@@ -1,0 +1,607 @@
+﻿<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FAQ — Perguntas Frequentes — Conecta Já</title>
+  <meta name="description" content="Perguntas frequentes sobre o Conecta Já — tire todas as suas dúvidas sobre como funciona a plataforma.">
+  <!-- SEO -->
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://conectaja-ao.github.io/ConectaJa.ao/faq.html">
+  <!-- Open Graph / WhatsApp / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conectaja-ao.github.io/ConectaJa.ao/faq.html">
+  <meta property="og:site_name" content="Conecta Já">
+  <meta property="og:locale" content="pt_AO">
+  <meta property="og:title" content="FAQ — Perguntas Frequentes — Conecta Já">
+  <meta property="og:description" content="Perguntas frequentes sobre o Conecta Já — tire todas as suas dúvidas sobre como funciona a plataforma.">
+  <meta property="og:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+  <meta property="og:image:width" content="192">
+  <meta property="og:image:height" content="192">
+  <meta property="og:image:alt" content="Conecta Já — Plataforma de Serviços em Angola">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FAQ — Perguntas Frequentes — Conecta Já">
+  <meta name="twitter:description" content="Perguntas frequentes sobre o Conecta Já — tire todas as suas dúvidas sobre como funciona a plataforma.">
+  <meta name="twitter:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .faq-page { background: white; }
+
+    /* Search */
+    .faq-search-wrap { padding: 3rem 0 0; }
+    .faq-search-box {
+      position: relative; max-width: 640px; margin: 0 auto;
+    }
+    .faq-search-box i { position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: var(--color-gray-400); font-size: 1.1rem; }
+    .faq-search {
+      width: 100%; padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+      border: 2px solid var(--color-gray-200); border-radius: 1rem;
+      font-size: 1rem; color: var(--color-gray-900);
+      background: var(--color-gray-50);
+      transition: all .25s;
+      font-family: inherit;
+    }
+    .faq-search:focus { outline: none; border-color: var(--color-primary); background: white; box-shadow: 0 0 0 4px rgba(230,57,70,.08); }
+
+    /* Tabs */
+    .faq-tabs-wrap { padding: 2.5rem 0 0; }
+    .faq-tabs { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .faq-tab {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.5rem;
+      border: 2px solid var(--color-gray-200); border-radius: 50px;
+      background: white; color: var(--color-gray-600);
+      font-size: .9rem; font-weight: 600; cursor: pointer;
+      transition: all .25s;
+    }
+    .faq-tab:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .faq-tab.active { background: var(--color-primary); border-color: var(--color-primary); color: white; box-shadow: 0 8px 20px rgba(230,57,70,.25); }
+    .faq-tab i { font-size: .85rem; }
+
+    /* Panels */
+    .faq-panels { padding: 4rem 0; }
+    .faq-panel { display: none; }
+    .faq-panel.active { display: block; }
+
+    /* Accordion */
+    .accordion { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    .accordion__item {
+      background: white; border: 2px solid var(--color-gray-100);
+      border-radius: 1.25rem; overflow: hidden;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .accordion__item:hover { border-color: rgba(230,57,70,.2); }
+    .accordion__item.open { border-color: var(--color-primary); box-shadow: 0 8px 30px rgba(230,57,70,.1); }
+
+    .accordion__trigger {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 2rem; background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem;
+    }
+    .accordion__question {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 1.05rem; font-weight: 700; color: var(--color-gray-900);
+    }
+    .accordion__question i { color: var(--color-primary); font-size: .9rem; flex-shrink: 0; }
+    .accordion__icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--color-gray-100); color: var(--color-gray-500);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: .85rem;
+      transition: all .25s;
+    }
+    .accordion__item.open .accordion__icon { background: var(--color-primary); color: white; transform: rotate(45deg); }
+
+    .accordion__body { display: none; padding: 0 2rem 2rem; }
+    .accordion__item.open .accordion__body { display: block; }
+    .accordion__body p {
+      font-size: 1rem; line-height: 1.8; color: var(--color-gray-600);
+      border-top: 1px solid var(--color-gray-100); padding-top: 1.25rem;
+    }
+    .accordion__body a { color: var(--color-primary); font-weight: 600; text-decoration: underline; }
+
+    /* Contact CTA */
+    .faq-cta {
+      padding: 7rem 0;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .faq-cta::before {
+      content: ''; position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(230,57,70,.2), transparent 70%);
+      top: -150px; right: -100px; border-radius: 50%;
+    }
+    .faq-cta__inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .faq-cta__badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem 1.25rem;
+      background: rgba(230,57,70,.15); border: 1px solid rgba(230,57,70,.3);
+      color: var(--color-secondary); border-radius: 50px;
+      font-size: .875rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 2rem;
+    }
+    .faq-cta__title { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: white; margin-bottom: 1rem; }
+    .faq-cta__desc { font-size: 1.15rem; color: rgba(255,255,255,.7); margin-bottom: 2.5rem; line-height: 1.7; }
+    .faq-cta__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* no-results */
+    .faq-no-results { text-align: center; padding: 4rem 0; color: var(--color-gray-500); }
+    .faq-no-results i { font-size: 3rem; margin-bottom: 1rem; display: block; }
+
+    /* Dark mode overrides */
+    [data-theme="dark"] .faq-page { background: var(--color-white) !important; }
+    [data-theme="dark"] .faq-search { background: var(--color-gray-200) !important; border-color: var(--color-gray-300) !important; color: var(--color-gray-900) !important; }
+    [data-theme="dark"] .faq-search:focus { background: var(--color-gray-200) !important; }
+    [data-theme="dark"] .faq-tab { background: var(--color-gray-200) !important; border-color: var(--color-gray-300) !important; color: var(--color-gray-600) !important; }
+    [data-theme="dark"] .faq-tab.active { background: var(--color-primary) !important; border-color: var(--color-primary) !important; color: white !important; }
+    [data-theme="dark"] .accordion__item { background: var(--color-gray-100) !important; border-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .accordion__icon { background: var(--color-gray-200) !important; color: var(--color-gray-600) !important; }
+    [data-theme="dark"] .accordion__body p { border-top-color: var(--color-gray-300) !important; }
+  </style>
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <script>if(localStorage.getItem('cj-lang')==='en')document.documentElement.style.opacity='0';</script>
+    <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+
+</head>
+<body class="faq-page">
+
+<div class="page-transition-overlay"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar__wrapper">
+      <a href="index.html" class="navbar__logo">
+        <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+          <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+          <circle cx="20" cy="20" r="8" fill="white"/>
+        </svg>
+        <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+      </a>
+      <ul class="navbar__menu" id="navMenu" role="list">
+        <li class="navbar__item"><a href="index.html" class="navbar__link">Início</a></li>
+        <li class="navbar__item"><a href="prestadores.html" class="navbar__link">Prestadores</a></li>
+        <li class="navbar__item"><a href="bisno.html" class="navbar__link">Bisno</a></li>
+        <li class="navbar__item"><a href="sobre.html" class="navbar__link">Sobre</a></li>
+        <li class="navbar__item"><a href="blog.html" class="navbar__link">Blog</a></li>
+        <li class="navbar__item"><a href="faq.html" class="navbar__link active">FAQ</a></li>
+        <li class="navbar__item"><a href="contacto.html" class="navbar__link">Contacto</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <a href="prestadores.html" class="btn btn--primary btn--sm">Ver Prestadores</a>
+      </div>
+      <div class="lang-toggle-wrapper" id="langWrapper">
+        <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma" aria-expanded="false" title="Mudar idioma">
+          <span class="lang-flag">🇵🇹</span>
+          <span class="lang-code">PT</span>
+          <i class="fas fa-chevron-down lang-arrow"></i>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" data-set-lang="pt">🇵🇹 Português</button>
+          <button class="lang-option" data-set-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo escuro">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__content">
+        <div class="page-hero__badge reveal"><i class="fas fa-question-circle"></i> Ajuda &amp; Suporte</div>
+        <h1 class="page-hero__title reveal delay-100">Perguntas <span>Frequentes</span></h1>
+        <p class="page-hero__description reveal delay-200">Encontra respostas rápidas às tuas dúvidas sobre o Conecta Já</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <div class="faq-search-wrap">
+    <div class="container">
+      <div class="faq-search-box reveal">
+        <i class="fas fa-search"></i>
+        <input type="search" class="faq-search" placeholder="Pesquisar nas perguntas…" aria-label="Pesquisar FAQ">
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="faq-tabs-wrap">
+    <div class="container">
+      <div class="faq-tabs reveal">
+        <button class="faq-tab active" data-tab="tab-geral"><i class="fas fa-globe"></i> Geral</button>
+        <button class="faq-tab" data-tab="tab-clientes"><i class="fas fa-user"></i> Clientes</button>
+        <button class="faq-tab" data-tab="tab-prestadores"><i class="fas fa-briefcase"></i> Prestadores</button>
+        <button class="faq-tab" data-tab="tab-pagamentos"><i class="fas fa-credit-card"></i> Pagamentos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ PANELS -->
+  <div class="faq-panels">
+    <div class="container">
+
+      <!-- GERAL -->
+      <div class="faq-panel active" id="tab-geral">
+        <div class="accordion">
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> O que é o Conecta Já?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>O Conecta Já é a plataforma digital angolana que liga clientes a prestadores de serviços verificados e de confiança. Desde canalizadores a designers, encontras o profissional certo de forma rápida, segura e sem complicações.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> O Conecta Já é gratuito?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Para clientes, a utilização da plataforma é totalmente gratuita. Podes pesquisar, contactar e contratar prestadores sem qualquer custo. Os prestadores de serviços têm planos de subscrição para aumentar a sua visibilidade na plataforma.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Como garantem a qualidade dos prestadores?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Todos os prestadores passam por um processo de verificação de identidade e histórico profissional. Além disso, o sistema de avaliações permite que os clientes deixem feedback real sobre os serviços recebidos, garantindo transparência e qualidade contínua.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Em que cidades o serviço está disponível?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Atualmente o Conecta Já opera em Luanda, Benguela, Lubango, Huambo, Cabinda e Malanje. Estamos a expandir rapidamente para cobrir todo o território nacional em 2026.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Como posso contactar o suporte?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Podes contactar-nos através do <a href="contacto.html">formulário de contacto</a>, por WhatsApp no <strong>+244 931 482 577</strong>, ou por email em <strong>conectaja.ao@gmail.com</strong>. Respondemos em até 24 horas em dias úteis.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CLIENTES -->
+      <div class="faq-panel" id="tab-clientes" hidden>
+        <div class="accordion">
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Como faço para contratar um prestador?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>É simples: pesquisa o serviço que precisas, filtra por localização e categoria, escolhe o prestador que mais te agrada, e contacta diretamente via WhatsApp ou pelo botão "Fazer Pedido" no perfil. O processo é rápido e sem intermediários desnecessários.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Preciso de criar uma conta para usar a plataforma?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Podes pesquisar e ver perfis sem conta. No entanto, para fazer pedidos, deixar avaliações e aceder ao dashboard pessoal, precisas de criar uma conta gratuita. O registo demora menos de 2 minutos.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Como funciona o sistema de avaliações?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Após a conclusão de um serviço, podes deixar uma avaliação de 1 a 5 estrelas e um comentário sobre a tua experiência. As avaliações são públicas e ajudam outros clientes a escolher o prestador certo. Pedimos honestidade e respeito nas avaliações.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> O que faço se o prestador não aparecer?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Se um prestador não comparecer ou não cumprir o acordado, contacta-nos imediatamente. Teremos todo o gosto em ajudar a resolver a situação e, se necessário, recomendar-te outro profissional disponível. A tua satisfação é a nossa prioridade.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Posso cancelar um pedido?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Sim, podes cancelar um pedido a qualquer momento antes do serviço ser iniciado. Acede ao teu dashboard, localiza o pedido e clica em "Cancelar". Recomendamos que informes o prestador com a maior antecedência possível.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PRESTADORES -->
+      <div class="faq-panel" id="tab-prestadores" hidden>
+        <div class="accordion">
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Como me registo como prestador?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Clica em "Oferecer Serviços" na página inicial, preenche o formulário de registo como prestador, indica a tua especialidade, localização e preços. Após verificação da nossa equipa (em até 48h), o teu perfil fica ativo e visível para clientes.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Quanto custa estar na plataforma?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>O plano básico é gratuito e inclui um perfil público, receber pedidos e avaliações. Os planos premium oferecem maior visibilidade nos resultados de pesquisa, destaque no topo das categorias e acesso a estatísticas avançadas. Consulta os nossos planos em <a href="contacto.html">contacto</a>.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Como funciona o processo de verificação?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>A nossa equipa verifica a identidade do prestador (BI/Passaporte) e valida as qualificações declaradas. Prestadores verificados recebem um selo de verificação no perfil, o que aumenta significativamente a confiança dos clientes e as contratações.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Como recebo os pagamentos?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>O pagamento é combinado diretamente entre o cliente e o prestador, de acordo com o que foi acordado. O Conecta Já facilita a descoberta e o contacto, mas não interfere nos acordos financeiros. Podes aceitar dinheiro, transferência bancária ou multicaixa.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Posso oferecer múltiplas categorias de serviço?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Sim! Podes indicar mais do que uma especialidade no teu perfil. No entanto, recomendamos focar nas tuas competências principais para garantir avaliações excelentes e construir uma reputação sólida na plataforma.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PAGAMENTOS -->
+      <div class="faq-panel" id="tab-pagamentos" hidden>
+        <div class="accordion">
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> O Conecta Já processa pagamentos?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Atualmente, o Conecta Já não processa pagamentos diretamente. Funciona como uma plataforma de descoberta e contacto — os pagamentos são acordados e realizados diretamente entre cliente e prestador. Estamos a trabalhar numa solução de pagamentos integrada para breve.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Quais formas de pagamento os prestadores aceitam?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Cada prestador define as suas formas de pagamento aceites, geralmente: dinheiro em mão, transferência bancária (BFA, BIC, BAI), Multicaixa Express ou pagamento por referência. Podes ver no perfil do prestador ou perguntar diretamente antes de contratar.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> É seguro fazer pagamento antecipado?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Recomendamos sempre verificar o histórico e avaliações do prestador antes de qualquer pagamento antecipado. Para novos prestadores sem histórico, podes optar por pagar após a conclusão do trabalho. Prestadores com o selo de verificação têm maior nível de confiança.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> O que faço em caso de disputa de pagamento?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Em caso de disputa, contacta-nos através do <a href="contacto.html">formulário de suporte</a> com os detalhes do pedido e do problema. A nossa equipa irá mediar a situação e tentar encontrar uma solução justa para ambas as partes. Documentar sempre o acordo por escrito (WhatsApp, email) ajuda muito nestes casos.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" aria-expanded="false">
+              <span class="accordion__question"><i class="fas fa-circle"></i> Haverá pagamentos integrados na plataforma?</span>
+              <span class="accordion__icon"><i class="fas fa-plus"></i></span>
+            </button>
+            <div class="accordion__body">
+              <p>Sim! Estamos a desenvolver um sistema de pagamentos integrado que permitirá pagamentos seguros direto na plataforma, com proteção para ambas as partes. Esta funcionalidade estará disponível num futuro próximo. Inscreve-te na nossa newsletter para saber quando lançarmos.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="faq-cta">
+    <div class="container">
+      <div class="faq-cta__inner reveal">
+        <div class="faq-cta__badge"><i class="fas fa-headset"></i> Suporte</div>
+        <h2 class="faq-cta__title">Ainda tens dúvidas?</h2>
+        <p class="faq-cta__desc">A nossa equipa de suporte está disponível para te ajudar. Fala connosco agora mesmo.</p>
+        <div class="faq-cta__actions">
+          <a href="https://wa.me/244931482577?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20Conecta%20Já." target="_blank" rel="noopener" class="btn btn--white btn--lg">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="contacto.html" class="btn btn--outline-white btn--lg">
+            <i class="fas fa-envelope"></i> Enviar Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="footer-column footer-column--brand">
+                <a href="index.html" class="footer__logo">
+                    <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+                        <circle cx="20" cy="20" r="8" fill="white"/>
+                    </svg>
+                    <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+                </a>
+                <p class="footer__description">
+                    A plataforma líder em Angola para conectar clientes a prestadores de serviços verificados e de confiança.
+                </p>
+                <div class="footer__social">
+                    <a href="https://web.facebook.com/profile.php?id=61589032370272" target="_blank" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/conecta__ja" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/244931482577" target="_blank" class="social-link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Serviços</h4>
+                <ul class="footer-links">
+                    <li><a href="prestadores.html">Todos os Prestadores</a></li>
+                    <li><a href="prestadores.html?cat=casa-construcao">Casa e Construção</a></li>
+                    <li><a href="prestadores.html?cat=tecnologia">Tecnologia</a></li>
+                    <li><a href="prestadores.html?cat=educacao">Educação</a></li>
+                    <li><a href="prestadores.html?cat=beleza">Beleza</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="contacto.html">Imprensa</a></li>
+                    <li><a href="contacto.html">Carreiras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Central de Ajuda</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="seguranca.html">Segurança</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Contacto</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+244931482577">+244 931 482 577</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Luanda, Angola</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Atendimento 24/7</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 Conecta Já. Todos os direitos reservados.</p>
+            <div class="footer-legal">
+                <a href="termos.html">Termos</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="seguranca.html">Segurança</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/244931482577?text=Olá!%20Preciso%20de%20ajuda%20com%20o%20Conecta%20Já"
+   target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Fala connosco</span>
+</a>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<script src="i18n.js"></script>
+<script>I18n.init();</script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+    <script src="app-shell.js"></script>
+
+</body>
+</html>

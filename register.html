@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Criar Conta — ConectaJá</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <style>
+    body { background:#fff; padding-top:56px; }
+    .wrap { padding:0 24px 40px; max-width:430px; margin:0 auto; }
+
+    /* Step: escolha */
+    #step-choose { display:block; }
+    #step-form   { display:none; }
+
+    .reg-header { padding:24px 0 20px; }
+    .reg-logo { font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:#FF6B35;text-decoration:none;display:block;margin-bottom:20px; }
+    .reg-logo span { color:#00B4D8; }
+    .reg-icon { width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#FF6B35,#ff9a6c);display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 8px 24px rgba(255,107,53,.3); }
+    .reg-icon i { font-size:24px;color:#fff; }
+    .reg-title { font-family:'Poppins',sans-serif;font-size:21px;font-weight:800;color:#111;margin-bottom:4px; }
+    .reg-sub   { font-size:13px;color:#6b7280;line-height:1.5; }
+
+    .choice-card {
+      display:flex;align-items:center;gap:14px;padding:16px;border-radius:14px;
+      border:2px solid #e5e7eb;background:#fff;cursor:pointer;text-align:left;width:100%;
+      transition:border-color .2s,box-shadow .2s,transform .15s;margin-bottom:12px;
+    }
+    .choice-card:active { transform:scale(.98); }
+    .choice-card.selected, .choice-card:hover { border-color:#FF6B35;box-shadow:0 4px 16px rgba(255,107,53,.14); }
+    .choice-icon { width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .choice-icon i { font-size:18px;color:#fff; }
+    .choice-title { font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:#111;margin-bottom:2px; }
+    .choice-desc  { font-size:11px;color:#6b7280;line-height:1.4; }
+    .choice-arrow { color:#d1d5db;font-size:13px;margin-left:auto; }
+
+    /* Form */
+    .form-type-badge {
+      display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:20px;
+      font-size:13px;font-weight:700;margin-bottom:20px;
+    }
+    .lbl { display:block;font-size:13px;font-weight:600;color:#6b7280;margin-bottom:6px; }
+    .inp {
+      width:100%;padding:13px 16px;border:1.5px solid #e5e7eb;border-radius:12px;
+      font-size:15px;color:#111;background:#fff;outline:none;font-family:'Inter',sans-serif;
+      transition:border-color .2s,box-shadow .2s;box-sizing:border-box;
+    }
+    .inp:focus { border-color:#FF6B35;box-shadow:0 0 0 3px #fff0eb; }
+    .inp-wrap { position:relative; }
+    .inp-wrap .inp { padding-right:48px; }
+    .eye-btn { position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#9ca3af;cursor:pointer;padding:4px; }
+    .ig { margin-bottom:14px; }
+    .btn-main {
+      width:100%;padding:14px;background:#FF6B35;color:#fff;border:none;border-radius:12px;
+      font-size:15px;font-weight:700;font-family:'Poppins',sans-serif;cursor:pointer;
+      transition:background .2s,transform .15s;margin-top:4px;
+    }
+    .btn-main:active { background:#e55a26;transform:scale(.98); }
+    .btn-main:disabled { opacity:.65;pointer-events:none; }
+    .err-msg { background:#fee2e2;color:#b91c1c;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:500;margin-bottom:14px;display:none; }
+    .err-msg.show { display:block; }
+    .footer-link { text-align:center;font-size:14px;color:#6b7280;margin-top:20px; }
+    .footer-link a { color:#FF6B35;font-weight:600;text-decoration:none; }
+    .divider { display:flex;align-items:center;gap:12px;color:#9ca3af;font-size:13px;margin:16px 0; }
+    .divider::before,.divider::after { content:'';flex:1;height:1px;background:#e5e7eb; }
+    .btn-google {
+      width:100%;padding:13px;background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;
+      font-size:14px;font-weight:600;color:#111;font-family:'Inter',sans-serif;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;
+    }
+    .btn-google:active { background:#f8f9fa; }
+
+    /* Dark mode */
+    [data-theme="dark"] body { background:#0d1117; }
+    [data-theme="dark"] .reg-title  { color:#f0f0f0; }
+    [data-theme="dark"] .choice-card { background:#161b26;border-color:rgba(255,255,255,.1); }
+    [data-theme="dark"] .choice-card.selected,[data-theme="dark"] .choice-card:hover { border-color:#FF6B35; }
+    [data-theme="dark"] .choice-title { color:#f0f0f0; }
+    [data-theme="dark"] .lbl { color:#9ca3af; }
+    [data-theme="dark"] .inp { background:#161b26;border-color:rgba(255,255,255,.12);color:#f0f0f0; }
+    [data-theme="dark"] .btn-google { background:#161b26;border-color:rgba(255,255,255,.12);color:#e5e7eb; }
+  </style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div id="cj-top-bar" style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:56px;background:#fff;z-index:9800;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #f0f0f0;">
+  <button id="back-btn" onclick="goBack()" style="width:38px;height:38px;border-radius:50%;background:#f8f9fa;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#111;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
+  </button>
+  <span id="top-title" style="flex:1;text-align:center;font-family:Poppins,sans-serif;font-size:17px;font-weight:700;color:#111;">Criar Conta</span>
+  <div style="width:38px;"></div>
+</div>
+
+<div class="wrap">
+
+  <!-- PASSO 1: Escolha de tipo -->
+  <div id="step-choose">
+    <div class="reg-header">
+      <a href="login.html" class="reg-logo">Conecta<span>Já</span></a>
+      <div class="reg-icon"><i class="fas fa-handshake"></i></div>
+      <div class="reg-title">Bem-vindo ao Conecta Já!</div>
+      <div class="reg-sub">Como deseja usar a plataforma?</div>
+    </div>
+
+    <button class="choice-card" onclick="selectType('client')">
+      <div class="choice-icon" style="background:linear-gradient(135deg,#06D6A0,#118AB2)">
+        <i class="fas fa-user"></i>
+      </div>
+      <div>
+        <div class="choice-title">Sou Cliente</div>
+        <div class="choice-desc">Procuro profissionais para contratar serviços</div>
+      </div>
+      <i class="fas fa-chevron-right choice-arrow"></i>
+    </button>
+
+    <button class="choice-card" onclick="selectType('provider')">
+      <div class="choice-icon" style="background:linear-gradient(135deg,#FF6B35,#ff9a6c)">
+        <i class="fas fa-briefcase"></i>
+      </div>
+      <div>
+        <div class="choice-title">Sou Prestador de Serviços</div>
+        <div class="choice-desc">Quero oferecer os meus serviços na plataforma</div>
+      </div>
+      <i class="fas fa-chevron-right choice-arrow"></i>
+    </button>
+
+    <div class="footer-link">
+      Já tens conta? <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- PASSO 2: Formulário de registo -->
+  <div id="step-form">
+    <div style="margin:20px 0 16px;">
+      <div id="type-badge" class="form-type-badge"></div>
+      <div class="reg-title" style="font-size:19px;">Criar a tua conta</div>
+      <div class="reg-sub" style="margin-top:4px;">Preenche os dados para te registares.</div>
+    </div>
+
+    <div id="err-msg" class="err-msg"></div>
+
+    <div class="ig">
+      <label class="lbl">Nome completo</label>
+      <input class="inp" type="text" id="fullname" placeholder="O teu nome" autocomplete="name">
+    </div>
+    <div class="ig">
+      <label class="lbl">Email</label>
+      <input class="inp" type="email" id="email" placeholder="o.teu@email.com" autocomplete="email" inputmode="email">
+    </div>
+    <div class="ig">
+      <label class="lbl">Senha</label>
+      <div class="inp-wrap">
+        <input class="inp" type="password" id="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        <button class="eye-btn" type="button" onclick="togglePwd('password','eye1')">
+          <svg id="eye1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="ig">
+      <label class="lbl">Confirmar senha</label>
+      <div class="inp-wrap">
+        <input class="inp" type="password" id="password2" placeholder="Repete a senha" autocomplete="new-password">
+        <button class="eye-btn" type="button" onclick="togglePwd('password2','eye2')">
+          <svg id="eye2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="btn-main" id="reg-btn" onclick="doRegister()">Criar Conta</button>
+
+    <div class="divider">ou</div>
+
+    <button class="btn-google" onclick="googleRegister()">
+      <svg viewBox="0 0 24 24" width="20" height="20">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      Registar com Google
+    </button>
+
+    <div class="footer-link">
+      Já tens conta? <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+  var selectedType = null;
+
+  // Se já autenticado, redirige
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) window.location.href = 'index.html';
+  });
+
+  function selectType(type) {
+    selectedType = type;
+    var badge = document.getElementById('type-badge');
+    if (type === 'client') {
+      badge.style.background = 'rgba(6,214,160,.12)';
+      badge.style.color = '#0a7a5a';
+      badge.innerHTML = '<i class="fas fa-user" style="font-size:12px;"></i> Sou Cliente';
+    } else {
+      badge.style.background = 'rgba(255,107,53,.12)';
+      badge.style.color = '#c94e1a';
+      badge.innerHTML = '<i class="fas fa-briefcase" style="font-size:12px;"></i> Sou Prestador';
+    }
+    document.getElementById('step-choose').style.display = 'none';
+    document.getElementById('step-form').style.display = 'block';
+    document.getElementById('top-title').textContent = 'Criar Conta';
+  }
+
+  function goBack() {
+    if (document.getElementById('step-form').style.display === 'block') {
+      document.getElementById('step-form').style.display = 'none';
+      document.getElementById('step-choose').style.display = 'block';
+    } else {
+      window.location.href = 'login.html';
+    }
+  }
+
+  function togglePwd(inputId, iconId) {
+    var inp = document.getElementById(inputId);
+    var icon = document.getElementById(iconId);
+    var show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    icon.innerHTML = show
+      ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
+      : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
+
+  function showErr(msg) { var e=document.getElementById('err-msg'); e.textContent=msg; e.classList.add('show'); }
+  function clearErr()   { document.getElementById('err-msg').classList.remove('show'); }
+
+  async function doRegister() {
+    clearErr();
+    var name  = document.getElementById('fullname').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var pass  = document.getElementById('password').value;
+    var pass2 = document.getElementById('password2').value;
+    if (!name)           { showErr('Introduz o teu nome.'); return; }
+    if (!email)          { showErr('Introduz o teu email.'); return; }
+    if (pass.length < 6) { showErr('A senha deve ter pelo menos 6 caracteres.'); return; }
+    if (pass !== pass2)  { showErr('As senhas não coincidem.'); return; }
+
+    var btn = document.getElementById('reg-btn');
+    btn.textContent = 'A criar conta...'; btn.disabled = true;
+    try {
+      var cred = await firebase.auth().createUserWithEmailAndPassword(email, pass);
+      await cred.user.updateProfile({ displayName: name });
+      // Guardar tipo no Firestore
+      await window.firebaseDb.collection('users').doc(cred.user.uid).set({
+        name: name, email: email, type: selectedType,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      // Guardar tipo localmente (compatível com script.js)
+      localStorage.setItem('cj_type_' + cred.user.uid, selectedType);
+      // Redirigir para o dashboard correcto
+      window.location.href = selectedType === 'provider' ? 'dashboard-provider.html' : 'dashboard-client.html';
+    } catch(e) {
+      btn.textContent = 'Criar Conta'; btn.disabled = false;
+      var msg = 'Erro ao criar conta. Tenta novamente.';
+      if (e.code === 'auth/email-already-in-use') msg = 'Este email já tem conta. Faz login.';
+      if (e.code === 'auth/invalid-email')        msg = 'Email inválido.';
+      if (e.code === 'auth/weak-password')        msg = 'Senha demasiado fraca.';
+      showErr(msg);
+    }
+  }
+
+  function googleRegister() {
+    clearErr();
+    if (!selectedType) { showErr('Escolhe primeiro o tipo de conta.'); return; }
+
+    // Guardar tipo seleccionado antes do redirect (perdido após redirect)
+    sessionStorage.setItem('cj-reg-type', selectedType);
+
+    var btn = document.querySelector('.btn-google');
+    if (btn) btn.disabled = true;
+
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+
+    firebase.auth().signInWithRedirect(provider).catch(function(e) {
+      if (btn) btn.disabled = false;
+      showErr('Não foi possível iniciar o registo com Google.');
+    });
+  }
+
+  // Processar resultado do redirect ao voltar
+  firebase.auth().getRedirectResult().then(function(result) {
+    if (!result || !result.user) return;
+    var type = sessionStorage.getItem('cj-reg-type') || 'client';
+    sessionStorage.removeItem('cj-reg-type');
+
+    var saveProfile = function() {
+      return window.firebaseDb.collection('users').doc(result.user.uid).set({
+        name: result.user.displayName,
+        email: result.user.email,
+        type: type,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    };
+
+    saveProfile().then(function() {
+      localStorage.setItem('cj_type_' + result.user.uid, type);
+      window.location.href = type === 'provider' ? 'dashboard-provider.html' : 'dashboard-client.html';
+    }).catch(function() {
+      window.location.href = 'dashboard-client.html';
+    });
+  }).catch(function(e) {
+    if (e && e.code !== 'auth/no-current-user') {
+      showErr('Erro no registo com Google. Tenta novamente.');
+    }
+  });
+</script>
+</body>
+</html>

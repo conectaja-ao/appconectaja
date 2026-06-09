@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Termos de Uso — Conecta Já</title>
+  <meta name="description" content="Termos e condições de uso da plataforma Conecta Já.">
+  <!-- SEO — página legal, não indexar -->
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://conectaja-ao.github.io/ConectaJa.ao/termos.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conectaja-ao.github.io/ConectaJa.ao/termos.html">
+  <meta property="og:site_name" content="Conecta Já">
+  <meta property="og:title" content="Termos de Uso — Conecta Já">
+  <meta property="og:description" content="Termos e condições de uso da plataforma Conecta Já.">
+  <meta property="og:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .legal-page { background: var(--color-gray-50); }
+    .legal-body { padding: 5rem 0 7rem; }
+    .legal-layout { display: grid; gap: 3rem; }
+    @media (min-width: 1024px) { .legal-layout { grid-template-columns: 260px 1fr; align-items: start; } }
+    .legal-toc {
+      background: white; border-radius: 1.5rem; padding: 1.75rem;
+      border: 1px solid var(--color-gray-100); position: sticky; top: calc(var(--header-height) + 1.5rem);
+    }
+    .legal-toc__title { font-size: .875rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--color-gray-500); margin-bottom: 1rem; }
+    .legal-toc a { display: block; font-size: .875rem; color: var(--color-gray-600); padding: .4rem 0; text-decoration: none; border-left: 2px solid transparent; padding-left: .75rem; transition: all .2s; font-weight: 500; }
+    .legal-toc a:hover { color: var(--color-primary); border-left-color: var(--color-primary); }
+    .legal-content { background: white; border-radius: 1.5rem; padding: 3rem; border: 1px solid var(--color-gray-100); }
+    .legal-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 2px solid var(--color-gray-100); }
+    .legal-meta span { display: flex; align-items: center; gap: .4rem; font-size: .875rem; color: var(--color-gray-500); }
+    .legal-content h2 { font-size: 1.5rem; font-weight: 800; margin: 2.5rem 0 1rem; color: var(--color-gray-900); display: flex; align-items: center; gap: .5rem; scroll-margin-top: calc(var(--header-height) + 2rem); }
+    .legal-content h2 i { color: var(--color-primary); font-size: 1rem; }
+    .legal-content h2:first-of-type { margin-top: 0; }
+    .legal-content p { font-size: .975rem; line-height: 1.85; color: var(--color-gray-600); margin-bottom: 1rem; }
+    .legal-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .legal-content ul li { font-size: .975rem; line-height: 1.8; color: var(--color-gray-600); margin-bottom: .4rem; }
+    .legal-content a { color: var(--color-primary); font-weight: 600; }
+    .legal-highlight { background: rgba(230,57,70,.05); border: 1px solid rgba(230,57,70,.15); border-left: 4px solid var(--color-primary); border-radius: .75rem; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .legal-highlight p { margin: 0; color: var(--color-gray-700); }
+
+    /* Dark mode overrides */
+    [data-theme="dark"] .legal-toc { background: var(--color-gray-100) !important; border-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .legal-content { background: var(--color-gray-100) !important; border-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .legal-meta { border-bottom-color: var(--color-gray-300) !important; }
+  </style>
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <script>if(localStorage.getItem('cj-lang')==='en')document.documentElement.style.opacity='0';</script>
+    <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+
+</head>
+<body class="legal-page">
+<div class="page-transition-overlay"></div>
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar__wrapper">
+      <a href="index.html" class="navbar__logo">
+        <svg class="logo__icon" viewBox="0 0 40 40" fill="none"><path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/><circle cx="20" cy="20" r="8" fill="white"/></svg>
+        <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+      </a>
+      <ul class="navbar__menu" id="navMenu" role="list">
+        <li class="navbar__item"><a href="index.html" class="navbar__link">Início</a></li>
+        <li class="navbar__item"><a href="prestadores.html" class="navbar__link">Prestadores</a></li>
+        <li class="navbar__item"><a href="bisno.html" class="navbar__link">Bisno</a></li>
+        <li class="navbar__item"><a href="sobre.html" class="navbar__link">Sobre</a></li>
+        <li class="navbar__item"><a href="faq.html" class="navbar__link">FAQ</a></li>
+        <li class="navbar__item"><a href="contacto.html" class="navbar__link">Contacto</a></li>
+      </ul>
+      <div class="navbar__actions"><a href="prestadores.html" class="btn btn--primary btn--sm">Ver Prestadores</a></div>
+      <div class="lang-toggle-wrapper" id="langWrapper">
+        <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma" aria-expanded="false" title="Mudar idioma">
+          <span class="lang-flag">🇵🇹</span>
+          <span class="lang-code">PT</span>
+          <i class="fas fa-chevron-down lang-arrow"></i>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" data-set-lang="pt">🇵🇹 Português</button>
+          <button class="lang-option" data-set-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo escuro"><i class="fas fa-moon"></i></button>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__content">
+        <div class="page-hero__badge reveal"><i class="fas fa-file-contract"></i> Legal</div>
+        <h1 class="page-hero__title reveal delay-100">Termos de <span>Uso</span></h1>
+        <p class="page-hero__description reveal delay-200">As regras que regem a utilização da plataforma Conecta Já.</p>
+      </div>
+    </div>
+  </section>
+  <div class="legal-body">
+    <div class="container">
+      <div class="legal-layout">
+        <nav class="legal-toc reveal">
+          <div class="legal-toc__title">Índice</div>
+          <a href="#aceitacao">1. Aceitação</a>
+          <a href="#servicos">2. Descrição dos Serviços</a>
+          <a href="#conta">3. Conta de Utilizador</a>
+          <a href="#prestadores">4. Prestadores</a>
+          <a href="#clientes">5. Clientes</a>
+          <a href="#conduta">6. Conduta</a>
+          <a href="#responsabilidade">7. Responsabilidade</a>
+          <a href="#propriedade">8. Propriedade Intelectual</a>
+          <a href="#rescisao">9. Rescisão</a>
+          <a href="#alteracoes">10. Alterações</a>
+          <a href="#contacto-legal">11. Contacto</a>
+        </nav>
+        <div class="legal-content reveal">
+          <div class="legal-meta">
+            <span><i class="fas fa-calendar"></i> Última atualização: Maio de 2026</span>
+            <span><i class="fas fa-map-marker-alt"></i> Aplicável em Angola</span>
+          </div>
+          <div class="legal-highlight">
+            <p><strong>Por favor lê estes termos com atenção.</strong> Ao utilizar a plataforma Conecta Já, concordas com os termos e condições aqui descritos. Se não concordares, deves deixar de utilizar a plataforma.</p>
+          </div>
+          <h2 id="aceitacao"><i class="fas fa-check-circle"></i> 1. Aceitação dos Termos</h2>
+          <p>Ao acederes e utilizares a plataforma Conecta Já (doravante "Plataforma"), confirmas que leste, compreendeste e concordas em cumprir estes Termos de Uso. Estes termos constituem um acordo legal vinculativo entre ti e a Conecta Já.</p>
+          <p>Se utilizares a Plataforma em nome de uma empresa ou organização, garantis ter autoridade para vincular essa entidade a estes termos.</p>
+          <h2 id="servicos"><i class="fas fa-cogs"></i> 2. Descrição dos Serviços</h2>
+          <p>O Conecta Já é uma plataforma digital que facilita a ligação entre clientes que procuram serviços e prestadores de serviços em Angola. A Plataforma permite:</p>
+          <ul>
+            <li>Pesquisar e descobrir prestadores de serviços verificados</li>
+            <li>Consultar perfis, avaliações e preços</li>
+            <li>Contactar diretamente os prestadores</li>
+            <li>Deixar avaliações e feedback</li>
+            <li>Gerir pedidos de serviço</li>
+          </ul>
+          <p>O Conecta Já atua como intermediário e não é parte contratante nos acordos celebrados entre clientes e prestadores.</p>
+          <h2 id="conta"><i class="fas fa-user"></i> 3. Conta de Utilizador</h2>
+          <p>Para aceder a determinadas funcionalidades, é necessário criar uma conta. Ao registares, comprometeste a:</p>
+          <ul>
+            <li>Fornecer informações verdadeiras, precisas e atualizadas</li>
+            <li>Manter a confidencialidade da tua senha</li>
+            <li>Notificar imediatamente o Conecta Já de qualquer uso não autorizado</li>
+            <li>Ser responsável por todas as atividades realizadas na tua conta</li>
+          </ul>
+          <p>O Conecta Já reserva-se o direito de suspender ou encerrar contas que violem estes termos.</p>
+          <h2 id="prestadores"><i class="fas fa-briefcase"></i> 4. Prestadores de Serviços</h2>
+          <p>Os prestadores de serviços comprometem-se a:</p>
+          <ul>
+            <li>Fornecer informações verídicas sobre as suas qualificações e experiência</li>
+            <li>Prestar serviços com qualidade, profissionalismo e dentro dos prazos acordados</li>
+            <li>Cumprir toda a legislação angolana aplicável</li>
+            <li>Manter seguros e licenças necessários para a sua atividade</li>
+            <li>Responder às avaliações de forma respeitosa</li>
+          </ul>
+          <h2 id="clientes"><i class="fas fa-user-check"></i> 5. Clientes</h2>
+          <p>Os clientes comprometem-se a:</p>
+          <ul>
+            <li>Fornecer descrições claras e precisas dos serviços pretendidos</li>
+            <li>Cumprir os acordos celebrados com os prestadores</li>
+            <li>Deixar avaliações honestas e respeitosas</li>
+            <li>Não utilizar a Plataforma para fins fraudulentos</li>
+          </ul>
+          <h2 id="conduta"><i class="fas fa-shield-alt"></i> 6. Conduta Proibida</h2>
+          <p>É expressamente proibido:</p>
+          <ul>
+            <li>Publicar informações falsas, enganosas ou difamatórias</li>
+            <li>Utilizar a Plataforma para atividades ilegais</li>
+            <li>Tentar aceder a áreas restritas da Plataforma</li>
+            <li>Assediar, ameaçar ou intimidar outros utilizadores</li>
+            <li>Criar múltiplas contas com intuito fraudulento</li>
+            <li>Copiar, reproduzir ou distribuir conteúdos sem autorização</li>
+          </ul>
+          <h2 id="responsabilidade"><i class="fas fa-balance-scale"></i> 7. Limitação de Responsabilidade</h2>
+          <p>O Conecta Já não garante a qualidade, segurança ou legalidade dos serviços prestados. A Plataforma não é responsável por:</p>
+          <ul>
+            <li>Disputas entre clientes e prestadores</li>
+            <li>Danos resultantes de serviços prestados</li>
+            <li>Perdas financeiras decorrentes de transações entre utilizadores</li>
+            <li>Interrupções ou falhas técnicas da Plataforma</li>
+          </ul>
+          <h2 id="propriedade"><i class="fas fa-copyright"></i> 8. Propriedade Intelectual</h2>
+          <p>Todo o conteúdo da Plataforma, incluindo logótipos, textos, imagens e código, é propriedade exclusiva do Conecta Já e está protegido por direitos de autor. É proibida a reprodução sem autorização prévia e escrita.</p>
+          <h2 id="rescisao"><i class="fas fa-times-circle"></i> 9. Rescisão</h2>
+          <p>Podes encerrar a tua conta a qualquer momento através das definições da conta ou contactando-nos. O Conecta Já pode suspender ou encerrar contas por violação destes termos, sem aviso prévio em casos graves.</p>
+          <h2 id="alteracoes"><i class="fas fa-edit"></i> 10. Alterações aos Termos</h2>
+          <p>O Conecta Já reserva-se o direito de modificar estes termos a qualquer momento. As alterações serão comunicadas por email ou através da Plataforma. A continuação da utilização após as alterações implica a sua aceitação.</p>
+          <h2 id="contacto-legal"><i class="fas fa-envelope"></i> 11. Contacto</h2>
+          <p>Para questões sobre estes termos, contacta-nos em <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a> ou através do <a href="contacto.html">formulário de contacto</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="footer-column footer-column--brand">
+                <a href="index.html" class="footer__logo">
+                    <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+                        <circle cx="20" cy="20" r="8" fill="white"/>
+                    </svg>
+                    <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+                </a>
+                <p class="footer__description">
+                    A plataforma líder em Angola para conectar clientes a prestadores de serviços verificados e de confiança.
+                </p>
+                <div class="footer__social">
+                    <a href="https://web.facebook.com/profile.php?id=61589032370272" target="_blank" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/conecta__ja" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/244931482577" target="_blank" class="social-link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Serviços</h4>
+                <ul class="footer-links">
+                    <li><a href="prestadores.html">Todos os Prestadores</a></li>
+                    <li><a href="prestadores.html?cat=casa-construcao">Casa e Construção</a></li>
+                    <li><a href="prestadores.html?cat=tecnologia">Tecnologia</a></li>
+                    <li><a href="prestadores.html?cat=educacao">Educação</a></li>
+                    <li><a href="prestadores.html?cat=beleza">Beleza</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="contacto.html">Imprensa</a></li>
+                    <li><a href="contacto.html">Carreiras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Central de Ajuda</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="seguranca.html">Segurança</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Contacto</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+244931482577">+244 931 482 577</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Luanda, Angola</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Atendimento 24/7</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 Conecta Já. Todos os direitos reservados.</p>
+            <div class="footer-legal">
+                <a href="termos.html">Termos</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="seguranca.html">Segurança</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/244931482577?text=Olá!%20Preciso%20de%20ajuda%20com%20o%20Conecta%20Já"
+   target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Fala connosco</span>
+</a>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+</button>
+<script src="i18n.js"></script>
+<script>I18n.init();</script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+    <script src="app-shell.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mensagens — ConectaJá</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <style>
+    body {
+      background: var(--bg, #f4f6fb);
+      /* Override app-shell padding — usamos contentor próprio */
+      padding-bottom: 0 !important;
+    }
+
+    /* ── Contentor principal com scroll correcto ── */
+    .mensagens-page {
+      position: fixed;
+      top: var(--topbar-h, 56px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      bottom: var(--tab-h, 64px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg, #f4f6fb);
+    }
+
+    /* ── Search bar (fixa dentro do contentor) ── */
+    .msg-search {
+      padding: 10px 16px 8px;
+      flex-shrink: 0;
+      background: var(--bg, #f4f6fb);
+      border-bottom: 1px solid rgba(0,0,0,.05);
+    }
+    .msg-search input {
+      width: 100%; padding: 10px 16px 10px 40px;
+      border: none; border-radius: 12px;
+      background: var(--card-bg, #fff);
+      font-size: 14px; color: var(--text, #111);
+      outline: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .msg-search .search-ico {
+      position: absolute; left: 28px; top: 50%; transform: translateY(-50%);
+      color: #9ca3af; pointer-events: none;
+    }
+    .msg-search-wrap { position: relative; }
+
+    /* ── Conversation list (scroll dentro do contentor) ── */
+    .conv-list {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .conv-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      background: var(--card-bg, #fff);
+      border-radius: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .conv-item:active { background: var(--hover-bg, #f0f2f8); }
+
+    /* Avatar */
+    .conv-avatar {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: linear-gradient(135deg, #FF6B35, #ff9a6c);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: #fff;
+      flex-shrink: 0; position: relative;
+    }
+    .conv-avatar.online::after {
+      content: ''; position: absolute; bottom: 2px; right: 2px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #22c55e; border: 2px solid #fff;
+    }
+
+    /* Info */
+    .conv-info { flex: 1; min-width: 0; }
+    .conv-row1 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+    .conv-name {
+      font-weight: 700; font-size: 15px;
+      color: var(--text, #111);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 180px;
+    }
+    .conv-time { font-size: 12px; color: #9ca3af; flex-shrink: 0; }
+    .conv-preview {
+      font-size: 13px; color: #6b7280;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .conv-preview.unread { font-weight: 600; color: var(--text, #111); }
+
+    /* Unread badge */
+    .conv-badge {
+      min-width: 20px; height: 20px; border-radius: 10px;
+      background: #FF6B35; color: #fff;
+      font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 5px; flex-shrink: 0;
+    }
+
+    /* ── Skeleton ── */
+    .skeleton { animation: shimmer 1.4s infinite linear; }
+    .sk-avatar { width:50px; height:50px; border-radius:50%; background:#e5e7eb; flex-shrink:0; }
+    .sk-body { flex:1; display:flex; flex-direction:column; gap:8px; }
+    .sk-line { height:13px; border-radius:6px; background:#e5e7eb; }
+    .sk-line.short { width:40%; }
+    @keyframes shimmer {
+      0%   { opacity: 1; }
+      50%  { opacity: .5; }
+      100% { opacity: 1; }
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center; padding: 60px 32px;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .empty-ico {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #fff3ee; display: flex; align-items: center; justify-content: center;
+    }
+    .empty-ico svg { color: #FF6B35; }
+    .empty-title { font-size: 17px; font-weight: 700; color: var(--text, #111); }
+    .empty-sub { font-size: 14px; color: #6b7280; line-height: 1.5; }
+    .empty-cta {
+      margin-top: 8px; padding: 12px 24px;
+      background: #FF6B35; color: #fff;
+      border: none; border-radius: 12px;
+      font-size: 14px; font-weight: 700;
+      font-family: 'Poppins', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block;
+    }
+
+    /* ── Not logged in ── */
+    .login-prompt {
+      text-align: center; padding: 60px 32px;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .login-prompt svg { color: #FF6B35; }
+    .login-prompt p { font-size: 15px; color: #6b7280; line-height: 1.5; }
+    .login-prompt a {
+      padding: 13px 28px; background: #FF6B35; color: #fff;
+      border-radius: 12px; font-weight: 700; text-decoration: none;
+      font-family: 'Poppins', sans-serif; font-size: 15px;
+    }
+
+    /* Dark mode */
+    [data-theme="dark"] body { --bg: #0e1117; --card-bg: #1a2030; --text: #f1f5f9; --hover-bg: #222840; }
+    [data-theme="dark"] .mensagens-page { background: #0e1117; }
+    [data-theme="dark"] .msg-search { background: #0e1117; border-bottom-color: rgba(255,255,255,.06); }
+    [data-theme="dark"] .msg-search input { background: #1a2030; color: #f1f5f9; }
+    [data-theme="dark"] .sk-avatar, [data-theme="dark"] .sk-line { background: #2a3246; }
+    [data-theme="dark"] .empty-ico { background: #1e2b3a; }
+    [data-theme="dark"] .conv-time { color: #6b7280; }
+  </style>
+</head>
+<body>
+
+<div class="mensagens-page">
+<div class="msg-search">
+  <div class="msg-search-wrap">
+    <svg class="search-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="search" id="search-input" placeholder="Pesquisar conversa..." oninput="filterConvs(this.value)">
+  </div>
+</div>
+
+<div class="conv-list" id="conv-list">
+  <!-- Skeletons enquanto carrega -->
+  <div class="conv-item skeleton" id="sk1">
+    <div class="sk-avatar"></div>
+    <div class="sk-body"><div class="sk-line" style="width:60%"></div><div class="sk-line short"></div></div>
+  </div>
+  <div class="conv-item skeleton" id="sk2">
+    <div class="sk-avatar"></div>
+    <div class="sk-body"><div class="sk-line" style="width:75%"></div><div class="sk-line short"></div></div>
+  </div>
+  <div class="conv-item skeleton" id="sk3">
+    <div class="sk-avatar"></div>
+    <div class="sk-body"><div class="sk-line" style="width:50%"></div><div class="sk-line short"></div></div>
+  </div>
+</div>
+</div><!-- /.mensagens-page -->
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app-shell.js"></script>
+<script>
+var allConvs = [];
+
+firebase.auth().onAuthStateChanged(function(user) {
+  removeSkeleton();
+  if (!user) {
+    showLoginPrompt();
+    return;
+  }
+  loadConversations(user.uid);
+});
+
+function removeSkeleton() {
+  ['sk1','sk2','sk3'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.remove();
+  });
+}
+
+function showLoginPrompt() {
+  document.getElementById('conv-list').innerHTML =
+    '<div class="login-prompt">' +
+      '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+      '<p>Inicia sessão para veres as tuas mensagens.</p>' +
+      '<a href="login.html">Iniciar sessão</a>' +
+    '</div>';
+}
+
+function loadConversations(uid) {
+  firebaseDb.collection('conversations')
+    .where('participants', 'array-contains', uid)
+    .orderBy('lastMessageAt', 'desc')
+    .onSnapshot(function(snap) {
+      allConvs = [];
+      snap.forEach(function(doc) {
+        allConvs.push({ id: doc.id, ...doc.data() });
+      });
+      renderConvs(allConvs, uid);
+      updateTabBadge(uid);
+    }, function(err) {
+      // Índice não criado ainda — tenta sem orderBy
+      firebaseDb.collection('conversations')
+        .where('participants', 'array-contains', uid)
+        .onSnapshot(function(snap) {
+          allConvs = [];
+          snap.forEach(function(doc) {
+            allConvs.push({ id: doc.id, ...doc.data() });
+          });
+          allConvs.sort(function(a,b) {
+            var ta = a.lastMessageAt ? a.lastMessageAt.seconds : 0;
+            var tb = b.lastMessageAt ? b.lastMessageAt.seconds : 0;
+            return tb - ta;
+          });
+          renderConvs(allConvs, uid);
+          updateTabBadge(uid);
+        });
+    });
+}
+
+function renderConvs(list, uid) {
+  var el = document.getElementById('conv-list');
+  if (!list.length) {
+    el.innerHTML =
+      '<div class="empty-state">' +
+        '<div class="empty-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>' +
+        '<div class="empty-title">Sem mensagens ainda</div>' +
+        '<div class="empty-sub">Visita o perfil de um prestador e clica em "Enviar Mensagem" para começar.</div>' +
+        '<a href="prestadores.html" class="empty-cta">Ver Prestadores</a>' +
+      '</div>';
+    return;
+  }
+
+  el.innerHTML = list.map(function(c) {
+    var otherUid = (c.participants || []).find(function(p) { return p !== uid; }) || '';
+    var otherName = (c.participantNames || {})[otherUid] || 'Utilizador';
+    var initial   = otherName.charAt(0).toUpperCase();
+    var unread    = ((c.unreadCount || {})[uid]) || 0;
+    var preview   = c.lastMessage || 'Nenhuma mensagem';
+    var timeStr   = formatTime(c.lastMessageAt);
+
+    return '<a href="chat.html?id=' + c.id + '" class="conv-item">' +
+      '<div class="conv-avatar">' + initial + '</div>' +
+      '<div class="conv-info">' +
+        '<div class="conv-row1">' +
+          '<span class="conv-name">' + escHtml(otherName) + '</span>' +
+          '<span class="conv-time">' + timeStr + '</span>' +
+        '</div>' +
+        '<div class="conv-preview' + (unread > 0 ? ' unread' : '') + '">' + escHtml(preview) + '</div>' +
+      '</div>' +
+      (unread > 0 ? '<div class="conv-badge">' + unread + '</div>' : '') +
+    '</a>';
+  }).join('');
+}
+
+function filterConvs(q) {
+  var uid = (firebase.auth().currentUser || {}).uid;
+  if (!uid) return;
+  if (!q) { renderConvs(allConvs, uid); return; }
+  q = q.toLowerCase();
+  var filtered = allConvs.filter(function(c) {
+    var otherUid = (c.participants || []).find(function(p) { return p !== uid; }) || '';
+    var name = ((c.participantNames || {})[otherUid] || '').toLowerCase();
+    return name.includes(q) || (c.lastMessage || '').toLowerCase().includes(q);
+  });
+  renderConvs(filtered, uid);
+}
+
+function updateTabBadge(uid) {
+  var total = allConvs.reduce(function(sum, c) {
+    return sum + (((c.unreadCount || {})[uid]) || 0);
+  }, 0);
+  var badge = document.querySelector('.tab-msg-badge');
+  if (badge) {
+    badge.textContent = total > 9 ? '9+' : (total || '');
+    badge.style.display = total > 0 ? 'flex' : 'none';
+  }
+}
+
+function formatTime(ts) {
+  if (!ts) return '';
+  var d = ts.toDate ? ts.toDate() : new Date(ts.seconds * 1000);
+  var now = new Date();
+  var diff = now - d;
+  if (diff < 60000) return 'agora';
+  if (diff < 3600000) return Math.floor(diff/60000) + 'm';
+  if (diff < 86400000) return d.toLocaleTimeString('pt', {hour:'2-digit',minute:'2-digit'});
+  if (diff < 604800000) {
+    var days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+    return days[d.getDay()];
+  }
+  return d.toLocaleDateString('pt', {day:'2-digit',month:'2-digit'});
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>

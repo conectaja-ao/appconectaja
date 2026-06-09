@@ -1,0 +1,879 @@
+﻿<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Conecta Já — Plataforma #1 de Serviços em Angola</title>
+    <meta name="description" content="A maior plataforma de serviços profissionais em Angola. Conecte-se com prestadores verificados de confiança em Luanda e todo o país.">
+    <meta name="keywords" content="serviços angola, prestadores luanda, canalizador, eletricista, professor particular, técnico, angola">
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://conectaja-ao.github.io/ConectaJa.ao/">
+    <!-- Open Graph / WhatsApp / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://conectaja-ao.github.io/ConectaJa.ao/">
+    <meta property="og:site_name" content="Conecta Já">
+    <meta property="og:locale" content="pt_AO">
+    <meta property="og:title" content="Conecta Já — Plataforma #1 de Serviços em Angola">
+    <meta property="og:description" content="A maior plataforma de serviços profissionais em Angola. Conecte-se com prestadores verificados de confiança em Luanda e todo o país.">
+    <meta property="og:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+    <meta property="og:image:width" content="192">
+    <meta property="og:image:height" content="192">
+    <meta property="og:image:alt" content="Conecta Já — Plataforma de Serviços em Angola">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Conecta Já — Plataforma #1 de Serviços em Angola">
+    <meta name="twitter:description" content="A maior plataforma de serviços profissionais em Angola. Conecte-se com prestadores verificados de confiança em Luanda e todo o país.">
+    <meta name="twitter:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="global.css">
+    <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+    <script>if(localStorage.getItem('cj-lang')==='en')document.documentElement.style.opacity='0';</script>
+    <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+
+</head>
+<body>
+<div class="page-transition-overlay"></div>
+
+<header class="navbar" id="navbar">
+    <div class="container">
+        <div class="navbar__wrapper">
+            <a href="index.html" class="navbar__logo">
+                <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+                    <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+                    <circle cx="20" cy="20" r="8" fill="white"/>
+                </svg>
+                <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+            </a>
+            <ul class="navbar__menu" id="navMenu" role="list">
+                <li class="navbar__item"><a href="index.html" class="navbar__link active">Início</a></li>
+                <li class="navbar__item"><a href="prestadores.html" class="navbar__link">Prestadores</a></li>
+                <li class="navbar__item"><a href="bisno.html" class="navbar__link">Bisno</a></li>
+                <li class="navbar__item"><a href="sobre.html" class="navbar__link">Sobre</a></li>
+                <li class="navbar__item"><a href="blog.html" class="navbar__link">Blog</a></li>
+                <li class="navbar__item"><a href="faq.html" class="navbar__link">FAQ</a></li>
+                <li class="navbar__item"><a href="contacto.html" class="navbar__link">Contacto</a></li>
+            </ul>
+            <div class="navbar__actions">
+                <a href="prestadores.html" class="btn btn--outline btn--sm">Ver Prestadores</a>
+                <button class="btn btn--primary btn--sm" data-modal="loginModal">Entrar</button>
+            </div>
+            <div class="lang-toggle-wrapper" id="langWrapper">
+                <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma" aria-expanded="false" title="Mudar idioma">
+                    <span class="lang-flag">🇵🇹</span>
+                    <span class="lang-code">PT</span>
+                    <i class="fas fa-chevron-down lang-arrow"></i>
+                </button>
+                <div class="lang-menu" id="langMenu">
+                    <button class="lang-option" data-set-lang="pt">🇵🇹 Português</button>
+                    <button class="lang-option" data-set-lang="en">🇬🇧 English</button>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo escuro">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- ============================================
+     HERO SECTION
+============================================ -->
+<section class="hero" id="home">
+    <div class="hero__bg">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__blob hero__blob--3"></div>
+        <div class="hero__grid-bg"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero__content">
+            <div class="hero__text">
+                <div class="hero__badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>Plataforma #1 em Angola • Lançamento 2026</span>
+                </div>
+
+                <h1 class="hero__title">
+                    Conecta-te aos
+                    <span class="hero__title--highlight">Melhores Prestadores</span>
+                    de Serviços em Angola
+                </h1>
+
+                <p class="hero__description">
+                    Encontra profissionais verificados e de confiança para qualquer serviço.
+                    Rápido, seguro e transparente. Mais de 5.000 prestadores prontos para te ajudar.
+                </p>
+
+                <div class="hero__cta">
+                    <button class="btn btn--primary btn--xl" id="btnComecarAgora" data-open-choice>
+                        <i class="fas fa-rocket"></i>
+                        Começar Agora — Grátis
+                    </button>
+                    <a href="#how-it-works" class="btn btn--ghost btn--xl">
+                        <i class="fas fa-play-circle"></i>
+                        Como Funciona
+                    </a>
+                </div>
+
+                <div class="hero__stats">
+                    <div class="stat">
+                        <div class="stat__number">
+                            <span class="count" id="stat-providers" data-target="0">0</span><span class="stat__suffix">+</span>
+                        </div>
+                        <div class="stat__label">Prestadores</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number">
+                            <span class="count" id="stat-orders" data-target="0">0</span><span class="stat__suffix">+</span>
+                        </div>
+                        <div class="stat__label">Serviços Realizados</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number"><span id="stat-rating">—</span><span class="stat__suffix">★</span></div>
+                        <div class="stat__label">Avaliação Média</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number">
+                            <span class="count" id="stat-satisfaction" data-target="98">0</span><span class="stat__suffix">%</span>
+                        </div>
+                        <div class="stat__label">Satisfação</div>
+                    </div>
+                </div>
+
+                <div class="hero__trust">
+                    <i class="fas fa-shield-check"></i>
+                    Todos os prestadores são verificados e aprovados pela nossa equipa
+                </div>
+            </div>
+
+            <div class="hero__visual">
+                <div class="hero__cards">
+                    <div class="service-card">
+                        <div class="service-card__icon"><i class="fas fa-wrench"></i></div>
+                        <div class="service-card__content">
+                            <h4>Canalizador</h4>
+                            <div class="service-card__rating"><i class="fas fa-star"></i><span>4.9</span></div>
+                            <p>150+ disponíveis</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-card__icon" style="background:linear-gradient(135deg,#F59E0B,#F4A261)"><i class="fas fa-bolt"></i></div>
+                        <div class="service-card__content">
+                            <h4>Eletricista</h4>
+                            <div class="service-card__rating"><i class="fas fa-star"></i><span>4.8</span></div>
+                            <p>200+ disponíveis</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-card__icon" style="background:linear-gradient(135deg,#2A9D8F,#3BC4B4)"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div class="service-card__content">
+                            <h4>Professor</h4>
+                            <div class="service-card__rating"><i class="fas fa-star"></i><span>5.0</span></div>
+                            <p>300+ disponíveis</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-card__icon" style="background:linear-gradient(135deg,#6366F1,#8B5CF6)"><i class="fas fa-laptop-code"></i></div>
+                        <div class="service-card__content">
+                            <h4>Técnico IT</h4>
+                            <div class="service-card__rating"><i class="fas fa-star"></i><span>4.9</span></div>
+                            <p>120+ disponíveis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SEARCH SECTION
+============================================ -->
+<section class="search-section" id="search">
+    <div class="container">
+        <div class="search-wrapper">
+            <h2 class="search__title">O que precisas hoje?</h2>
+            <p class="search__subtitle">Pesquisa por serviço, categoria ou localização</p>
+
+            <form class="search-form" id="searchForm" role="search">
+                <div class="search-form__group">
+                    <i class="fas fa-search search-form__icon"></i>
+                    <input type="text" class="search-form__input" id="searchQuery"
+                        placeholder="Ex: Canalizador, Professor de Inglês, Pintor..."
+                        autocomplete="off" aria-label="Pesquisar serviços">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+
+                <div class="search-form__group">
+                    <i class="fas fa-map-marker-alt search-form__icon"></i>
+                    <select class="search-form__select" id="searchLocation" aria-label="Localização">
+                        <option value="">Todas as Províncias</option>
+                        <option value="luanda">Luanda</option>
+                        <option value="benguela">Benguela</option>
+                        <option value="huambo">Huambo</option>
+                        <option value="huila">Huíla</option>
+                        <option value="cabinda">Cabinda</option>
+                        <option value="cuanza-norte">Cuanza Norte</option>
+                        <option value="cuanza-sul">Cuanza Sul</option>
+                        <option value="malanje">Malanje</option>
+                        <option value="outros">Outras Províncias</option>
+                    </select>
+                </div>
+
+                <div class="search-form__group">
+                    <i class="fas fa-th-large search-form__icon"></i>
+                    <select class="search-form__select" id="searchCategory" aria-label="Categoria">
+                        <option value="">Todas as Categorias</option>
+                        <option value="casa-construcao">Casa e Construção</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="educacao">Educação</option>
+                        <option value="beleza">Beleza e Bem-estar</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="limpeza">Limpeza</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="saude">Saúde</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--lg">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span>
+                </button>
+            </form>
+
+            <div class="search__popular">
+                <span>Populares:</span>
+                <button class="tag" data-search="canalizador"><i class="fas fa-wrench"></i> Canalizador</button>
+                <button class="tag" data-search="eletricista"><i class="fas fa-bolt"></i> Eletricista</button>
+                <button class="tag" data-search="professor"><i class="fas fa-graduation-cap"></i> Professor</button>
+                <button class="tag" data-search="pintor"><i class="fas fa-paint-brush"></i> Pintor</button>
+                <button class="tag" data-search="técnico"><i class="fas fa-tools"></i> Técnico</button>
+                <button class="tag" data-search="limpeza"><i class="fas fa-broom"></i> Limpeza</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     CATEGORIES SECTION
+============================================ -->
+<section class="categories" id="services">
+    <div class="container">
+        <div class="section-header section-header--centered reveal">
+            <span class="section-header__label"><i class="fas fa-th-large"></i> Categorias</span>
+            <h2 class="section-header__title">Explora por <span>Categoria</span></h2>
+            <p class="section-header__description">
+                Mais de 50 categorias de serviços profissionais à tua disposição em todo Angola
+            </p>
+        </div>
+
+        <div class="categories-grid">
+            <a href="prestadores.html?cat=casa-construcao" class="category-card reveal delay-100">
+                <div class="category-card__icon"><i class="fas fa-home"></i></div>
+                <h3 class="category-card__title">Casa e Construção</h3>
+                <p class="category-card__description">Canalizadores, eletricistas, pintores, pedreiros, carpinteiros</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 680+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prestadores.html?cat=tecnologia" class="category-card reveal delay-200">
+                <div class="category-card__icon" style="background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.1));color:#6366F1"><i class="fas fa-laptop-code"></i></div>
+                <h3 class="category-card__title">Tecnologia</h3>
+                <p class="category-card__description">Reparação de telemóveis, computadores, redes, programação</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 450+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prestadores.html?cat=educacao" class="category-card reveal delay-300">
+                <div class="category-card__icon" style="background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(5,150,105,0.1));color:#10B981"><i class="fas fa-graduation-cap"></i></div>
+                <h3 class="category-card__title">Educação</h3>
+                <p class="category-card__description">Professores particulares, explicadores, cursos profissionais</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 1.200+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prestadores.html?cat=beleza" class="category-card reveal delay-400">
+                <div class="category-card__icon" style="background:linear-gradient(135deg,rgba(236,72,153,0.1),rgba(219,39,119,0.1));color:#EC4899"><i class="fas fa-cut"></i></div>
+                <h3 class="category-card__title">Beleza e Bem-estar</h3>
+                <p class="category-card__description">Cabeleireiros, barbeiros, manicures, esteticistas, massagistas</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 600+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prestadores.html?cat=eventos" class="category-card reveal delay-100">
+                <div class="category-card__icon" style="background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(217,119,6,0.1));color:#F59E0B"><i class="fas fa-calendar-alt"></i></div>
+                <h3 class="category-card__title">Eventos</h3>
+                <p class="category-card__description">Fotógrafos, DJs, decoradores, catering, organização de eventos</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 380+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prestadores.html?cat=limpeza" class="category-card reveal delay-200">
+                <div class="category-card__icon" style="background:linear-gradient(135deg,rgba(14,165,233,0.1),rgba(2,132,199,0.1));color:#0EA5E9"><i class="fas fa-broom"></i></div>
+                <h3 class="category-card__title">Limpeza</h3>
+                <p class="category-card__description">Limpeza doméstica, escritórios, pós-obra, jardinagem</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 520+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prestadores.html?cat=transporte" class="category-card reveal delay-300">
+                <div class="category-card__icon" style="background:linear-gradient(135deg,rgba(234,88,12,0.1),rgba(194,65,12,0.1));color:#EA580C"><i class="fas fa-truck"></i></div>
+                <h3 class="category-card__title">Transporte</h3>
+                <p class="category-card__description">Motoristas, mudanças, entregas, logística</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 290+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prestadores.html?cat=saude" class="category-card reveal delay-400">
+                <div class="category-card__icon" style="background:linear-gradient(135deg,rgba(239,68,68,0.1),rgba(220,38,38,0.1));color:#EF4444"><i class="fas fa-heartbeat"></i></div>
+                <h3 class="category-card__title">Saúde</h3>
+                <p class="category-card__description">Enfermeiros, fisioterapeutas, nutricionistas, personal trainers</p>
+                <div class="category-card__meta">
+                    <span class="category-card__count"><i class="fas fa-users"></i> 340+ prestadores</span>
+                    <span class="category-card__arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+        </div>
+
+        <div class="categories__footer reveal">
+            <a href="prestadores.html" class="btn btn--primary btn--lg">
+                <i class="fas fa-th-large"></i>
+                Ver todas as categorias
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     HOW IT WORKS
+============================================ -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="section-header section-header--centered reveal">
+            <span class="section-header__label"><i class="fas fa-route"></i> Processo</span>
+            <h2 class="section-header__title">Como <span>Funciona?</span></h2>
+            <p class="section-header__description">
+                Três passos simples para encontrar o profissional perfeito
+            </p>
+        </div>
+
+        <div class="steps">
+            <div class="step reveal delay-100">
+                <div class="step__number"><span>01</span></div>
+                <div class="step__icon"><i class="fas fa-search"></i></div>
+                <h3 class="step__title">Pesquisa o Serviço</h3>
+                <p class="step__description">
+                    Usa a nossa busca avançada para encontrar o prestador ideal.
+                    Filtra por categoria, localização, avaliações e preço.
+                </p>
+                <ul class="step__features">
+                    <li><i class="fas fa-check-circle"></i> Busca inteligente</li>
+                    <li><i class="fas fa-check-circle"></i> Filtros avançados</li>
+                    <li><i class="fas fa-check-circle"></i> Perfis verificados</li>
+                </ul>
+            </div>
+
+            <div class="step reveal delay-200">
+                <div class="step__number"><span>02</span></div>
+                <div class="step__icon"><i class="fas fa-comments"></i></div>
+                <h3 class="step__title">Conecta e Negoceia</h3>
+                <p class="step__description">
+                    Contacta directamente com o prestador via WhatsApp ou telefone.
+                    Recebe orçamentos e agenda o serviço de forma transparente.
+                </p>
+                <ul class="step__features">
+                    <li><i class="fas fa-check-circle"></i> Orçamentos grátis</li>
+                    <li><i class="fas fa-check-circle"></i> Contacto directo</li>
+                    <li><i class="fas fa-check-circle"></i> Agendamento flexível</li>
+                </ul>
+            </div>
+
+            <div class="step reveal delay-300">
+                <div class="step__number"><span>03</span></div>
+                <div class="step__icon"><i class="fas fa-star"></i></div>
+                <h3 class="step__title">Avalia o Serviço</h3>
+                <p class="step__description">
+                    Após a conclusão do trabalho, deixa a tua avaliação honesta.
+                    O teu feedback ajuda outros clientes e incentiva a excelência.
+                </p>
+                <ul class="step__features">
+                    <li><i class="fas fa-check-circle"></i> Sistema de avaliação</li>
+                    <li><i class="fas fa-check-circle"></i> Feedback transparente</li>
+                    <li><i class="fas fa-check-circle"></i> Garantia de qualidade</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     TESTIMONIALS SECTION
+============================================ -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-header section-header--centered reveal">
+            <span class="section-header__label"><i class="fas fa-quote-right"></i> Testemunhos</span>
+            <h2 class="section-header__title">O que dizem os <span>nossos clientes</span></h2>
+            <p class="section-header__description">
+                Histórias reais de pessoas que encontraram os melhores profissionais
+            </p>
+        </div>
+
+        <div class="testimonials-carousel">
+            <div class="testimonials-track" id="testimonialsTrack">
+
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-card__quote">"</div>
+                    <p class="testimonial-card__text">
+                        Encontrei um canalizador excelente em menos de 10 minutos! O serviço foi impecável e o preço muito justo. Nunca mais vou procurar profissionais de outra forma.
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">A</div>
+                        <div class="testimonial-card__info">
+                            <div class="testimonial-card__name">Ana Rodrigues</div>
+                            <div class="testimonial-card__role">Cliente · Luanda</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-card__quote">"</div>
+                    <p class="testimonial-card__text">
+                        Desde que me registei como prestador, o meu negócio cresceu exponencialmente. Recebo pedidos diariamente e a plataforma é muito fácil de usar.
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar" style="background:linear-gradient(135deg,#F59E0B,#F4A261)">M</div>
+                        <div class="testimonial-card__info">
+                            <div class="testimonial-card__name">Manuel Costa</div>
+                            <div class="testimonial-card__role">Eletricista · Luanda</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-card__quote">"</div>
+                    <p class="testimonial-card__text">
+                        Precisava urgentemente de um professor de matemática para o meu filho. Em 30 minutos tinha encontrado um profissional incrível com ótimas avaliações!
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar" style="background:linear-gradient(135deg,#2A9D8F,#3BC4B4)">F</div>
+                        <div class="testimonial-card__info">
+                            <div class="testimonial-card__name">Filomena Santos</div>
+                            <div class="testimonial-card__role">Cliente · Benguela</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="testimonial-card__quote">"</div>
+                    <p class="testimonial-card__text">
+                        A verificação dos prestadores dá-me muita confiança. Já contratei 5 profissionais diferentes e nunca tive problemas. Recomendo a todos!
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar" style="background:linear-gradient(135deg,#6366F1,#8B5CF6)">P</div>
+                        <div class="testimonial-card__info">
+                            <div class="testimonial-card__name">Paulo Ferreira</div>
+                            <div class="testimonial-card__role">Cliente · Huambo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-card__quote">"</div>
+                    <p class="testimonial-card__text">
+                        Como decoradora de eventos, o Conecta Já transformou o meu negócio. A visibilidade que a plataforma me deu foi incrível!
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar" style="background:linear-gradient(135deg,#EC4899,#DB2777)">C</div>
+                        <div class="testimonial-card__info">
+                            <div class="testimonial-card__name">Carla Nzinga</div>
+                            <div class="testimonial-card__role">Decoradora · Luanda</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="testimonials__controls">
+            <button class="testimonials__btn" id="prevTestimonial" aria-label="Anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="testimonials__dots" id="testimonialsDots"></div>
+            <button class="testimonials__btn" id="nextTestimonial" aria-label="Próximo">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     TRUST SECTION
+============================================ -->
+<section class="trust" id="confianca">
+    <div class="container">
+        <div class="trust-content">
+            <div class="section-header section-header--centered reveal" style="margin-bottom:3.5rem">
+                <span class="section-header__label" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.8)">
+                    <i class="fas fa-shield-alt"></i> Confiança
+                </span>
+                <h2 class="trust__title">Por que Confiar no <span style="color:var(--color-secondary)">Conecta Já?</span></h2>
+                <p class="trust__description">
+                    Somos a plataforma mais segura e confiável de Angola.
+                    Todos os nossos prestadores passam por verificação rigorosa antes de serem aprovados.
+                </p>
+            </div>
+
+            <div class="trust-features">
+                <div class="trust-feature reveal delay-100">
+                    <div class="trust-feature__icon"><i class="fas fa-id-card"></i></div>
+                    <h3 class="trust-feature__title">Verificação de Identidade</h3>
+                    <p class="trust-feature__description">Todos os documentos são verificados pela nossa equipa antes da aprovação</p>
+                </div>
+
+                <div class="trust-feature reveal delay-200">
+                    <div class="trust-feature__icon"><i class="fas fa-star"></i></div>
+                    <h3 class="trust-feature__title">Avaliações Autênticas</h3>
+                    <p class="trust-feature__description">Sistema anti-fraude que garante feedback genuíno e transparente</p>
+                </div>
+
+                <div class="trust-feature reveal delay-300">
+                    <div class="trust-feature__icon"><i class="fas fa-headset"></i></div>
+                    <h3 class="trust-feature__title">Suporte 24/7</h3>
+                    <p class="trust-feature__description">Equipa sempre disponível via WhatsApp, email ou telefone</p>
+                </div>
+
+                <div class="trust-feature reveal delay-400">
+                    <div class="trust-feature__icon"><i class="fas fa-lock"></i></div>
+                    <h3 class="trust-feature__title">100% Gratuito</h3>
+                    <p class="trust-feature__description">Sem taxas escondidas para clientes. Simples, directo e transparente</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     CTA SECTION
+============================================ -->
+<section class="cta" id="comecar">
+    <div class="container">
+        <div class="cta-content reveal">
+            <h2 class="cta__title">Pronto para Começar?</h2>
+            <p class="cta__description">
+                Junta-te a milhares de angolanos que já encontraram os melhores profissionais
+            </p>
+            <div class="cta__buttons">
+                <a href="prestadores.html" class="btn btn--white btn--xl">
+                    <i class="fas fa-search"></i>
+                    Procurar Prestadores
+                </a>
+                <button class="btn btn--outline-white btn--xl" id="btnSouPrestadorCTA">
+                    <i class="fas fa-briefcase"></i>
+                    Quero Oferecer Serviços
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="footer-column footer-column--brand">
+                <a href="index.html" class="footer__logo">
+                    <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+                        <circle cx="20" cy="20" r="8" fill="white"/>
+                    </svg>
+                    <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+                </a>
+                <p class="footer__description">
+                    A plataforma líder em Angola para conectar clientes a prestadores de serviços verificados e de confiança.
+                </p>
+                <div class="footer__social">
+                    <a href="https://web.facebook.com/profile.php?id=61589032370272" target="_blank" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/conecta__ja" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/244931482577" target="_blank" class="social-link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Serviços</h4>
+                <ul class="footer-links">
+                    <li><a href="prestadores.html">Todos os Prestadores</a></li>
+                    <li><a href="prestadores.html?cat=casa-construcao">Casa e Construção</a></li>
+                    <li><a href="prestadores.html?cat=tecnologia">Tecnologia</a></li>
+                    <li><a href="prestadores.html?cat=educacao">Educação</a></li>
+                    <li><a href="prestadores.html?cat=beleza">Beleza</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="contacto.html">Imprensa</a></li>
+                    <li><a href="contacto.html">Carreiras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Central de Ajuda</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="seguranca.html">Segurança</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Contacto</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+244931482577">+244 931 482 577</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Luanda, Angola</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Atendimento 24/7</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 Conecta Já. Todos os direitos reservados.</p>
+            <div class="footer-legal">
+                <a href="termos.html">Termos</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="seguranca.html">Segurança</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================
+     FLOATING BUTTONS
+============================================ -->
+<a href="https://wa.me/244931482577?text=Olá!%20Preciso%20de%20ajuda%20com%20o%20Conecta%20Já"
+   target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Fala connosco</span>
+</a>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ============================================
+     MODAL — ESCOLHA: CLIENTE OU PRESTADOR
+============================================ -->
+<div class="modal" id="choiceModal" role="dialog" aria-modal="true">
+    <div class="modal__overlay"></div>
+    <div class="modal__container" style="max-width:580px">
+        <button class="modal__close" id="closeChoiceModal" aria-label="Fechar">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal__content" style="text-align:center">
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:88px;height:88px;background:var(--gradient-primary);border-radius:50%;margin-bottom:1.75rem;box-shadow:0 8px 32px rgba(230,57,70,0.3)">
+                <i class="fas fa-handshake" style="font-size:2.5rem;color:white"></i>
+            </div>
+            <h2 class="modal__title">Bem-vindo ao Conecta Já!</h2>
+            <p class="modal__description">Como deseja usar a plataforma?</p>
+
+            <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem">
+                <button id="btnSouCliente" class="choice-card">
+                    <div class="choice-card__icon" style="background:linear-gradient(135deg,#06D6A0,#118AB2)">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div style="flex:1;text-align:left">
+                        <div class="choice-card__title">Sou Cliente</div>
+                        <p class="choice-card__description">Procuro profissionais para contratar serviços</p>
+                    </div>
+                    <i class="fas fa-arrow-right choice-card__arrow"></i>
+                </button>
+
+                <button id="btnSouPrestador" class="choice-card">
+                    <div class="choice-card__icon" style="background:var(--gradient-primary)">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div style="flex:1;text-align:left">
+                        <div class="choice-card__title">Sou Prestador de Serviços</div>
+                        <p class="choice-card__description">Quero oferecer os meus serviços na plataforma</p>
+                    </div>
+                    <i class="fas fa-arrow-right choice-card__arrow"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     MODAL — INFO PARA PRESTADORES
+============================================ -->
+<div class="modal" id="prestadorInfoModal" role="dialog" aria-modal="true">
+    <div class="modal__overlay"></div>
+    <div class="modal__container" style="max-width:660px">
+        <button class="modal__close" aria-label="Fechar"><i class="fas fa-times"></i></button>
+        <div class="modal__content" style="text-align:center">
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:100px;height:100px;background:var(--gradient-primary);border-radius:50%;margin-bottom:2rem;box-shadow:0 8px 32px rgba(230,57,70,0.3)">
+                <i class="fas fa-handshake" style="font-size:3rem;color:white"></i>
+            </div>
+
+            <h2 style="font-size:2rem;font-weight:900;margin-bottom:1rem;color:var(--color-black)">
+                Torna-te um Prestador Conecta Já!
+            </h2>
+            <p style="font-size:1.1rem;color:var(--color-gray-600);margin-bottom:2rem;line-height:1.7">
+                Ótimo! Para começar a oferecer os teus serviços na nossa plataforma, precisamos validar o teu perfil e garantir a qualidade dos nossos prestadores.
+            </p>
+
+            <div style="background:var(--color-gray-100);padding:1.75rem;border-radius:1.25rem;border-left:4px solid var(--color-primary);margin-bottom:2rem;text-align:left">
+                <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1.25rem;color:var(--color-black)">
+                    <i class="fas fa-clipboard-check" style="color:var(--color-primary)"></i> Como Funciona:
+                </h3>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.875rem">
+                    <li style="display:flex;align-items:flex-start;gap:0.875rem;padding-bottom:0.875rem;border-bottom:1px solid var(--color-gray-200)">
+                        <i class="fas fa-check-circle" style="color:var(--color-success);font-size:1.125rem;margin-top:2px;flex-shrink:0"></i>
+                        <span style="color:var(--color-gray-700)">Entra em contacto connosco através de um dos canais abaixo</span>
+                    </li>
+                    <li style="display:flex;align-items:flex-start;gap:0.875rem;padding-bottom:0.875rem;border-bottom:1px solid var(--color-gray-200)">
+                        <i class="fas fa-check-circle" style="color:var(--color-success);font-size:1.125rem;margin-top:2px;flex-shrink:0"></i>
+                        <span style="color:var(--color-gray-700)">Envia-nos as tuas informações profissionais com fotos e vídeos dos serviços realizados</span>
+                    </li>
+                    <li style="display:flex;align-items:flex-start;gap:0.875rem;padding-bottom:0.875rem;border-bottom:1px solid var(--color-gray-200)">
+                        <i class="fas fa-check-circle" style="color:var(--color-success);font-size:1.125rem;margin-top:2px;flex-shrink:0"></i>
+                        <span style="color:var(--color-gray-700)">A nossa equipa irá validar o teu perfil (24-48h)</span>
+                    </li>
+                    <li style="display:flex;align-items:flex-start;gap:0.875rem">
+                        <i class="fas fa-check-circle" style="color:var(--color-success);font-size:1.125rem;margin-top:2px;flex-shrink:0"></i>
+                        <span style="color:var(--color-gray-700)">Após aprovação, a tua sessão será criada e começas a receber pedidos!</span>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:1.25rem;color:var(--color-black)">Entre em Contacto:</h3>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem">
+                <a href="https://wa.me/244931482577?text=Olá!%20Quero%20ser%20um%20prestador%20no%20Conecta%20Já"
+                   target="_blank" class="btn btn--primary btn--lg" style="justify-content:center">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="mailto:conectaja.ao@gmail.com?subject=Quero%20ser%20Prestador%20-%20Conecta%20Já"
+                   class="btn btn--outline btn--lg" style="justify-content:center">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="tel:+244931482577" class="btn btn--outline btn--lg" style="justify-content:center">
+                    <i class="fas fa-phone"></i> Telefone
+                </a>
+            </div>
+
+            <p style="font-size:0.875rem;color:var(--color-gray-500)">
+                <i class="fas fa-clock"></i> Respondemos em até 24 horas
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner">
+        <div class="spinner__circle"></div>
+        <div class="spinner__circle"></div>
+        <div class="spinner__circle"></div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+    <div class="toast__icon"></div>
+    <div class="toast__content">
+        <div class="toast__title"></div>
+        <div class="toast__message"></div>
+    </div>
+    <button class="toast__close" aria-label="Fechar"><i class="fas fa-times"></i></button>
+</div>
+
+<script src="i18n.js"></script>
+<script>I18n.init();</script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+    <script src="app-shell.js"></script>
+
+</body>
+</html>

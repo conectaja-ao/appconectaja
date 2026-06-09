@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sem Ligação — Conecta Já</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-primary: #E63946;
+      --color-secondary: #F4A261;
+      --color-accent: #2A9D8F;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      color: white; text-align: center; padding: 2rem;
+    }
+    .offline-wrap { max-width: 560px; margin: 0 auto; }
+    .offline-logo {
+      display: inline-flex; align-items: center; gap: .75rem;
+      font-size: 1.5rem; font-weight: 900; color: white; text-decoration: none;
+      margin-bottom: 3rem;
+    }
+    .offline-logo svg { width: 36px; height: 36px; color: var(--color-primary); }
+    .offline-logo span { color: var(--color-primary); }
+    .offline-icon {
+      width: 120px; height: 120px; border-radius: 2rem; margin: 0 auto 2.5rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; color: white;
+      box-shadow: 0 20px 60px rgba(230,57,70,.3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 20px 60px rgba(230,57,70,.3); }
+      50% { box-shadow: 0 20px 80px rgba(230,57,70,.5), 0 0 0 20px rgba(230,57,70,.1); }
+    }
+    h1 { font-size: clamp(2rem,5vw,3rem); font-weight: 900; margin-bottom: 1rem; }
+    h1 span { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    p { font-size: 1.1rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 2.5rem; }
+    .btn-retry {
+      display: inline-flex; align-items: center; gap: .75rem;
+      padding: 1rem 2.5rem; border-radius: 1rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white; font-size: 1rem; font-weight: 700; border: none;
+      cursor: pointer; text-decoration: none;
+      transition: all .3s; box-shadow: 0 8px 30px rgba(230,57,70,.3);
+    }
+    .btn-retry:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(230,57,70,.4); }
+    .offline-tips { margin-top: 3rem; display: flex; flex-direction: column; gap: .75rem; }
+    .tip { display: flex; align-items: center; gap: .75rem; padding: 1rem 1.25rem; border-radius: 1rem; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); text-align: left; font-size: .9rem; color: rgba(255,255,255,.6); }
+    .tip i { color: var(--color-secondary); flex-shrink: 0; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-primary); display: inline-block; margin-right: .5rem; animation: blink 1.5s ease-in-out infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+    .connection-status { font-size: .875rem; color: rgba(255,255,255,.4); margin-top: 2rem; }
+  </style>
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+</head>
+<body>
+  <div class="offline-wrap">
+    <a href="index.html" class="offline-logo">
+      <svg viewBox="0 0 40 40" fill="none"><path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/><circle cx="20" cy="20" r="8" fill="white"/></svg>
+      Conecta<span>Já</span>
+    </a>
+
+    <div class="offline-icon"><i class="fas fa-wifi"></i></div>
+
+    <h1>Sem <span>Ligação</span></h1>
+    <p>Parece que perdeste a ligação à internet. Verifica a tua rede Wi-Fi ou dados móveis e tenta novamente.</p>
+
+    <button class="btn-retry" onclick="window.location.reload()">
+      <i class="fas fa-redo"></i> Tentar Novamente
+    </button>
+
+    <div class="offline-tips">
+      <div class="tip"><i class="fas fa-wifi"></i> Verifica se estás ligado ao Wi-Fi</div>
+      <div class="tip"><i class="fas fa-mobile-alt"></i> Activa os dados móveis se estiveres fora de casa</div>
+      <div class="tip"><i class="fas fa-router"></i> Reinicia o router se o problema persistir</div>
+    </div>
+
+    <p class="connection-status">
+      <span class="status-dot"></span> A verificar ligação…
+    </p>
+  </div>
+
+  <script>
+    // Auto-refresh when back online
+    window.addEventListener('online', () => {
+      document.querySelector('.connection-status').innerHTML = '<span style="color:#25D366;">● Ligação restaurada! A redirecionar…</span>';
+      setTimeout(() => window.location.href = 'index.html', 1500);
+    });
+
+    // Update status text
+    window.addEventListener('offline', () => {
+      document.querySelector('.connection-status').innerHTML = '<span style="color:#E63946;">● Sem ligação à internet</span>';
+    });
+  </script>
+</body>
+</html>

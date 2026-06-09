@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Política de Privacidade — Conecta Já</title>
+  <meta name="description" content="Política de privacidade e proteção de dados do Conecta Já.">
+  <!-- SEO — página legal, não indexar -->
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://conectaja-ao.github.io/ConectaJa.ao/privacidade.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conectaja-ao.github.io/ConectaJa.ao/privacidade.html">
+  <meta property="og:site_name" content="Conecta Já">
+  <meta property="og:title" content="Política de Privacidade — Conecta Já">
+  <meta property="og:description" content="Política de privacidade e proteção de dados do Conecta Já.">
+  <meta property="og:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .legal-page { background: var(--color-gray-50); }
+    .legal-body { padding: 5rem 0 7rem; }
+    .legal-layout { display: grid; gap: 3rem; }
+    @media (min-width: 1024px) { .legal-layout { grid-template-columns: 260px 1fr; align-items: start; } }
+    .legal-toc { background: white; border-radius: 1.5rem; padding: 1.75rem; border: 1px solid var(--color-gray-100); position: sticky; top: calc(var(--header-height) + 1.5rem); }
+    .legal-toc__title { font-size: .875rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--color-gray-500); margin-bottom: 1rem; }
+    .legal-toc a { display: block; font-size: .875rem; color: var(--color-gray-600); padding: .4rem 0; text-decoration: none; border-left: 2px solid transparent; padding-left: .75rem; transition: all .2s; font-weight: 500; }
+    .legal-toc a:hover { color: var(--color-primary); border-left-color: var(--color-primary); }
+    .legal-content { background: white; border-radius: 1.5rem; padding: 3rem; border: 1px solid var(--color-gray-100); }
+    .legal-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 2px solid var(--color-gray-100); }
+    .legal-meta span { display: flex; align-items: center; gap: .4rem; font-size: .875rem; color: var(--color-gray-500); }
+    .legal-content h2 { font-size: 1.5rem; font-weight: 800; margin: 2.5rem 0 1rem; color: var(--color-gray-900); display: flex; align-items: center; gap: .5rem; scroll-margin-top: calc(var(--header-height) + 2rem); }
+    .legal-content h2 i { color: var(--color-accent); font-size: 1rem; }
+    .legal-content h2:first-of-type { margin-top: 0; }
+    .legal-content p { font-size: .975rem; line-height: 1.85; color: var(--color-gray-600); margin-bottom: 1rem; }
+    .legal-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .legal-content ul li { font-size: .975rem; line-height: 1.8; color: var(--color-gray-600); margin-bottom: .4rem; }
+    .legal-content a { color: var(--color-primary); font-weight: 600; }
+    .legal-highlight { background: rgba(42,157,143,.05); border: 1px solid rgba(42,157,143,.2); border-left: 4px solid var(--color-accent); border-radius: .75rem; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .legal-highlight p { margin: 0; color: var(--color-gray-700); }
+    .rights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .right-card { background: var(--color-gray-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid var(--color-gray-100); }
+    .right-card i { color: var(--color-accent); font-size: 1.25rem; margin-bottom: .75rem; display: block; }
+    .right-card strong { font-size: .9rem; display: block; margin-bottom: .3rem; }
+    .right-card p { font-size: .8rem; color: var(--color-gray-500); margin: 0; line-height: 1.5; }
+
+    /* Dark mode overrides */
+    [data-theme="dark"] .legal-toc { background: var(--color-gray-100) !important; border-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .legal-content { background: var(--color-gray-100) !important; border-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .legal-meta { border-bottom-color: var(--color-gray-300) !important; }
+  </style>
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <script>if(localStorage.getItem('cj-lang')==='en')document.documentElement.style.opacity='0';</script>
+    <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+
+</head>
+<body class="legal-page">
+<div class="page-transition-overlay"></div>
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar__wrapper">
+      <a href="index.html" class="navbar__logo">
+        <svg class="logo__icon" viewBox="0 0 40 40" fill="none"><path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/><circle cx="20" cy="20" r="8" fill="white"/></svg>
+        <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+      </a>
+      <ul class="navbar__menu" id="navMenu" role="list">
+        <li class="navbar__item"><a href="index.html" class="navbar__link">Início</a></li>
+        <li class="navbar__item"><a href="prestadores.html" class="navbar__link">Prestadores</a></li>
+        <li class="navbar__item"><a href="bisno.html" class="navbar__link">Bisno</a></li>
+        <li class="navbar__item"><a href="sobre.html" class="navbar__link">Sobre</a></li>
+        <li class="navbar__item"><a href="faq.html" class="navbar__link">FAQ</a></li>
+        <li class="navbar__item"><a href="contacto.html" class="navbar__link">Contacto</a></li>
+      </ul>
+      <div class="navbar__actions"><a href="prestadores.html" class="btn btn--primary btn--sm">Ver Prestadores</a></div>
+      <div class="lang-toggle-wrapper" id="langWrapper">
+        <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma" aria-expanded="false" title="Mudar idioma">
+          <span class="lang-flag">🇵🇹</span>
+          <span class="lang-code">PT</span>
+          <i class="fas fa-chevron-down lang-arrow"></i>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" data-set-lang="pt">🇵🇹 Português</button>
+          <button class="lang-option" data-set-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo escuro"><i class="fas fa-moon"></i></button>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__content">
+        <div class="page-hero__badge reveal"><i class="fas fa-lock"></i> Privacidade</div>
+        <h1 class="page-hero__title reveal delay-100">Política de Privacidade</h1>
+        <p class="page-hero__description reveal delay-200">Como recolhemos, utilizamos e protegemos os teus dados pessoais.</p>
+      </div>
+    </div>
+  </section>
+  <div class="legal-body">
+    <div class="container">
+      <div class="legal-layout">
+        <nav class="legal-toc reveal">
+          <div class="legal-toc__title">Índice</div>
+          <a href="#recolha">1. Dados Recolhidos</a>
+          <a href="#utilizacao">2. Utilização</a>
+          <a href="#partilha">3. Partilha</a>
+          <a href="#seguranca-dados">4. Segurança</a>
+          <a href="#cookies">5. Cookies</a>
+          <a href="#direitos">6. Os teus Direitos</a>
+          <a href="#retencao">7. Retenção</a>
+          <a href="#menores">8. Menores</a>
+          <a href="#alteracoes-priv">9. Alterações</a>
+          <a href="#contacto-priv">10. Contacto</a>
+        </nav>
+        <div class="legal-content reveal">
+          <div class="legal-meta">
+            <span><i class="fas fa-calendar"></i> Última atualização: Maio de 2026</span>
+            <span><i class="fas fa-shield-alt"></i> Proteção de dados garantida</span>
+          </div>
+          <div class="legal-highlight">
+            <p><strong>A tua privacidade é importante para nós.</strong> O Conecta Já compromete-se a proteger os teus dados pessoais e a ser transparente sobre como os utilizamos.</p>
+          </div>
+          <h2 id="recolha"><i class="fas fa-database"></i> 1. Dados que Recolhemos</h2>
+          <p>Recolhemos apenas os dados necessários para o funcionamento da Plataforma:</p>
+          <ul>
+            <li><strong>Dados de registo:</strong> nome, email, número de telefone e tipo de conta</li>
+            <li><strong>Dados de perfil:</strong> foto, bio profissional, localização e categorias de serviço</li>
+            <li><strong>Dados de utilização:</strong> pedidos de serviço, avaliações e mensagens</li>
+            <li><strong>Dados técnicos:</strong> endereço IP, tipo de dispositivo e dados de navegação</li>
+          </ul>
+          <h2 id="utilizacao"><i class="fas fa-tasks"></i> 2. Como Utilizamos os teus Dados</h2>
+          <p>Os teus dados são utilizados para:</p>
+          <ul>
+            <li>Fornecer e melhorar os serviços da Plataforma</li>
+            <li>Verificar identidades e autenticar utilizadores</li>
+            <li>Facilitar a comunicação entre clientes e prestadores</li>
+            <li>Enviar notificações relevantes sobre a tua conta</li>
+            <li>Cumprir obrigações legais</li>
+            <li>Analisar e melhorar a experiência de utilização</li>
+          </ul>
+          <h2 id="partilha"><i class="fas fa-share-alt"></i> 3. Partilha de Dados</h2>
+          <p>Não vendemos os teus dados a terceiros. Podemos partilhar informações com:</p>
+          <ul>
+            <li><strong>Outros utilizadores:</strong> O perfil público dos prestadores é visível a clientes</li>
+            <li><strong>Prestadores de serviços técnicos:</strong> que nos ajudam a operar a Plataforma</li>
+            <li><strong>Autoridades competentes:</strong> quando exigido por lei</li>
+          </ul>
+          <h2 id="seguranca-dados"><i class="fas fa-shield-alt"></i> 4. Segurança dos Dados</h2>
+          <p>Implementamos medidas técnicas e organizacionais para proteger os teus dados, incluindo encriptação de dados sensíveis, controlos de acesso e monitorização de segurança. No entanto, nenhum sistema é 100% seguro.</p>
+          <h2 id="cookies"><i class="fas fa-cookie-bite"></i> 5. Cookies</h2>
+          <p>Utilizamos cookies e tecnologias similares para melhorar a tua experiência. Podes gerir as preferências de cookies nas definições do teu navegador. Os cookies essenciais são necessários para o funcionamento da Plataforma.</p>
+          <h2 id="direitos"><i class="fas fa-user-shield"></i> 6. Os teus Direitos</h2>
+          <div class="rights-grid">
+            <div class="right-card"><i class="fas fa-eye"></i><strong>Acesso</strong><p>Podes solicitar uma cópia dos teus dados pessoais.</p></div>
+            <div class="right-card"><i class="fas fa-edit"></i><strong>Retificação</strong><p>Podes corrigir dados incorretos ou incompletos.</p></div>
+            <div class="right-card"><i class="fas fa-trash"></i><strong>Eliminação</strong><p>Podes pedir a eliminação dos teus dados.</p></div>
+            <div class="right-card"><i class="fas fa-ban"></i><strong>Oposição</strong><p>Podes opor-te ao processamento dos teus dados.</p></div>
+            <div class="right-card"><i class="fas fa-download"></i><strong>Portabilidade</strong><p>Podes obter os teus dados num formato legível.</p></div>
+            <div class="right-card"><i class="fas fa-pause"></i><strong>Limitação</strong><p>Podes solicitar a limitação do processamento.</p></div>
+          </div>
+          <p>Para exercer estes direitos, contacta-nos em <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a>.</p>
+          <h2 id="retencao"><i class="fas fa-clock"></i> 7. Retenção de Dados</h2>
+          <p>Conservamos os teus dados enquanto a tua conta estiver ativa ou enquanto necessário para prestar serviços. Após o encerramento da conta, os dados são eliminados em até 90 dias, salvo obrigação legal de conservação mais prolongada.</p>
+          <h2 id="menores"><i class="fas fa-child"></i> 8. Menores de Idade</h2>
+          <p>A Plataforma não é destinada a menores de 18 anos. Não recolhemos intencionalmente dados de menores. Se tomarmos conhecimento da recolha de dados de menores, os mesmos serão eliminados imediatamente.</p>
+          <h2 id="alteracoes-priv"><i class="fas fa-edit"></i> 9. Alterações a esta Política</h2>
+          <p>Podemos atualizar esta política periodicamente. Notificaremos os utilizadores sobre alterações significativas por email ou através da Plataforma. A data de última atualização está sempre indicada no topo deste documento.</p>
+          <h2 id="contacto-priv"><i class="fas fa-envelope"></i> 10. Contacto</h2>
+          <p>Para questões sobre privacidade, contacta-nos em <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a> ou pelo formulário em <a href="contacto.html">contacto.html</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="footer-column footer-column--brand">
+                <a href="index.html" class="footer__logo">
+                    <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+                        <circle cx="20" cy="20" r="8" fill="white"/>
+                    </svg>
+                    <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+                </a>
+                <p class="footer__description">
+                    A plataforma líder em Angola para conectar clientes a prestadores de serviços verificados e de confiança.
+                </p>
+                <div class="footer__social">
+                    <a href="https://web.facebook.com/profile.php?id=61589032370272" target="_blank" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/conecta__ja" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/244931482577" target="_blank" class="social-link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Serviços</h4>
+                <ul class="footer-links">
+                    <li><a href="prestadores.html">Todos os Prestadores</a></li>
+                    <li><a href="prestadores.html?cat=casa-construcao">Casa e Construção</a></li>
+                    <li><a href="prestadores.html?cat=tecnologia">Tecnologia</a></li>
+                    <li><a href="prestadores.html?cat=educacao">Educação</a></li>
+                    <li><a href="prestadores.html?cat=beleza">Beleza</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="contacto.html">Imprensa</a></li>
+                    <li><a href="contacto.html">Carreiras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Central de Ajuda</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="seguranca.html">Segurança</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Contacto</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+244931482577">+244 931 482 577</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Luanda, Angola</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Atendimento 24/7</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 Conecta Já. Todos os direitos reservados.</p>
+            <div class="footer-legal">
+                <a href="termos.html">Termos</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="seguranca.html">Segurança</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/244931482577?text=Olá!%20Preciso%20de%20ajuda%20com%20o%20Conecta%20Já"
+   target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Fala connosco</span>
+</a>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+</button>
+<script src="i18n.js"></script>
+<script>I18n.init();</script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+    <script src="app-shell.js"></script>
+
+</body>
+</html>

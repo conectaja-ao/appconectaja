@@ -1,0 +1,1788 @@
+﻿<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Bisno — Conecta Já</title>
+  <meta name="description" content="Publica o teu pedido, oferta ou oportunidade e entra em contacto com quem pode ajudar.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://conectaja-ao.github.io/ConectaJa.ao/bisno.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conectaja-ao.github.io/ConectaJa.ao/bisno.html">
+  <meta property="og:site_name" content="Conecta Já">
+  <meta property="og:locale" content="pt_AO">
+  <meta property="og:title" content="Bisno — Conecta Já">
+  <meta property="og:description" content="Publica o teu pedido, oferta ou oportunidade e entra em contacto com quem pode ajudar.">
+  <meta property="og:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    /* ── Bisno page ── */
+    .bisno-page { background: var(--color-gray-50); min-height: 100vh; }
+
+    /* ── Hero ── */
+    .bisno-hero {
+      padding: 9rem 0 4rem;
+      background: linear-gradient(135deg,
+        rgba(230,57,70,.06) 0%,
+        rgba(244,162,97,.06) 50%,
+        rgba(42,157,143,.04) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .bisno-hero::before {
+      content:'';
+      position:absolute; width:500px; height:500px;
+      background:radial-gradient(circle,rgba(230,57,70,.08) 0%,transparent 70%);
+      top:-180px; right:-80px; border-radius:50%;
+      animation:blobPulse 8s ease-in-out infinite;
+    }
+    .bisno-hero::after {
+      content:'';
+      position:absolute; width:350px; height:350px;
+      background:radial-gradient(circle,rgba(244,162,97,.08) 0%,transparent 70%);
+      bottom:-80px; left:-80px; border-radius:50%;
+      animation:blobPulse 10s ease-in-out infinite reverse;
+    }
+    .bisno-hero__content { position:relative; z-index:1; max-width:700px; margin:0 auto; }
+    .bisno-hero__badge {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.5rem 1.25rem; border-radius:50px;
+      background:rgba(230,57,70,.1); border:1px solid rgba(230,57,70,.2);
+      color:var(--color-primary); font-size:.875rem; font-weight:700;
+      margin-bottom:1.5rem;
+    }
+    .bisno-hero__title {
+      font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; line-height:1.1;
+      color:var(--color-gray-900); margin-bottom:1rem;
+    }
+    .bisno-hero__title span { color:var(--color-primary); }
+    .bisno-hero__sub {
+      font-size:1.1rem; color:var(--color-gray-600); max-width:520px; margin:0 auto;
+    }
+
+    /* ── Main layout ── */
+    .bisno-main { padding:3rem 0 6rem; }
+    .bisno-grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:2rem;
+      max-width:720px;
+      margin:0 auto;
+    }
+
+    /* ── Compose box ── */
+    .compose-card {
+      background:var(--color-white);
+      border-radius:1.5rem;
+      border:1px solid var(--color-gray-100);
+      box-shadow:0 4px 24px rgba(0,0,0,.05);
+      overflow:hidden;
+    }
+    .compose-header {
+      display:flex; align-items:center; gap:1rem;
+      padding:1.25rem 1.5rem;
+      border-bottom:1px solid var(--color-gray-100);
+    }
+    .compose-avatar {
+      width:44px; height:44px; border-radius:50%;
+      background:linear-gradient(135deg,var(--color-primary),var(--color-secondary,#f4a261));
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:800; font-size:1rem; flex-shrink:0;
+      overflow:hidden;
+    }
+    .compose-avatar img { width:100%; height:100%; object-fit:cover; }
+    .compose-prompt {
+      flex:1; background:var(--color-gray-50); border:1.5px solid var(--color-gray-200);
+      border-radius:2rem; padding:.75rem 1.25rem; font-size:.95rem;
+      color:var(--color-gray-400); cursor:pointer; transition:all .2s;
+    }
+    .compose-prompt:hover { border-color:var(--color-primary); background:#fff; }
+
+    .compose-body { padding:1.5rem; display:none; }
+    .compose-body.open { display:block; }
+    .compose-textarea {
+      width:100%; border:1.5px solid var(--color-gray-200); border-radius:1rem;
+      padding:1rem; font-size:.975rem; font-family:inherit; resize:none;
+      min-height:110px; color:var(--color-gray-900); background:var(--color-gray-50);
+      transition:all .2s; outline:none;
+    }
+    .compose-textarea:focus { border-color:var(--color-primary); background:#fff; box-shadow:0 0 0 3px rgba(230,57,70,.08); }
+    .compose-cats {
+      display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1rem;
+    }
+    .compose-cat {
+      padding:.35rem .9rem; border-radius:50px; border:1.5px solid var(--color-gray-200);
+      font-size:.8rem; font-weight:700; color:var(--color-gray-600);
+      cursor:pointer; transition:all .2s; background:none;
+    }
+    .compose-cat:hover { border-color:var(--color-primary); color:var(--color-primary); }
+    .compose-cat.selected { background:var(--color-primary); border-color:var(--color-primary); color:#fff; }
+
+    .compose-footer {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:1.25rem; gap:1rem; flex-wrap:wrap;
+    }
+    .compose-img-btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.5rem 1rem; border-radius:.75rem; border:1.5px solid var(--color-gray-200);
+      background:none; font-size:.875rem; font-weight:600; color:var(--color-gray-600);
+      cursor:pointer; transition:all .2s;
+    }
+    .compose-img-btn:hover { border-color:var(--color-primary); color:var(--color-primary); }
+    .compose-img-preview {
+      margin-top:1rem; position:relative; display:inline-block;
+    }
+    .compose-img-preview img {
+      max-width:100%; max-height:240px; border-radius:1rem;
+      object-fit:cover; display:block;
+    }
+    .compose-img-remove {
+      position:absolute; top:.5rem; right:.5rem;
+      width:28px; height:28px; border-radius:50%;
+      background:rgba(0,0,0,.6); color:#fff; border:none;
+      cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.75rem;
+    }
+    .char-count { font-size:.78rem; color:var(--color-gray-400); }
+    .char-count.warn { color:#e63946; }
+    .btn-post {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.65rem 1.75rem; border-radius:.875rem;
+      background:var(--color-primary); color:#fff; border:none;
+      font-weight:800; font-size:.9rem; cursor:pointer; transition:all .2s;
+    }
+    .btn-post:hover { background:var(--color-primary-dark,#c1121f); transform:translateY(-1px); }
+    .btn-post:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+
+    /* ── Login nudge ── */
+    .login-nudge {
+      background:var(--color-white); border-radius:1.5rem;
+      border:1px solid var(--color-gray-100);
+      padding:2rem; text-align:center;
+      box-shadow:0 4px 24px rgba(0,0,0,.05);
+    }
+    .login-nudge i { font-size:2rem; color:var(--color-primary); margin-bottom:1rem; display:block; }
+    .login-nudge p { color:var(--color-gray-600); margin-bottom:1.25rem; }
+
+    /* ── Filters ── */
+    .bisno-filters {
+      display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;
+    }
+    .filter-chip {
+      padding:.45rem 1.1rem; border-radius:50px;
+      border:1.5px solid var(--color-gray-200); background:#fff;
+      font-size:.82rem; font-weight:700; color:var(--color-gray-600);
+      cursor:pointer; transition:all .2s;
+    }
+    .filter-chip:hover { border-color:var(--color-primary); color:var(--color-primary); }
+    .filter-chip.active { background:var(--color-primary); border-color:var(--color-primary); color:#fff; }
+
+    /* ── Post card ── */
+    .post-card {
+      background:var(--color-white); border-radius:1.5rem;
+      border:1px solid var(--color-gray-100);
+      box-shadow:0 4px 24px rgba(0,0,0,.04);
+      overflow:hidden; transition:transform .2s, box-shadow .2s;
+    }
+    .post-card:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(0,0,0,.09); }
+
+    .post-card__head {
+      display:flex; align-items:flex-start; justify-content:space-between;
+      padding:1.25rem 1.5rem 0;
+    }
+    .post-author { display:flex; align-items:center; gap:.875rem; }
+    .post-avatar {
+      width:46px; height:46px; border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg,var(--color-primary),#f4a261);
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:800; font-size:1rem; overflow:hidden;
+    }
+    .post-avatar img { width:100%; height:100%; object-fit:cover; }
+    .post-author__name { font-weight:800; font-size:.975rem; color:var(--color-gray-900); }
+    .post-author__meta { font-size:.78rem; color:var(--color-gray-400); margin-top:.1rem; }
+    .post-cat-badge {
+      display:inline-flex; align-items:center; gap:.35rem;
+      padding:.28rem .8rem; border-radius:50px;
+      font-size:.72rem; font-weight:700;
+    }
+    .cat--casa       { background:rgba(59,130,246,.1); color:#2563eb; }
+    .cat--trabalho   { background:rgba(34,197,94,.1);  color:#16a34a; }
+    .cat--veiculo    { background:rgba(245,158,11,.1); color:#d97706; }
+    .cat--venda      { background:rgba(139,92,246,.1); color:#7c3aed; }
+    .cat--parceria   { background:rgba(236,72,153,.1); color:#be185d; }
+    .cat--outro      { background:rgba(107,114,128,.1);color:#4b5563; }
+
+    .post-menu-btn {
+      background:none; border:none; padding:.4rem; cursor:pointer;
+      color:var(--color-gray-400); border-radius:.5rem;
+      transition:all .2s; line-height:1;
+    }
+    .post-menu-btn:hover { background:var(--color-gray-100); color:var(--color-gray-700); }
+    .post-menu { position:relative; }
+    .post-menu__dropdown {
+      position:absolute; right:0; top:100%; margin-top:.25rem;
+      background:#fff; border:1px solid var(--color-gray-100);
+      border-radius:.875rem; box-shadow:0 8px 32px rgba(0,0,0,.12);
+      padding:.4rem; min-width:130px; z-index:50; display:none;
+    }
+    .post-menu__dropdown.open { display:block; }
+    .post-menu__item {
+      display:flex; align-items:center; gap:.6rem;
+      padding:.6rem .9rem; border-radius:.625rem;
+      font-size:.82rem; font-weight:600; cursor:pointer;
+      border:none; background:none; width:100%; text-align:left;
+      color:var(--color-gray-700); transition:background .15s;
+    }
+    .post-menu__item:hover { background:var(--color-gray-50); }
+    .post-menu__item--danger { color:#e63946; }
+    .post-menu__item--danger:hover { background:rgba(230,57,70,.06); }
+
+    .post-card__text {
+      padding:1rem 1.5rem;
+      font-size:.975rem; line-height:1.65;
+      color:var(--color-gray-800);
+      white-space:pre-wrap; word-break:break-word;
+    }
+    .post-card__image {
+      margin:0 1.5rem 1rem;
+      border-radius:1rem; overflow:hidden;
+      cursor:pointer; background:#f4f6fa;
+    }
+    .post-card__image img {
+      width:100%; height:auto; display:block;
+      object-fit:contain;
+      transition:transform .3s;
+    }
+    .post-card__image:hover img { transform:scale(1.015); }
+
+    .post-card__foot {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 1.5rem 1.25rem; border-top:1px solid var(--color-gray-100);
+      flex-wrap:wrap; gap:.75rem;
+    }
+    .post-card__time { font-size:.78rem; color:var(--color-gray-400); }
+    .btn-contact {
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.55rem 1.25rem; border-radius:.875rem;
+      background:var(--color-primary); color:#fff; border:none;
+      font-size:.82rem; font-weight:800; cursor:pointer; transition:all .2s;
+      text-decoration:none;
+    }
+    .btn-contact:hover { background:var(--color-primary-dark,#c1121f); transform:translateY(-1px); }
+
+    /* ── Empty / loading ── */
+    .bisno-empty {
+      text-align:center; padding:4rem 2rem;
+      color:var(--color-gray-400);
+      background:var(--color-white); border-radius:1.5rem;
+      border:1px solid var(--color-gray-100);
+    }
+    .bisno-empty i { font-size:2.5rem; margin-bottom:1rem; display:block; opacity:.35; }
+    .bisno-spinner { text-align:center; padding:3rem; color:var(--color-gray-400); }
+    .bisno-spinner i { font-size:1.5rem; }
+
+    /* ── Lightbox ── */
+    #bisnoLightbox {
+      position:fixed; inset:0; background:rgba(0,0,0,.88);
+      display:none; align-items:center; justify-content:center;
+      z-index:9999; padding:1.5rem;
+    }
+    #bisnoLightbox.open { display:flex; }
+    /* wrapper auto-dimensiona-se à imagem, máx 94vw × 94vh */
+    #bisnoLightboxWrap {
+      position:relative;
+      max-width:min(94vw, 900px);
+      max-height:94vh;
+      display:flex; align-items:center; justify-content:center;
+    }
+    #bisnoLightboxImg {
+      display:block;
+      max-width:100%;
+      max-height:94vh;
+      width:auto; height:auto;
+      border-radius:.75rem;
+      box-shadow:0 32px 80px rgba(0,0,0,.5);
+    }
+    #bisnoLightboxClose {
+      position:absolute; top:-.75rem; right:-.75rem;
+      background:#fff; border:none; color:#111;
+      width:36px; height:36px; border-radius:50%; font-size:.95rem;
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 16px rgba(0,0,0,.3); transition:transform .15s;
+      flex-shrink:0; z-index:1;
+    }
+    #bisnoLightboxClose:hover { transform:scale(1.1); }
+
+    /* ── Comentários ── */
+    .post-comments {
+      border-top:1px solid var(--color-gray-100);
+      background:var(--color-gray-50);
+      border-radius:0 0 1.5rem 1.5rem;
+    }
+    .cmt-list {
+      padding:.75rem 1.25rem;
+      display:flex; flex-direction:column; gap:.625rem;
+      max-height:420px; overflow-y:auto;
+    }
+    .cmt-list::-webkit-scrollbar { width:4px; }
+    .cmt-list::-webkit-scrollbar-track { background:transparent; }
+    .cmt-list::-webkit-scrollbar-thumb { background:var(--color-gray-200); border-radius:2px; }
+    .cmt-loading { text-align:center; padding:1.25rem; color:var(--color-gray-400); font-size:.85rem; }
+    .cmt-empty   { text-align:center; padding:1.25rem; color:var(--color-gray-400); font-size:.85rem; }
+    .cmt-empty i { margin-right:.4rem; opacity:.6; }
+    .cmt-item { display:flex; gap:.625rem; align-items:flex-start; }
+    .cmt-avatar {
+      width:32px; height:32px; border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg,var(--color-primary),#f4a261);
+      color:#fff; font-weight:800; font-size:.7rem;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .cmt-body { flex:1; min-width:0; }
+    .cmt-meta { display:flex; align-items:center; gap:.4rem; margin-bottom:.25rem; flex-wrap:wrap; }
+    .cmt-name { font-weight:700; font-size:.8rem; color:var(--color-gray-900); }
+    .cmt-time { font-size:.7rem; color:var(--color-gray-400); }
+    .cmt-del-btn {
+      background:none; border:none; cursor:pointer;
+      color:var(--color-gray-300); font-size:.68rem;
+      padding:.1rem .3rem; border-radius:.3rem;
+      transition:all .15s; margin-left:auto; line-height:1;
+    }
+    .cmt-del-btn:hover { color:#e63946; background:rgba(230,57,70,.08); }
+    .cmt-text {
+      font-size:.875rem; color:var(--color-gray-700); line-height:1.5;
+      word-break:break-word; background:#fff; border-radius:.75rem;
+      padding:.45rem .875rem; border:1px solid var(--color-gray-100);
+      display:inline-block; max-width:100%;
+    }
+    .cmt-compose {
+      display:flex; align-items:center; gap:.625rem;
+      padding:.875rem 1.25rem;
+      border-top:1px solid var(--color-gray-100);
+    }
+    .cmt-compose-avatar {
+      width:32px; height:32px; border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg,var(--color-primary),#f4a261);
+      color:#fff; font-weight:800; font-size:.7rem;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .cmt-input {
+      flex:1; padding:.55rem 1rem; border-radius:2rem;
+      border:1.5px solid var(--color-gray-200);
+      font-size:.875rem; font-family:inherit;
+      background:#fff; outline:none; transition:all .2s;
+      min-width:0;
+    }
+    .cmt-input:focus { border-color:var(--color-primary); box-shadow:0 0 0 3px rgba(230,57,70,.08); }
+    .cmt-send-btn {
+      width:34px; height:34px; border-radius:50%; flex-shrink:0;
+      background:var(--color-primary); color:#fff; border:none;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:all .2s; font-size:.8rem;
+    }
+    .cmt-send-btn:hover { background:var(--color-primary-dark,#c1121f); transform:scale(1.08); }
+    .cmt-send-btn:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+    .cmt-login-nudge {
+      padding:.875rem 1.25rem; font-size:.83rem;
+      color:var(--color-gray-500); border-top:1px solid var(--color-gray-100);
+      text-align:center;
+    }
+    .cmt-login-nudge span { color:var(--color-primary); cursor:pointer; font-weight:700; }
+    /* toggle button no footer */
+    .cmt-toggle {
+      display:inline-flex; align-items:center; gap:.35rem;
+      background:none; border:none; cursor:pointer;
+      color:var(--color-gray-500); font-size:.8rem; font-weight:700;
+      padding:.3rem .65rem; border-radius:.5rem;
+      transition:all .2s; font-family:inherit;
+    }
+    .cmt-toggle:hover { color:var(--color-primary); background:rgba(230,57,70,.07); }
+    .cmt-toggle--active { color:var(--color-primary); }
+
+    /* ── Modal de edição ── */
+    #editModal {
+      position:fixed; inset:0; background:rgba(0,0,0,.55);
+      display:none; align-items:center; justify-content:center;
+      z-index:9990; padding:1rem;
+    }
+    #editModal.open { display:flex; }
+    .edit-box {
+      background:#fff; border-radius:1.5rem; padding:2rem;
+      width:100%; max-width:520px;
+      box-shadow:0 32px 80px rgba(0,0,0,.18);
+      max-height:90vh; overflow-y:auto;
+    }
+    .edit-box__title {
+      font-size:1.1rem; font-weight:900; margin-bottom:1.25rem;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .edit-box__title i { color:var(--color-primary); }
+    .edit-box textarea {
+      width:100%; border:1.5px solid var(--color-gray-200);
+      border-radius:1rem; padding:1rem; font-size:.975rem;
+      font-family:inherit; resize:none; min-height:120px;
+      color:var(--color-gray-900); background:var(--color-gray-50);
+      outline:none; transition:all .2s;
+    }
+    .edit-box textarea:focus { border-color:var(--color-primary); background:#fff; box-shadow:0 0 0 3px rgba(230,57,70,.08); }
+    .edit-box__cats {
+      display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1rem; margin-bottom:1.5rem;
+    }
+    .edit-box__actions { display:flex; gap:.75rem; justify-content:flex-end; }
+    .btn-save {
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.65rem 1.5rem; border-radius:.875rem;
+      background:var(--color-primary); color:#fff; border:none;
+      font-weight:800; font-size:.9rem; cursor:pointer; transition:all .2s;
+    }
+    .btn-save:hover { background:var(--color-primary-dark,#c1121f); }
+    .btn-save:disabled { opacity:.5; cursor:not-allowed; }
+    .btn-cancel-edit {
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.65rem 1.25rem; border-radius:.875rem;
+      background:var(--color-gray-100); color:var(--color-gray-700); border:none;
+      font-weight:700; font-size:.9rem; cursor:pointer; transition:all .2s;
+    }
+    .btn-cancel-edit:hover { background:var(--color-gray-200); }
+    .edit-edited-badge {
+      font-size:.72rem; color:var(--color-gray-400);
+      font-style:italic; margin-left:.4rem;
+    }
+
+    /* ── Toast ── */
+    #bisnoToast {
+      position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(120%);
+      background:#1a1d27; color:#fff; padding:.875rem 1.75rem; border-radius:1rem;
+      font-size:.875rem; font-weight:700; z-index:9998; transition:transform .3s;
+      display:flex; align-items:center; gap:.6rem; white-space:nowrap;
+    }
+    #bisnoToast.show { transform:translateX(-50%) translateY(0); }
+
+    /* animação de entrada para posts criados dinamicamente (não usa .reveal) */
+    @keyframes postIn {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .post-card { animation: postIn .35s ease both; }
+
+    /* ── Location compose input ── */
+    .compose-loc-row {
+      display:flex; align-items:center; gap:.6rem; margin-top:.875rem;
+    }
+    .compose-loc-icon { color:var(--color-gray-400); font-size:.85rem; flex-shrink:0; }
+    .compose-loc-input {
+      flex:1; padding:.5rem .9rem; border-radius:2rem;
+      border:1.5px solid var(--color-gray-200);
+      font-size:.875rem; font-family:inherit; background:#fff; outline:none;
+      color:var(--color-gray-900); transition:all .2s; min-width:0;
+    }
+    .compose-loc-input:focus { border-color:var(--color-primary); box-shadow:0 0 0 3px rgba(230,57,70,.08); }
+
+    /* ── Location badge on card ── */
+    .post-loc-badge {
+      display:inline-flex; align-items:center; gap:.25rem;
+      color:var(--color-gray-400); font-size:.73rem; white-space:nowrap;
+    }
+
+    /* ── Location filter select ── */
+    .loc-select {
+      padding:.42rem 1.5rem .42rem 1rem; border-radius:50px;
+      border:1.5px solid var(--color-gray-200); background:#fff;
+      font-size:.82rem; font-weight:700; color:var(--color-gray-600);
+      cursor:pointer; outline:none; transition:all .2s; font-family:inherit;
+    }
+    .loc-select:focus,
+    .loc-select:hover { border-color:var(--color-primary); color:var(--color-primary); }
+
+    /* ── Share button (WhatsApp) ── */
+    .share-btn {
+      display:inline-flex; align-items:center; gap:.35rem;
+      background:none; border:none; cursor:pointer;
+      color:var(--color-gray-500); font-size:.85rem;
+      padding:.3rem .55rem; border-radius:.5rem;
+      transition:all .2s; font-family:inherit; line-height:1;
+    }
+    .share-btn:hover { color:#25d366; background:rgba(37,211,102,.1); }
+
+    /* ── Report button ── */
+    .report-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      background:none; border:none; cursor:pointer;
+      color:var(--color-gray-300); font-size:.78rem;
+      padding:.3rem .45rem; border-radius:.5rem; transition:all .2s;
+      line-height:1;
+    }
+    .report-btn:hover { color:#e63946; background:rgba(230,57,70,.07); }
+
+    /* ── Report modal ── */
+    #reportModal {
+      position:fixed; inset:0; background:rgba(0,0,0,.55);
+      display:none; align-items:center; justify-content:center;
+      z-index:9992; padding:1rem;
+    }
+    #reportModal.open { display:flex; }
+    .report-box {
+      background:#fff; border-radius:1.5rem; padding:2rem;
+      width:100%; max-width:440px;
+      box-shadow:0 32px 80px rgba(0,0,0,.18);
+    }
+    .report-box__title {
+      font-size:1.05rem; font-weight:900; margin-bottom:.4rem;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .report-box__title i { color:#e63946; }
+    .report-box__desc {
+      color:var(--color-gray-500); font-size:.85rem; margin-bottom:1.25rem;
+    }
+    .report-reasons { display:flex; flex-direction:column; gap:.4rem; margin-bottom:1.5rem; }
+    .report-reason {
+      display:flex; align-items:center; gap:.6rem;
+      padding:.7rem 1rem; border-radius:.875rem;
+      border:1.5px solid var(--color-gray-200);
+      background:none; font-size:.875rem; font-family:inherit;
+      font-weight:600; color:var(--color-gray-700);
+      cursor:pointer; transition:all .15s; text-align:left; width:100%;
+    }
+    .report-reason:hover { border-color:var(--color-primary); color:var(--color-primary); background:rgba(230,57,70,.04); }
+    .report-reason.selected { border-color:#e63946; background:rgba(230,57,70,.07); color:#e63946; }
+    .report-box__actions { display:flex; gap:.75rem; justify-content:flex-end; }
+    .btn-report-submit {
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.65rem 1.5rem; border-radius:.875rem;
+      background:#e63946; color:#fff; border:none;
+      font-weight:800; font-size:.9rem; cursor:pointer; transition:all .2s;
+    }
+    .btn-report-submit:hover { background:#c1121f; }
+    .btn-report-submit:disabled { opacity:.5; cursor:not-allowed; }
+
+    /* ── Search ── */
+    .bisno-search__wrap {
+      position:relative; display:flex; align-items:center;
+    }
+    .bisno-search__icon {
+      position:absolute; left:1rem;
+      color:var(--color-gray-400); font-size:.875rem; pointer-events:none;
+    }
+    .bisno-search__input {
+      width:100%; padding:.75rem 2.75rem .75rem 2.75rem;
+      border:1.5px solid var(--color-gray-200); border-radius:2rem;
+      font-size:.95rem; font-family:inherit; background:#fff; outline:none;
+      color:var(--color-gray-900); transition:all .2s;
+    }
+    .bisno-search__input:focus {
+      border-color:var(--color-primary); box-shadow:0 0 0 3px rgba(230,57,70,.08);
+    }
+    .bisno-search__clear {
+      position:absolute; right:1rem;
+      background:none; border:none; cursor:pointer;
+      color:var(--color-gray-400); font-size:.85rem; padding:.25rem .3rem;
+      border-radius:50%; transition:all .15s; line-height:1;
+    }
+    .bisno-search__clear:hover { color:var(--color-gray-700); background:var(--color-gray-100); }
+
+    /* ── Like button ── */
+    .like-btn {
+      display:inline-flex; align-items:center; gap:.35rem;
+      background:none; border:none; cursor:pointer;
+      color:var(--color-gray-500); font-size:.8rem; font-weight:700;
+      padding:.3rem .65rem; border-radius:.5rem;
+      transition:all .2s; font-family:inherit;
+    }
+    .like-btn:hover { color:#e63946; background:rgba(230,57,70,.07); }
+    .like-btn--liked { color:#e63946; }
+    .like-btn--liked i { animation:heartPop .25s ease both; }
+    @keyframes heartPop {
+      0%   { transform:scale(1); }
+      50%  { transform:scale(1.45); }
+      100% { transform:scale(1); }
+    }
+
+    /* ── Resolved badge & dimming ── */
+    .resolved-badge {
+      display:inline-flex; align-items:center; gap:.3rem;
+      padding:.25rem .75rem; border-radius:50px;
+      background:rgba(34,197,94,.1); color:#16a34a;
+      font-size:.72rem; font-weight:700;
+      border:1px solid rgba(34,197,94,.2); white-space:nowrap;
+    }
+    .post-card--resolved { opacity:.65; }
+    .post-card--resolved:hover { opacity:1; }
+
+    @media (max-width:600px) {
+      .bisno-hero { padding:8rem 0 3rem; }
+      .compose-footer { flex-direction:column; align-items:stretch; }
+      .btn-post { width:100%; justify-content:center; }
+    }
+  </style>
+    <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+
+</head>
+<body class="bisno-page">
+
+<div class="page-transition-overlay"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar__wrapper">
+      <a href="index.html" class="navbar__logo">
+        <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+          <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+          <circle cx="20" cy="20" r="8" fill="white"/>
+        </svg>
+        <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+      </a>
+      <ul class="navbar__menu" id="navMenu" role="list">
+        <li class="navbar__item"><a href="index.html" class="navbar__link">Início</a></li>
+        <li class="navbar__item"><a href="prestadores.html" class="navbar__link">Prestadores</a></li>
+        <li class="navbar__item"><a href="bisno.html" class="navbar__link active">Bisno</a></li>
+        <li class="navbar__item"><a href="sobre.html" class="navbar__link">Sobre</a></li>
+        <li class="navbar__item"><a href="blog.html" class="navbar__link">Blog</a></li>
+        <li class="navbar__item"><a href="faq.html" class="navbar__link">FAQ</a></li>
+        <li class="navbar__item"><a href="contacto.html" class="navbar__link">Contacto</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <a href="prestadores.html" class="btn btn--primary btn--sm">Ver Prestadores</a>
+      </div>
+      <div class="lang-toggle-wrapper" id="langWrapper">
+        <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma" aria-expanded="false" title="Mudar idioma">
+          <span class="lang-flag">🇵🇹</span>
+          <span class="lang-code">PT</span>
+          <i class="fas fa-chevron-down lang-arrow"></i>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" data-set-lang="pt">🇵🇹 Português</button>
+          <button class="lang-option" data-set-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo escuro">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:0;">
+
+  <!-- HERO -->
+  <section class="bisno-hero">
+    <div class="container">
+      <div class="bisno-hero__content">
+        <div class="bisno-hero__badge">
+          <i class="fas fa-bolt"></i> Mural da Comunidade
+        </div>
+        <h1 class="bisno-hero__title">
+          O teu pedido,<br><span>a resposta certa</span>
+        </h1>
+        <p class="bisno-hero__sub">
+          Publica o que precisas ou o que tens para oferecer. Alguém na comunidade tem a solução.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="bisno-main">
+    <div class="container">
+      <div class="bisno-grid">
+
+        <!-- COMPOSE / LOGIN NUDGE -->
+        <div id="composeSection"></div>
+
+        <!-- SEARCH -->
+        <div class="bisno-search">
+          <div class="bisno-search__wrap">
+            <i class="fas fa-search bisno-search__icon"></i>
+            <input type="text" id="bisnoSearchInput" class="bisno-search__input"
+                   placeholder="Pesquisar publicações…" maxlength="100" autocomplete="off">
+            <button class="bisno-search__clear" id="bisnoSearchClear" style="display:none" title="Limpar">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="bisno-filters" id="bisnoFilters">
+          <button class="filter-chip active" data-cat="all">Todos</button>
+          <button class="filter-chip" data-cat="casa"><i class="fas fa-home"></i> Casa</button>
+          <button class="filter-chip" data-cat="trabalho"><i class="fas fa-briefcase"></i> Trabalho</button>
+          <button class="filter-chip" data-cat="veiculo"><i class="fas fa-car"></i> Veículo</button>
+          <button class="filter-chip" data-cat="venda"><i class="fas fa-tag"></i> Venda</button>
+          <button class="filter-chip" data-cat="parceria"><i class="fas fa-handshake"></i> Parceria</button>
+          <button class="filter-chip" data-cat="outro"><i class="fas fa-ellipsis-h"></i> Outro</button>
+          <select id="locSelect" class="loc-select" style="display:none" title="Filtrar por cidade">
+            <option value="all">📍 Todas as cidades</option>
+          </select>
+        </div>
+
+        <!-- FEED -->
+        <div id="bisnoFeed">
+          <div class="bisno-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- EDIT MODAL -->
+<div id="editModal">
+  <div class="edit-box">
+    <div class="edit-box__title"><i class="fas fa-pen"></i> Editar publicação</div>
+    <textarea id="editText" maxlength="1000" rows="5"></textarea>
+    <div style="display:flex;justify-content:flex-end;margin-top:.3rem">
+      <span class="char-count" id="editCharCount">0 / 1000</span>
+    </div>
+    <div class="edit-box__cats" id="editCats">
+      <!-- preenchido via JS -->
+    </div>
+    <div class="edit-box__actions">
+      <button class="btn-cancel-edit" id="editCancelBtn"><i class="fas fa-times"></i> Cancelar</button>
+      <button class="btn-save" id="editSaveBtn"><i class="fas fa-check"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- REPORT MODAL -->
+<div id="reportModal">
+  <div class="report-box">
+    <div class="report-box__title"><i class="fas fa-flag"></i> Denunciar publicação</div>
+    <p class="report-box__desc">Porque queres denunciar esta publicação?</p>
+    <div class="report-reasons" id="reportReasons">
+      <button class="report-reason" data-reason="spam"><i class="fas fa-ban" style="opacity:.5;width:14px"></i> Spam ou publicidade</button>
+      <button class="report-reason" data-reason="inappropriate"><i class="fas fa-exclamation-triangle" style="opacity:.5;width:14px"></i> Conteúdo inapropriado</button>
+      <button class="report-reason" data-reason="fake"><i class="fas fa-times-circle" style="opacity:.5;width:14px"></i> Informação falsa</button>
+      <button class="report-reason" data-reason="offensive"><i class="fas fa-comment-slash" style="opacity:.5;width:14px"></i> Linguagem ofensiva</button>
+      <button class="report-reason" data-reason="other"><i class="fas fa-ellipsis-h" style="opacity:.5;width:14px"></i> Outro motivo</button>
+    </div>
+    <div class="report-box__actions">
+      <button class="btn-cancel-edit" id="reportCancelBtn"><i class="fas fa-times"></i> Cancelar</button>
+      <button class="btn-report-submit" id="reportSubmitBtn" disabled><i class="fas fa-flag"></i> Denunciar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CITY DATALIST (used by compose input) -->
+<datalist id="cityDatalist">
+  <option value="Luanda">
+  <option value="Benguela">
+  <option value="Huambo">
+  <option value="Lubango">
+  <option value="Malanje">
+  <option value="Lobito">
+  <option value="Kuito">
+  <option value="Uíge">
+  <option value="Saurimo">
+  <option value="Cabinda">
+  <option value="Namibe">
+  <option value="Dundo">
+  <option value="Ndalatando">
+  <option value="Menongue">
+  <option value="Soyo">
+  <option value="Caxito">
+  <option value="Sumbe">
+  <option value="Mbanza Kongo">
+  <option value="Luena">
+  <option value="Ondjiva">
+</datalist>
+
+<!-- LIGHTBOX -->
+<div id="bisnoLightbox">
+  <div id="bisnoLightboxWrap">
+    <button id="bisnoLightboxClose" title="Fechar"><i class="fas fa-times"></i></button>
+    <img id="bisnoLightboxImg" src="" alt="">
+  </div>
+</div>
+
+<div id="bisnoToast"></div>
+
+<!-- SCRIPTS -->
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+
+<script>
+'use strict';
+
+const db   = window.firebaseDb;
+const auth = window.firebaseAuth;
+
+const CATS = {
+  casa:     { label:'Casa',      icon:'fa-home',       css:'cat--casa' },
+  trabalho: { label:'Trabalho',  icon:'fa-briefcase',  css:'cat--trabalho' },
+  veiculo:  { label:'Veículo',   icon:'fa-car',        css:'cat--veiculo' },
+  venda:    { label:'Venda',     icon:'fa-tag',        css:'cat--venda' },
+  parceria: { label:'Parceria',  icon:'fa-handshake',  css:'cat--parceria' },
+  outro:    { label:'Outro',     icon:'fa-ellipsis-h', css:'cat--outro' },
+};
+
+// ── State ────────────────────────────────────────────────────────────────────
+let _user          = null;
+let _allPosts      = [];
+let _catFilter     = 'all';
+let _locFilter     = 'all';
+let _searchQuery   = '';
+let _imageData     = null;       // base64 da imagem a publicar
+let _unsub         = null;
+let _reportPostId  = null;
+let _reportReason  = null;
+const _cmtUnsubs   = {};         // postId → unsubscribe fn dos comentários
+const _openCmts    = new Set();  // postIds com comentários expandidos
+const _cmtCounts   = {};         // postId → contagem em cache
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function timeAgo(ts) {
+  if (!ts) return '';
+  const d   = ts.toDate ? ts.toDate() : new Date(ts);
+  const sec = Math.floor((Date.now() - d) / 1000);
+  if (sec < 60)  return 'agora mesmo';
+  if (sec < 3600) return `há ${Math.floor(sec/60)} min`;
+  if (sec < 86400) return `há ${Math.floor(sec/3600)} h`;
+  if (sec < 604800) return `há ${Math.floor(sec/86400)} d`;
+  return d.toLocaleDateString('pt-AO',{day:'2-digit',month:'short'});
+}
+
+function showToast(msg, icon='fa-check-circle') {
+  const el = document.getElementById('bisnoToast');
+  el.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(()=>el.classList.remove('show'), 3200);
+}
+
+// Comprimir imagem antes de guardar (max 1200px, qualidade 0.92)
+function compressImage(file) {
+  return new Promise((resolve, reject) => {
+    const MAX = 1200, Q = 0.92;
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = e => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > MAX || h > MAX) {
+          const ratio = Math.min(MAX/w, MAX/h);
+          w = Math.round(w*ratio); h = Math.round(h*ratio);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', Q));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── Auth listener ────────────────────────────────────────────────────────────
+Auth.onReady(user => {
+  _user = user;
+  renderCompose();
+  startFeed();
+});
+
+// ── Compose ──────────────────────────────────────────────────────────────────
+function renderCompose() {
+  const el = document.getElementById('composeSection');
+  if (!_user) {
+    el.innerHTML = `
+      <div class="login-nudge">
+        <i class="fas fa-pencil-alt"></i>
+        <p>Faz <strong>login</strong> para publicar um pedido, oferta ou oportunidade na comunidade.</p>
+        <button class="btn btn--primary" onclick="document.getElementById('loginBtn')?.click()">
+          <i class="fas fa-sign-in-alt"></i> Entrar na conta
+        </button>
+      </div>`;
+    return;
+  }
+
+  const ini = (_user.name||'U').split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+  el.innerHTML = `
+    <div class="compose-card" id="composeCard">
+      <div class="compose-header">
+        <div class="compose-avatar" id="composeAvatarEl">
+          ${_user.photoURL
+            ? `<img src="${escHtml(_user.photoURL)}" alt="${ini}" onerror="this.outerHTML='${ini}'">`
+            : ini}
+        </div>
+        <div class="compose-prompt" id="composePromptBtn" role="button" tabindex="0">
+          O que precisas ou tens para oferecer, ${escHtml(_user.name.split(' ')[0])}?
+        </div>
+      </div>
+      <div class="compose-body" id="composeBody">
+        <textarea class="compose-textarea" id="composeText" maxlength="1000"
+          placeholder="Ex: Preciso de uma casa T3 em Luanda com urgência…&#10;Ex: Tenho um carro Toyota Hilux 2019 para venda…"></textarea>
+        <div style="display:flex;justify-content:flex-end;margin-top:.3rem">
+          <span class="char-count" id="charCount">0 / 1000</span>
+        </div>
+        <div class="compose-cats" id="composeCats">
+          ${Object.entries(CATS).map(([k,v])=>`
+            <button class="compose-cat" data-cat="${k}">
+              <i class="fas ${v.icon}"></i> ${v.label}
+            </button>`).join('')}
+        </div>
+        <div class="compose-loc-row">
+          <i class="fas fa-map-marker-alt compose-loc-icon"></i>
+          <input type="text" id="composeLocInput" class="compose-loc-input"
+            placeholder="Cidade / Município (opcional)" maxlength="60"
+            list="cityDatalist" autocomplete="off">
+        </div>
+        <div id="imgPreviewWrap"></div>
+        <div class="compose-footer">
+          <button class="compose-img-btn" id="composeImgBtn" type="button">
+            <i class="fas fa-image"></i> Adicionar imagem
+          </button>
+          <input type="file" id="composeImgInput" accept="image/*" style="display:none">
+          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+            <button class="btn btn--ghost btn--sm" id="composeCancelBtn">Cancelar</button>
+            <button class="btn-post" id="composeSubmitBtn" disabled>
+              <i class="fas fa-paper-plane"></i> Publicar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  // bind events
+  document.getElementById('composePromptBtn').addEventListener('click', openCompose);
+  document.getElementById('composePromptBtn').addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') openCompose(); });
+  document.getElementById('composeCancelBtn').addEventListener('click', closeCompose);
+  document.getElementById('composeText').addEventListener('input', onTextInput);
+  document.getElementById('composeImgBtn').addEventListener('click', ()=>document.getElementById('composeImgInput').click());
+  document.getElementById('composeImgInput').addEventListener('change', onImagePick);
+  document.getElementById('composeSubmitBtn').addEventListener('click', submitPost);
+  document.querySelectorAll('.compose-cat').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.compose-cat').forEach(x=>x.classList.remove('selected'));
+    b.classList.add('selected');
+  }));
+}
+
+function openCompose() {
+  document.getElementById('composeBody').classList.add('open');
+  document.getElementById('composeText').focus();
+}
+
+function closeCompose() {
+  document.getElementById('composeBody').classList.remove('open');
+  document.getElementById('composeText').value = '';
+  document.getElementById('charCount').textContent = '0 / 1000';
+  document.getElementById('charCount').classList.remove('warn');
+  document.getElementById('composeSubmitBtn').disabled = true;
+  document.querySelectorAll('.compose-cat').forEach(b=>b.classList.remove('selected'));
+  const _li = document.getElementById('composeLocInput');
+  if (_li) _li.value = '';
+  _imageData = null;
+  document.getElementById('imgPreviewWrap').innerHTML = '';
+}
+
+function onTextInput(e) {
+  const len = e.target.value.length;
+  const cc = document.getElementById('charCount');
+  cc.textContent = `${len} / 1000`;
+  cc.classList.toggle('warn', len > 900);
+  document.getElementById('composeSubmitBtn').disabled = len < 3;
+}
+
+async function onImagePick(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    _imageData = await compressImage(file);
+    const wrap = document.getElementById('imgPreviewWrap');
+    wrap.innerHTML = `
+      <div class="compose-img-preview">
+        <img src="${_imageData}" alt="Pré-visualização">
+        <button class="compose-img-remove" id="imgRemoveBtn" title="Remover">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>`;
+    document.getElementById('imgRemoveBtn').addEventListener('click', ()=>{
+      _imageData = null;
+      wrap.innerHTML = '';
+      document.getElementById('composeImgInput').value = '';
+    });
+  } catch (_) { showToast('Erro ao carregar imagem.','fa-exclamation-circle'); }
+}
+
+async function submitPost() {
+  const text = document.getElementById('composeText').value.trim();
+  if (!text || text.length < 3) return;
+  const catEl = document.querySelector('.compose-cat.selected');
+  const category = catEl ? catEl.dataset.cat : 'outro';
+  const btn = document.getElementById('composeSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A publicar…';
+
+  const locInput = document.getElementById('composeLocInput');
+  const location = locInput ? locInput.value.trim() : '';
+
+  try {
+    const post = {
+      uid:        _user.uid,
+      authorName: _user.name || 'Utilizador',
+      authorType: _user.type || 'client',
+      text,
+      category,
+      createdAt:  firebase.firestore.FieldValue.serverTimestamp(),
+    };
+    if (_imageData) post.imageData = _imageData;
+    if (location)   post.location  = location;
+    await db.collection('posts').add(post);
+    showToast('Publicação criada!', 'fa-check-circle');
+    closeCompose();
+  } catch (err) {
+    showToast('Erro ao publicar. Tenta novamente.','fa-exclamation-circle');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Publicar';
+  }
+}
+
+// ── Feed ─────────────────────────────────────────────────────────────────────
+function startFeed() {
+  if (_unsub) _unsub();
+  _unsub = db.collection('posts')
+    .orderBy('createdAt', 'desc')
+    .limit(80)
+    .onSnapshot(snap => {
+      _allPosts = [];
+      snap.forEach(d => _allPosts.push({ id: d.id, ...d.data() }));
+      updateLocFilter();
+      renderFeed();
+    }, () => {
+      document.getElementById('bisnoFeed').innerHTML = `
+        <div class="bisno-empty">
+          <i class="fas fa-exclamation-circle"></i>
+          <p>Erro ao carregar publicações.</p>
+        </div>`;
+    });
+}
+
+function renderFeed() {
+  const feed = document.getElementById('bisnoFeed');
+  let list = _allPosts;
+
+  // filtro de categoria
+  if (_catFilter !== 'all') list = list.filter(p => p.category === _catFilter);
+
+  // filtro de localização
+  if (_locFilter !== 'all') {
+    list = list.filter(p => (p.location || '').trim() === _locFilter);
+  }
+
+  // filtro de pesquisa (texto e nome do autor)
+  if (_searchQuery) {
+    const q = _searchQuery.toLowerCase();
+    list = list.filter(p =>
+      (p.text || '').toLowerCase().includes(q) ||
+      (p.authorName || '').toLowerCase().includes(q)
+    );
+  }
+
+  // posts Resolvidos vão para o fim (mantendo ordem relativa — sort estável)
+  list = [...list].sort((a, b) => {
+    const ra = !!a.resolved, rb = !!b.resolved;
+    return ra === rb ? 0 : ra ? 1 : -1;
+  });
+
+  if (!list.length) {
+    const hasFilter = _searchQuery || _catFilter !== 'all' || _locFilter !== 'all';
+    const emptyMsg = _searchQuery
+      ? `Nenhuma publicação encontrada para "<strong>${escHtml(_searchQuery)}</strong>".`
+      : _locFilter !== 'all'
+        ? `Sem publicações em <strong>${escHtml(_locFilter)}</strong>${_catFilter !== 'all' ? ' nesta categoria' : ''}.`
+        : _catFilter !== 'all'
+          ? 'Sem publicações nesta categoria.'
+          : 'Ainda não há publicações. Sê o primeiro!';
+    feed.innerHTML = `
+      <div class="bisno-empty">
+        <i class="fas fa-${_searchQuery ? 'search' : 'map-marker-alt'}"></i>
+        <p>${emptyMsg}</p>
+      </div>`;
+    return;
+  }
+
+  feed.innerHTML = list.map(p => postCardHtml(p)).join('');
+
+  // bind image lightbox
+  feed.querySelectorAll('.post-card__image img').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src));
+  });
+
+  // bind edit buttons
+  feed.querySelectorAll('.post-edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => openEditModal(btn.dataset.id));
+  });
+
+  // bind delete buttons
+  feed.querySelectorAll('.post-delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => deletePost(btn.dataset.id));
+  });
+
+  // bind resolve buttons (dropdown)
+  feed.querySelectorAll('.post-resolve-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.post-menu__dropdown.open').forEach(d => d.classList.remove('open'));
+      toggleResolved(btn.dataset.id);
+    });
+  });
+
+  // bind dropdown toggles
+  feed.querySelectorAll('.post-menu-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const dd = btn.nextElementSibling;
+      document.querySelectorAll('.post-menu__dropdown.open').forEach(o => { if(o!==dd) o.classList.remove('open'); });
+      dd.classList.toggle('open');
+    });
+  });
+
+  // bind like buttons
+  feed.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', () => toggleLike(btn.dataset.postid));
+  });
+
+  // bind share buttons
+  feed.querySelectorAll('.share-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const post = _allPosts.find(x => x.id === btn.dataset.postid);
+      if (post) sharePost(post);
+    });
+  });
+
+  // bind report buttons
+  feed.querySelectorAll('.report-btn').forEach(btn => {
+    btn.addEventListener('click', () => openReportModal(btn.dataset.postid));
+  });
+
+  // bind comments toggle buttons
+  feed.querySelectorAll('.cmt-toggle').forEach(btn => {
+    btn.addEventListener('click', () => toggleCmts(btn.dataset.postid));
+  });
+
+  // bind comment input (Enter to send)
+  feed.querySelectorAll('.cmt-input').forEach(input => {
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitComment(input.dataset.postid); }
+    });
+  });
+
+  // bind send buttons
+  feed.querySelectorAll('.cmt-send-btn').forEach(btn => {
+    btn.addEventListener('click', () => submitComment(btn.dataset.postid));
+  });
+
+  // restaurar secções de comentários que estavam abertas antes do re-render
+  restoreOpenCmts();
+}
+
+function postCardHtml(p) {
+  const cat     = CATS[p.category] || CATS.outro;
+  const ini     = (p.authorName||'?').split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+  const isOwn   = _user && _user.uid === p.uid;
+  const profileUrl = `perfil-prestador.html?id=${encodeURIComponent(p.uid)}`;
+
+  const avatarHtml = `<div class="post-avatar">${ini}</div>`;
+
+  const typeLabel = p.authorType === 'provider'
+    ? '<span style="color:var(--color-primary);font-weight:700">Prestador</span>'
+    : '<span style="color:var(--color-gray-400)">Cliente</span>';
+
+  const locationBadge = p.location
+    ? `<span class="post-loc-badge"><i class="fas fa-map-marker-alt"></i> ${escHtml(p.location)}</span>`
+    : '';
+
+  const editedBadge = p.edited
+    ? `<span class="edit-edited-badge">(editado)</span>` : '';
+
+  // ── Like button ──────────────────────────────────────────────────────────
+  const liked     = _user && Array.isArray(p.likedBy) && p.likedBy.includes(_user.uid);
+  const likeCount = p.likeCount || 0;
+  const likeBtnHtml = `
+    <button class="like-btn${liked ? ' like-btn--liked' : ''}" data-postid="${escHtml(p.id)}" title="${liked ? 'Tirar like' : 'Dar like'}">
+      <i class="${liked ? 'fas' : 'far'} fa-heart"></i>${likeCount > 0 ? ` ${likeCount}` : ''}
+    </button>`;
+
+  // ── Resolved badge ───────────────────────────────────────────────────────
+  const resolvedBadge = p.resolved
+    ? `<span class="resolved-badge"><i class="fas fa-check-circle"></i> Resolvido</span>` : '';
+
+  // ── Owner menu ───────────────────────────────────────────────────────────
+  const menuHtml = isOwn ? `
+    <div class="post-menu">
+      <button class="post-menu-btn" title="Opções"><i class="fas fa-ellipsis-v"></i></button>
+      <div class="post-menu__dropdown">
+        <button class="post-menu__item post-edit-btn" data-id="${escHtml(p.id)}">
+          <i class="fas fa-pen"></i> Editar
+        </button>
+        <button class="post-menu__item post-resolve-btn" data-id="${escHtml(p.id)}">
+          <i class="fas fa-${p.resolved ? 'undo' : 'check-circle'}"></i> ${p.resolved ? 'Reabrir' : 'Marcar Resolvido'}
+        </button>
+        <button class="post-menu__item post-menu__item--danger post-delete-btn" data-id="${escHtml(p.id)}">
+          <i class="fas fa-trash"></i> Eliminar
+        </button>
+      </div>
+    </div>` : '';
+
+  const imageHtml = p.imageData ? `
+    <div class="post-card__image">
+      <img src="${p.imageData}" alt="Imagem da publicação" loading="lazy">
+    </div>` : '';
+
+  return `
+    <div class="post-card${p.resolved ? ' post-card--resolved' : ''}">
+      <div class="post-card__head">
+        <div class="post-author">
+          ${avatarHtml}
+          <div>
+            <div class="post-author__name">${escHtml(p.authorName)}</div>
+            <div class="post-author__meta">
+              ${typeLabel} &middot;
+              <span class="post-cat-badge ${cat.css}">
+                <i class="fas ${cat.icon}"></i> ${cat.label}
+              </span>
+              ${locationBadge ? ` &middot; ${locationBadge}` : ''}
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.4rem;flex-shrink:0">
+          ${resolvedBadge}
+          ${menuHtml}
+        </div>
+      </div>
+      <div class="post-card__text">${escHtml(p.text)}</div>
+      ${imageHtml}
+      <div class="post-card__foot">
+        <div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+          <span class="post-card__time"><i class="fas fa-clock" style="margin-right:.3rem;opacity:.5"></i>${timeAgo(p.createdAt)}${editedBadge}</span>
+          <button class="cmt-toggle" data-postid="${escHtml(p.id)}">
+            <i class="fas fa-comment-alt"></i> ${(_cmtCounts[p.id]||0) > 0 ? `${_cmtCounts[p.id]} comentário${_cmtCounts[p.id]!==1?'s':''}` : 'Comentar'}
+          </button>
+          ${likeBtnHtml}
+          <button class="share-btn" data-postid="${escHtml(p.id)}" title="Partilhar no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </button>
+        </div>
+        <div style="display:flex;align-items:center;gap:.35rem;flex-shrink:0">
+          ${!isOwn && _user ? `<button class="report-btn" data-postid="${escHtml(p.id)}" title="Denunciar publicação"><i class="fas fa-flag"></i></button>` : ''}
+          <a href="${profileUrl}" class="btn-contact">
+            <i class="fas fa-user"></i> Ver Perfil
+          </a>
+        </div>
+      </div>
+      <div class="post-comments" id="cmt-${escHtml(p.id)}" style="display:none">
+        <div class="cmt-list"></div>
+        ${_user
+          ? `<div class="cmt-compose">
+               <div class="cmt-compose-avatar">${(_user.name||'U').split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase()}</div>
+               <input class="cmt-input" type="text" placeholder="Escreve um comentário…" maxlength="300" data-postid="${escHtml(p.id)}" autocomplete="off">
+               <button class="cmt-send-btn" data-postid="${escHtml(p.id)}" title="Enviar"><i class="fas fa-paper-plane"></i></button>
+             </div>`
+          : `<div class="cmt-login-nudge"><i class="fas fa-lock" style="margin-right:.4rem"></i>Faz <span onclick="document.getElementById('loginBtn')?.click()">login</span> para comentar.</div>`
+        }
+      </div>
+    </div>`;
+}
+
+async function deletePost(id) {
+  if (!_user) return;
+  if (!confirm('Eliminar esta publicação?')) return;
+  try {
+    await db.collection('posts').doc(id).delete();
+    showToast('Publicação eliminada.', 'fa-trash');
+  } catch (_) { showToast('Erro ao eliminar.','fa-exclamation-circle'); }
+}
+
+// ── Category filter ──────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    _catFilter = btn.dataset.cat;
+    renderFeed();
+  });
+});
+
+// ── Keyword search ────────────────────────────────────────────────────────────
+(function () {
+  const input     = document.getElementById('bisnoSearchInput');
+  const clearBtn  = document.getElementById('bisnoSearchClear');
+  if (!input || !clearBtn) return;
+
+  let _debounce = null;
+
+  input.addEventListener('input', () => {
+    clearTimeout(_debounce);
+    _debounce = setTimeout(() => {
+      _searchQuery = input.value.trim();
+      clearBtn.style.display = _searchQuery ? 'flex' : 'none';
+      renderFeed();
+    }, 220); // leve debounce para não re-renderizar em cada tecla
+  });
+
+  clearBtn.addEventListener('click', () => {
+    input.value    = '';
+    _searchQuery   = '';
+    clearBtn.style.display = 'none';
+    input.focus();
+    renderFeed();
+  });
+})();
+
+// ── Comments ─────────────────────────────────────────────────────────────────
+
+/** Expande ou colapsa a secção de comentários de um post */
+function toggleCmts(postId) {
+  const section = document.getElementById(`cmt-${postId}`);
+  if (!section) return;
+
+  if (_openCmts.has(postId)) {
+    // Colapsar
+    section.style.display = 'none';
+    _openCmts.delete(postId);
+    if (_cmtUnsubs[postId]) { _cmtUnsubs[postId](); delete _cmtUnsubs[postId]; }
+  } else {
+    // Expandir
+    section.style.display = 'block';
+    _openCmts.add(postId);
+    loadCmts(postId);
+  }
+  updateCmtBtn(postId);
+}
+
+/** Liga listener em tempo real à subcoleção de comentários */
+function loadCmts(postId) {
+  // Limpar listener anterior se existir
+  if (_cmtUnsubs[postId]) { _cmtUnsubs[postId](); delete _cmtUnsubs[postId]; }
+
+  const listEl = document.querySelector(`#cmt-${postId} .cmt-list`);
+  if (!listEl) return;
+  listEl.innerHTML = '<div class="cmt-loading"><i class="fas fa-spinner fa-spin"></i></div>';
+
+  _cmtUnsubs[postId] = db.collection('posts').doc(postId)
+    .collection('comments').orderBy('createdAt', 'asc')
+    .onSnapshot(snap => {
+      const comments = [];
+      snap.forEach(d => comments.push({ id: d.id, ...d.data() }));
+      _cmtCounts[postId] = comments.length;
+      renderCmts(postId, comments);
+      updateCmtBtn(postId);
+    }, () => {
+      const el = document.querySelector(`#cmt-${postId} .cmt-list`);
+      if (el) el.innerHTML = '<div class="cmt-empty"><i class="fas fa-exclamation-circle"></i> Erro ao carregar comentários.</div>';
+    });
+}
+
+/** Renderiza a lista de comentários */
+function renderCmts(postId, comments) {
+  const listEl = document.querySelector(`#cmt-${postId} .cmt-list`);
+  if (!listEl) return;
+
+  if (!comments.length) {
+    listEl.innerHTML = '<div class="cmt-empty"><i class="fas fa-comment-slash"></i> Sem comentários ainda. Sê o primeiro!</div>';
+    return;
+  }
+
+  listEl.innerHTML = comments.map(c => cmtItemHtml(c)).join('');
+
+  // bind botões de eliminar comentário
+  listEl.querySelectorAll('.cmt-del-btn').forEach(btn => {
+    btn.addEventListener('click', () => deleteCmt(postId, btn.dataset.cmtid));
+  });
+
+  // scroll suave para o último comentário só se o utilizador já estava no fundo
+  const atBottom = listEl.scrollHeight - listEl.scrollTop - listEl.clientHeight < 40;
+  if (atBottom) listEl.scrollTop = listEl.scrollHeight;
+}
+
+/** HTML de um item de comentário */
+function cmtItemHtml(c) {
+  const ini   = (c.authorName||'?').split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+  const isOwn = _user && _user.uid === c.uid;
+  return `
+    <div class="cmt-item">
+      <div class="cmt-avatar">${ini}</div>
+      <div class="cmt-body">
+        <div class="cmt-meta">
+          <span class="cmt-name">${escHtml(c.authorName)}</span>
+          <span class="cmt-time">${timeAgo(c.createdAt)}</span>
+          ${isOwn ? `<button class="cmt-del-btn" data-cmtid="${escHtml(c.id)}" title="Eliminar"><i class="fas fa-trash"></i></button>` : ''}
+        </div>
+        <div class="cmt-text">${escHtml(c.text)}</div>
+      </div>
+    </div>`;
+}
+
+/** Actualiza o texto/estado do botão de toggle de comentários */
+function updateCmtBtn(postId) {
+  const btn = document.querySelector(`.cmt-toggle[data-postid="${postId}"]`);
+  if (!btn) return;
+  const isOpen = _openCmts.has(postId);
+  const n = _cmtCounts[postId] || 0;
+  const label = n > 0 ? `${n} comentário${n !== 1 ? 's' : ''}` : 'Comentar';
+  btn.innerHTML = `<i class="fas fa-comment${isOpen ? 's' : '-alt'}"></i> ${label}`;
+  btn.classList.toggle('cmt-toggle--active', isOpen);
+}
+
+/** Envia um novo comentário */
+async function submitComment(postId) {
+  if (!_user) return;
+  const input = document.querySelector(`#cmt-${postId} .cmt-input`);
+  const sendBtn = document.querySelector(`#cmt-${postId} .cmt-send-btn`);
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+
+  // bloquear UI enquanto envia
+  input.disabled = true;
+  if (sendBtn) sendBtn.disabled = true;
+
+  try {
+    await db.collection('posts').doc(postId).collection('comments').add({
+      uid:        _user.uid,
+      authorName: _user.name || 'Utilizador',
+      authorType: _user.type || 'client',
+      text,
+      createdAt:  firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    input.value = '';
+  } catch (_err) {
+    showToast('Erro ao enviar comentário.', 'fa-exclamation-circle');
+  } finally {
+    input.disabled = false;
+    if (sendBtn) sendBtn.disabled = false;
+    input.focus();
+  }
+}
+
+/** Elimina um comentário */
+async function deleteCmt(postId, cmtId) {
+  if (!_user) return;
+  try {
+    await db.collection('posts').doc(postId).collection('comments').doc(cmtId).delete();
+  } catch (_err) {
+    showToast('Erro ao eliminar comentário.', 'fa-exclamation-circle');
+  }
+}
+
+/** Após re-render do feed, reabre as secções que estavam abertas */
+function restoreOpenCmts() {
+  if (!_openCmts.size) return;
+  _openCmts.forEach(postId => {
+    const section = document.getElementById(`cmt-${postId}`);
+    if (!section) {
+      // Post já não está visível — limpar estado
+      _openCmts.delete(postId);
+      if (_cmtUnsubs[postId]) { _cmtUnsubs[postId](); delete _cmtUnsubs[postId]; }
+      return;
+    }
+    section.style.display = 'block';
+    // Re-ligar o listener (foi destruído com o innerHTML do feed)
+    loadCmts(postId);
+    updateCmtBtn(postId);
+  });
+}
+
+// ── Likes ─────────────────────────────────────────────────────────────────────
+
+async function toggleLike(postId) {
+  if (!_user) { showToast('Faz login para dar like.', 'fa-info-circle'); return; }
+  const post = _allPosts.find(x => x.id === postId);
+  if (!post) return;
+
+  const liked = Array.isArray(post.likedBy) && post.likedBy.includes(_user.uid);
+
+  // Actualização optimista (UI responde imediatamente)
+  if (liked) {
+    post.likedBy   = (post.likedBy || []).filter(uid => uid !== _user.uid);
+    post.likeCount = Math.max(0, (post.likeCount || 0) - 1);
+  } else {
+    post.likedBy   = [...(post.likedBy || []), _user.uid];
+    post.likeCount = (post.likeCount || 0) + 1;
+  }
+  updateLikeBtn(postId, post);
+
+  try {
+    await db.collection('posts').doc(postId).update({
+      likedBy:   liked
+        ? firebase.firestore.FieldValue.arrayRemove(_user.uid)
+        : firebase.firestore.FieldValue.arrayUnion(_user.uid),
+      likeCount: firebase.firestore.FieldValue.increment(liked ? -1 : 1),
+    });
+  } catch (_err) {
+    // Reverter em caso de erro
+    if (liked) {
+      post.likedBy   = [...(post.likedBy || []), _user.uid];
+      post.likeCount = (post.likeCount || 0) + 1;
+    } else {
+      post.likedBy   = (post.likedBy || []).filter(uid => uid !== _user.uid);
+      post.likeCount = Math.max(0, (post.likeCount || 0) - 1);
+    }
+    updateLikeBtn(postId, post);
+    showToast('Erro ao actualizar like.', 'fa-exclamation-circle');
+  }
+}
+
+function updateLikeBtn(postId, post) {
+  const btn = document.querySelector(`.like-btn[data-postid="${postId}"]`);
+  if (!btn) return;
+  const liked = _user && Array.isArray(post.likedBy) && post.likedBy.includes(_user.uid);
+  const count = post.likeCount || 0;
+  btn.className = `like-btn${liked ? ' like-btn--liked' : ''}`;
+  btn.title     = liked ? 'Tirar like' : 'Dar like';
+  btn.innerHTML = `<i class="${liked ? 'fas' : 'far'} fa-heart"></i>${count > 0 ? ` ${count}` : ''}`;
+}
+
+// ── Resolved ──────────────────────────────────────────────────────────────────
+
+async function toggleResolved(postId) {
+  if (!_user) return;
+  const post = _allPosts.find(x => x.id === postId);
+  if (!post || post.uid !== _user.uid) return;
+
+  const newResolved = !post.resolved;
+  try {
+    await db.collection('posts').doc(postId).update({ resolved: newResolved });
+    showToast(
+      newResolved ? 'Marcado como Resolvido!' : 'Publicação reaberta!',
+      newResolved ? 'fa-check-circle' : 'fa-undo'
+    );
+  } catch (_err) {
+    showToast('Erro ao actualizar estado.', 'fa-exclamation-circle');
+  }
+}
+
+// ── Location filter ───────────────────────────────────────────────────────────
+
+function updateLocFilter() {
+  const select = document.getElementById('locSelect');
+  if (!select) return;
+
+  // Colecionar cidades únicas (case-insensitive deduplicate, guardar capitalização original)
+  const seen = {};
+  _allPosts.forEach(p => {
+    if (p.location && p.location.trim()) {
+      const key = p.location.trim().toLowerCase();
+      if (!seen[key]) seen[key] = p.location.trim();
+    }
+  });
+  const locs = Object.values(seen).sort((a, b) => a.localeCompare(b, 'pt'));
+
+  if (!locs.length) {
+    select.style.display = 'none';
+    _locFilter = 'all'; // sem cidades disponíveis → resetar sempre
+    return;
+  }
+
+  // Se o filtro activo já não existe na lista, resetar
+  if (_locFilter !== 'all' && !locs.some(l => l.toLowerCase() === _locFilter.toLowerCase())) {
+    _locFilter = 'all';
+  }
+
+  select.innerHTML =
+    `<option value="all">📍 Todas as cidades</option>` +
+    locs.map(l => `<option value="${escHtml(l)}"${l === _locFilter ? ' selected' : ''}>${escHtml(l)}</option>`).join('');
+  select.value = _locFilter === 'all' ? 'all' : (_locFilter || 'all');
+  select.style.display = '';
+}
+
+// ── Share (WhatsApp) ──────────────────────────────────────────────────────────
+
+function sharePost(post) {
+  const pageUrl = window.location.origin + window.location.pathname;
+  const snippet = (post.text || '').length > 180
+    ? post.text.substring(0, 180) + '…'
+    : post.text;
+  const msg =
+    `*${post.authorName || 'Bisno'}* no Conecta Já:\n\n${snippet}\n\n🔗 ${pageUrl}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+}
+
+// ── Report post ────────────────────────────────────────────────────────────────
+
+function openReportModal(postId) {
+  if (!_user) { showToast('Faz login para denunciar.', 'fa-info-circle'); return; }
+  _reportPostId = postId;
+  _reportReason = null;
+  document.querySelectorAll('.report-reason').forEach(b => b.classList.remove('selected'));
+  document.getElementById('reportSubmitBtn').disabled = true;
+  // fechar qualquer dropdown aberto
+  document.querySelectorAll('.post-menu__dropdown.open').forEach(d => d.classList.remove('open'));
+  document.getElementById('reportModal').classList.add('open');
+}
+
+function closeReportModal() {
+  document.getElementById('reportModal').classList.remove('open');
+  _reportPostId = null;
+  _reportReason = null;
+}
+
+async function submitReport() {
+  if (!_user || !_reportPostId || !_reportReason) return;
+  const post   = _allPosts.find(x => x.id === _reportPostId);
+  const btn    = document.getElementById('reportSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+  try {
+    await db.collection('reports').add({
+      postId:       _reportPostId,
+      reporterId:   _user.uid,
+      reporterName: _user.name || 'Utilizador',
+      reason:       _reportReason,
+      postText:     post ? (post.text || '').substring(0, 300) : '',
+      postAuthorId: post ? (post.uid || '') : '',
+      createdAt:    firebase.firestore.FieldValue.serverTimestamp(),
+      status:       'pending',
+    });
+    closeReportModal();
+    showToast('Denúncia enviada. Obrigado!', 'fa-flag');
+  } catch (_err) {
+    showToast('Erro ao enviar denúncia. Tenta novamente.', 'fa-exclamation-circle');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-flag"></i> Denunciar';
+  }
+}
+
+// ── Edit Modal ───────────────────────────────────────────────────────────────
+let _editId = null;
+
+function openEditModal(id) {
+  const p = _allPosts.find(x => x.id === id);
+  if (!p) return;
+  _editId = id;
+
+  // preencher textarea
+  const ta = document.getElementById('editText');
+  ta.value = p.text || '';
+  document.getElementById('editCharCount').textContent = `${ta.value.length} / 1000`;
+
+  // preencher categorias
+  const catsEl = document.getElementById('editCats');
+  catsEl.innerHTML = Object.entries(CATS).map(([k,v]) => `
+    <button class="compose-cat${p.category === k ? ' selected' : ''}" data-cat="${k}">
+      <i class="fas ${v.icon}"></i> ${v.label}
+    </button>`).join('');
+  catsEl.querySelectorAll('.compose-cat').forEach(b => b.addEventListener('click', () => {
+    catsEl.querySelectorAll('.compose-cat').forEach(x => x.classList.remove('selected'));
+    b.classList.add('selected');
+  }));
+
+  // fechar dropdown se aberto
+  document.querySelectorAll('.post-menu__dropdown.open').forEach(d => d.classList.remove('open'));
+
+  document.getElementById('editModal').classList.add('open');
+  ta.focus();
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.remove('open');
+  _editId = null;
+}
+
+// contador de caracteres no modal de edição
+document.getElementById('editText').addEventListener('input', e => {
+  const len = e.target.value.length;
+  const cc = document.getElementById('editCharCount');
+  cc.textContent = `${len} / 1000`;
+  cc.classList.toggle('warn', len > 900);
+});
+
+document.getElementById('editCancelBtn').addEventListener('click', closeEditModal);
+document.getElementById('editModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEditModal(); });
+
+document.getElementById('editSaveBtn').addEventListener('click', async () => {
+  if (!_editId) return;
+  const text = document.getElementById('editText').value.trim();
+  if (text.length < 3) return;
+  const catEl = document.querySelector('#editCats .compose-cat.selected');
+  const category = catEl ? catEl.dataset.cat : 'outro';
+  const btn = document.getElementById('editSaveBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+  try {
+    await db.collection('posts').doc(_editId).update({
+      text,
+      category,
+      edited: true,
+      editedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    // actualizar localmente sem esperar onSnapshot
+    const p = _allPosts.find(x => x.id === _editId);
+    if (p) { p.text = text; p.category = category; p.edited = true; }
+    closeEditModal();
+    showToast('Publicação actualizada!', 'fa-check-circle');
+  } catch (_) {
+    showToast('Erro ao guardar. Tenta novamente.', 'fa-exclamation-circle');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-check"></i> Guardar';
+  }
+});
+
+// ── Lightbox ─────────────────────────────────────────────────────────────────
+function openLightbox(src) {
+  document.getElementById('bisnoLightboxImg').src = src;
+  document.getElementById('bisnoLightbox').classList.add('open');
+}
+document.getElementById('bisnoLightboxClose').addEventListener('click', ()=>document.getElementById('bisnoLightbox').classList.remove('open'));
+document.getElementById('bisnoLightbox').addEventListener('click', e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') {
+    document.getElementById('bisnoLightbox').classList.remove('open');
+    closeEditModal();
+    closeReportModal();
+  }
+});
+
+// ── Location select ───────────────────────────────────────────────────────────
+document.getElementById('locSelect')?.addEventListener('change', function () {
+  _locFilter = this.value;
+  renderFeed();
+});
+
+// ── Report modal events ───────────────────────────────────────────────────────
+document.getElementById('reportReasons').addEventListener('click', e => {
+  const btn = e.target.closest('.report-reason');
+  if (!btn) return;
+  document.querySelectorAll('.report-reason').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  _reportReason = btn.dataset.reason;
+  document.getElementById('reportSubmitBtn').disabled = false;
+});
+document.getElementById('reportSubmitBtn').addEventListener('click', submitReport);
+document.getElementById('reportCancelBtn').addEventListener('click', closeReportModal);
+document.getElementById('reportModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeReportModal();
+});
+
+// close dropdowns on outside click
+document.addEventListener('click', ()=>document.querySelectorAll('.post-menu__dropdown.open').forEach(d=>d.classList.remove('open')));
+</script>
+    <script src="app-shell.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Segurança — Conecta Já</title>
+  <meta name="description" content="Como o Conecta Já garante a segurança dos seus utilizadores e dados.">
+  <!-- SEO — página legal, não indexar -->
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://conectaja-ao.github.io/ConectaJa.ao/seguranca.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conectaja-ao.github.io/ConectaJa.ao/seguranca.html">
+  <meta property="og:site_name" content="Conecta Já">
+  <meta property="og:title" content="Segurança — Conecta Já">
+  <meta property="og:description" content="Como o Conecta Já garante a segurança dos seus utilizadores e dados.">
+  <meta property="og:image" content="https://conectaja-ao.github.io/ConectaJa.ao/icons/icon-192x192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .legal-page { background: var(--color-gray-50); }
+    .security-body { padding: 5rem 0 7rem; }
+    .security-grid { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .security-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1200px) { .security-grid { grid-template-columns: repeat(3,1fr); } }
+    .security-card {
+      background: white; border-radius: 1.5rem; padding: 2.5rem;
+      border: 1px solid var(--color-gray-100);
+      transition: all .3s cubic-bezier(.16,1,.3,1);
+    }
+    .security-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.08); border-color: rgba(42,157,143,.2); }
+    .security-card__icon {
+      width: 72px; height: 72px; border-radius: 1.25rem; margin-bottom: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: white;
+    }
+    .security-card__icon--teal { background: linear-gradient(135deg, var(--color-accent), #0d7a6e); }
+    .security-card__icon--red { background: linear-gradient(135deg, var(--color-primary), #ff6b7a); }
+    .security-card__icon--blue { background: linear-gradient(135deg, #457B9D, #1D3557); }
+    .security-card__icon--gold { background: linear-gradient(135deg, #FBBF24, #F59E0B); }
+    .security-card__icon--purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+    .security-card__icon--green { background: linear-gradient(135deg, #059669, #10b981); }
+    .security-card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: .75rem; }
+    .security-card p { font-size: .925rem; line-height: 1.75; color: var(--color-gray-600); margin: 0; }
+    .tips-section { padding: 5rem 0; background: white; }
+    .tips-section .section-intro { text-align: center; margin-bottom: 3rem; }
+    .section-badge { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem 1.1rem; background: rgba(230,57,70,.1); border: 1px solid rgba(230,57,70,.2); color: var(--color-primary); border-radius: 50px; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
+    .tips-grid { display: grid; gap: 1rem; max-width: 900px; margin: 0 auto; }
+    @media (min-width: 768px) { .tips-grid { grid-template-columns: repeat(2,1fr); } }
+    .tip-card { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; border-radius: 1.25rem; border: 1px solid var(--color-gray-100); background: var(--color-gray-50); }
+    .tip-num { width: 36px; height: 36px; border-radius: .75rem; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); display: flex; align-items: center; justify-content: center; font-size: .875rem; font-weight: 900; color: white; flex-shrink: 0; }
+    .tip-card h4 { font-size: .95rem; font-weight: 800; margin-bottom: .3rem; }
+    .tip-card p { font-size: .85rem; color: var(--color-gray-500); line-height: 1.6; margin: 0; }
+    .report-section { padding: 6rem 0; background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%); text-align: center; }
+    .report-section__inner { max-width: 600px; margin: 0 auto; }
+    .report-section h2 { font-size: clamp(1.75rem,3.5vw,2.5rem); font-weight: 900; color: white; margin-bottom: 1rem; }
+    .report-section p { font-size: 1.1rem; color: rgba(255,255,255,.7); margin-bottom: 2.5rem; line-height: 1.7; }
+    .report-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Dark mode overrides */
+    [data-theme="dark"] .security-card { background: var(--color-gray-100) !important; border-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .tips-section { background: var(--color-gray-100) !important; }
+  </style>
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <script>if(localStorage.getItem('cj-lang')==='en')document.documentElement.style.opacity='0';</script>
+    <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+
+</head>
+<body class="legal-page">
+<div class="page-transition-overlay"></div>
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar__wrapper">
+      <a href="index.html" class="navbar__logo">
+        <svg class="logo__icon" viewBox="0 0 40 40" fill="none"><path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/><circle cx="20" cy="20" r="8" fill="white"/></svg>
+        <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+      </a>
+      <ul class="navbar__menu" id="navMenu" role="list">
+        <li class="navbar__item"><a href="index.html" class="navbar__link">Início</a></li>
+        <li class="navbar__item"><a href="prestadores.html" class="navbar__link">Prestadores</a></li>
+        <li class="navbar__item"><a href="bisno.html" class="navbar__link">Bisno</a></li>
+        <li class="navbar__item"><a href="sobre.html" class="navbar__link">Sobre</a></li>
+        <li class="navbar__item"><a href="faq.html" class="navbar__link">FAQ</a></li>
+        <li class="navbar__item"><a href="contacto.html" class="navbar__link">Contacto</a></li>
+      </ul>
+      <div class="navbar__actions"><a href="prestadores.html" class="btn btn--primary btn--sm">Ver Prestadores</a></div>
+      <div class="lang-toggle-wrapper" id="langWrapper">
+        <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma" aria-expanded="false" title="Mudar idioma">
+          <span class="lang-flag">🇵🇹</span>
+          <span class="lang-code">PT</span>
+          <i class="fas fa-chevron-down lang-arrow"></i>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" data-set-lang="pt">🇵🇹 Português</button>
+          <button class="lang-option" data-set-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo escuro"><i class="fas fa-moon"></i></button>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__content">
+        <div class="page-hero__badge reveal"><i class="fas fa-shield-alt"></i> Segurança</div>
+        <h1 class="page-hero__title reveal delay-100">A tua <span>Segurança</span> em Primeiro</h1>
+        <p class="page-hero__description reveal delay-200">Como protegemos os teus dados e garantimos transações seguras na plataforma.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY FEATURES -->
+  <section class="security-body">
+    <div class="container">
+      <div class="security-grid">
+        <div class="security-card reveal">
+          <div class="security-card__icon security-card__icon--teal"><i class="fas fa-user-check"></i></div>
+          <h3>Verificação de Identidade</h3>
+          <p>Todos os prestadores passam por um processo de verificação de identidade antes de serem listados. Verificamos BI/Passaporte e credenciais profissionais.</p>
+        </div>
+        <div class="security-card reveal delay-100">
+          <div class="security-card__icon security-card__icon--red"><i class="fas fa-star"></i></div>
+          <h3>Sistema de Avaliações</h3>
+          <p>As avaliações reais de clientes verificados ajudam-te a escolher os melhores profissionais. Avaliações falsas são detetadas e removidas automaticamente.</p>
+        </div>
+        <div class="security-card reveal delay-200">
+          <div class="security-card__icon security-card__icon--blue"><i class="fas fa-lock"></i></div>
+          <h3>Dados Encriptados</h3>
+          <p>Todos os dados pessoais são armazenados com encriptação de nível bancário. As tuas informações nunca são partilhadas com terceiros sem o teu consentimento.</p>
+        </div>
+        <div class="security-card reveal delay-300">
+          <div class="security-card__icon security-card__icon--gold"><i class="fas fa-headset"></i></div>
+          <h3>Suporte 24/7</h3>
+          <p>A nossa equipa de suporte está disponível para ajudar em situações de disputa ou problemas com prestadores. Respondemos em menos de 24 horas.</p>
+        </div>
+        <div class="security-card reveal delay-400">
+          <div class="security-card__icon security-card__icon--purple"><i class="fas fa-flag"></i></div>
+          <h3>Sistema de Reportes</h3>
+          <p>Podes reportar comportamentos suspeitos ou inadequados. Investigamos todos os reportes e tomamos medidas rápidas para proteger a comunidade.</p>
+        </div>
+        <div class="security-card reveal delay-500">
+          <div class="security-card__icon security-card__icon--green"><i class="fas fa-shield-alt"></i></div>
+          <h3>Monitorização Contínua</h3>
+          <p>A plataforma é monitorizada continuamente para detetar atividades fraudulentas ou suspeitas. Contas mal-intencionadas são bloqueadas imediatamente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="tips-section">
+    <div class="container">
+      <div class="section-intro">
+        <div class="section-badge reveal"><i class="fas fa-lightbulb"></i> Dicas de Segurança</div>
+        <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:900;margin-bottom:1rem;" class="reveal delay-100">Como te manter seguro</h2>
+        <p style="font-size:1.1rem;color:var(--color-gray-600);max-width:560px;margin:0 auto;" class="reveal delay-200">Segue estas dicas para ter uma experiência segura no Conecta Já</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card reveal"><div class="tip-num">1</div><div><h4>Verifica o perfil antes de contratar</h4><p>Lê as avaliações, verifica o selo de verificado e analisa o histórico do prestador.</p></div></div>
+        <div class="tip-card reveal delay-100"><div class="tip-num">2</div><div><h4>Evita pagamentos antecipados totais</h4><p>Prefere pagar após a conclusão do serviço, ou parcialmente antes e o restante depois.</p></div></div>
+        <div class="tip-card reveal"><div class="tip-num">3</div><div><h4>Documenta o acordo</h4><p>Guarda as conversas de WhatsApp e confirma por escrito o serviço, preço e prazo.</p></div></div>
+        <div class="tip-card reveal delay-100"><div class="tip-num">4</div><div><h4>Não partilhes dados sensíveis</h4><p>Nunca partilhes senhas, dados bancários ou números de BI fora do processo formal.</p></div></div>
+        <div class="tip-card reveal"><div class="tip-num">5</div><div><h4>Reporta comportamentos suspeitos</h4><p>Se algum prestador ou cliente se comportar de forma suspeita, reporta imediatamente.</p></div></div>
+        <div class="tip-card reveal delay-100"><div class="tip-num">6</div><div><h4>Prefere prestadores verificados</h4><p>Os prestadores com o selo de verificado passaram por uma análise mais rigorosa.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="report-section">
+    <div class="container">
+      <div class="report-section__inner reveal">
+        <h2>Encontraste algo suspeito?</h2>
+        <p>A segurança da nossa comunidade depende de todos. Se identificaste um utilizador suspeito, uma fraude ou qualquer comportamento inadequado, diz-nos imediatamente.</p>
+        <div class="report-actions">
+          <a href="https://wa.me/244931482577?text=Quero%20reportar%20um%20problema%20de%20segurança%20no%20Conecta%20Já." target="_blank" rel="noopener" class="btn btn--white btn--lg">
+            <i class="fab fa-whatsapp"></i> Reportar via WhatsApp
+          </a>
+          <a href="mailto:conectaja.ao@gmail.com?subject=Reporte%20de%20Segurança" class="btn btn--outline-white btn--lg">
+            <i class="fas fa-envelope"></i> Enviar Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="footer-column footer-column--brand">
+                <a href="index.html" class="footer__logo">
+                    <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+                        <circle cx="20" cy="20" r="8" fill="white"/>
+                    </svg>
+                    <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+                </a>
+                <p class="footer__description">
+                    A plataforma líder em Angola para conectar clientes a prestadores de serviços verificados e de confiança.
+                </p>
+                <div class="footer__social">
+                    <a href="https://web.facebook.com/profile.php?id=61589032370272" target="_blank" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/conecta__ja" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/244931482577" target="_blank" class="social-link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Serviços</h4>
+                <ul class="footer-links">
+                    <li><a href="prestadores.html">Todos os Prestadores</a></li>
+                    <li><a href="prestadores.html?cat=casa-construcao">Casa e Construção</a></li>
+                    <li><a href="prestadores.html?cat=tecnologia">Tecnologia</a></li>
+                    <li><a href="prestadores.html?cat=educacao">Educação</a></li>
+                    <li><a href="prestadores.html?cat=beleza">Beleza</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="contacto.html">Imprensa</a></li>
+                    <li><a href="contacto.html">Carreiras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Central de Ajuda</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="seguranca.html">Segurança</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="footer-column__title">Contacto</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:conectaja.ao@gmail.com">conectaja.ao@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+244931482577">+244 931 482 577</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Luanda, Angola</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Atendimento 24/7</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 Conecta Já. Todos os direitos reservados.</p>
+            <div class="footer-legal">
+                <a href="termos.html">Termos</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="seguranca.html">Segurança</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/244931482577?text=Olá!%20Preciso%20de%20ajuda%20com%20o%20Conecta%20Já"
+   target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Fala connosco</span>
+</a>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+</button>
+<script src="i18n.js"></script>
+<script>I18n.init();</script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+    <script src="app-shell.js"></script>
+
+</body>
+</html>

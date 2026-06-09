@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Chat — ConectaJá</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <style>
+    /* Override body padding — chat precisa de layout especial */
+    body {
+      display: flex; flex-direction: column;
+      height: 100dvh; overflow: hidden;
+      background: var(--chat-bg, #eef0f7);
+      padding-top: var(--topbar-h, 56px) !important;
+      padding-bottom: 0 !important;
+    }
+
+    /* ── Top bar override: mostrar avatar + nome ── */
+    #cj-top-bar .tb-title { display: none; }
+    .chat-header-info {
+      display: flex; align-items: center; gap: 10px;
+      flex: 1; overflow: hidden;
+    }
+    .chat-header-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, #FF6B35, #ff9a6c);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0;
+    }
+    .chat-header-name {
+      font-weight: 700; font-size: 15px;
+      color: var(--text, #111);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .chat-header-sub { font-size: 11px; color: #22c55e; font-weight: 600; }
+
+    /* ── Messages area ── */
+    .chat-messages {
+      flex: 1; overflow-y: auto;
+      padding: 12px 12px 0;
+      display: flex; flex-direction: column; gap: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Date separator */
+    .msg-date-sep {
+      text-align: center; font-size: 11px; font-weight: 600;
+      color: #9ca3af; margin: 8px 0 4px;
+    }
+    .msg-date-sep span {
+      background: rgba(0,0,0,.07); padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* Bubble */
+    .msg-bubble {
+      max-width: 78%; display: flex; flex-direction: column;
+    }
+    .msg-bubble.me    { align-self: flex-end; align-items: flex-end; }
+    .msg-bubble.them  { align-self: flex-start; align-items: flex-start; }
+
+    .bubble-text {
+      padding: 9px 13px; border-radius: 18px;
+      font-size: 15px; line-height: 1.45;
+      word-break: break-word;
+    }
+    .msg-bubble.me .bubble-text {
+      background: #FF6B35; color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .msg-bubble.them .bubble-text {
+      background: var(--bubble-them, #fff);
+      color: var(--text, #111);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+
+    .bubble-time {
+      font-size: 10px; color: #9ca3af;
+      margin-top: 2px; padding: 0 4px;
+    }
+    .msg-bubble.me .bubble-time { color: rgba(255,107,53,.7); }
+
+    /* Consecutive messages: tighten gap */
+    .msg-bubble + .msg-bubble.me,
+    .msg-bubble + .msg-bubble.them { margin-top: -2px; }
+
+    /* Typing indicator */
+    .typing-indicator {
+      align-self: flex-start;
+      background: var(--bubble-them, #fff);
+      padding: 10px 14px; border-radius: 18px; border-bottom-left-radius: 4px;
+      display: none; align-items: center; gap: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .typing-indicator.show { display: flex; }
+    .typing-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #9ca3af;
+      animation: bounce .9s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: .15s; }
+    .typing-dot:nth-child(3) { animation-delay: .3s; }
+    @keyframes bounce {
+      0%,80%,100% { transform: scale(1); opacity: .5; }
+      40%          { transform: scale(1.15); opacity: 1; }
+    }
+
+    /* ── Input bar ── */
+    .chat-input-bar {
+      padding: 8px 12px;
+      padding-bottom: calc(8px + var(--tab-h, 64px));
+      background: var(--input-bar-bg, #fff);
+      border-top: 1px solid rgba(0,0,0,.07);
+      display: flex; align-items: flex-end; gap: 8px;
+    }
+    .chat-input-wrap { flex: 1; position: relative; }
+    .chat-input {
+      width: 100%; padding: 10px 44px 10px 14px;
+      border: none; border-radius: 22px;
+      background: var(--input-bg, #f0f2f8);
+      font-size: 15px; color: var(--text, #111);
+      font-family: 'Inter', sans-serif;
+      outline: none; resize: none; max-height: 120px;
+      line-height: 1.4;
+    }
+    .chat-send-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: #FF6B35; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background .15s, transform .1s;
+    }
+    .chat-send-btn:active { transform: scale(.93); }
+    .chat-send-btn:disabled { background: #d1d5db; }
+    .chat-send-btn svg { color: #fff; }
+
+    /* Skeleton while loading */
+    .msg-skeleton { animation: shimmer 1.4s infinite; }
+    .sk-bubble { height: 36px; border-radius: 18px; background: #e5e7eb; margin-bottom: 6px; }
+    @keyframes shimmer { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    /* Empty state */
+    .chat-empty {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px; text-align: center; padding: 32px;
+    }
+    .chat-empty svg { color: #d1d5db; }
+    .chat-empty p { font-size: 14px; color: #9ca3af; }
+
+    /* Dark mode */
+    [data-theme="dark"] body   { --chat-bg: #0e1117; }
+    [data-theme="dark"] .bubble-text.them { --bubble-them: #1a2030; }
+    [data-theme="dark"] .msg-bubble.them .bubble-text { background: #1a2030; }
+    [data-theme="dark"] .typing-indicator { background: #1a2030; }
+    [data-theme="dark"] .chat-input-bar { --input-bar-bg: #111827; border-top-color: rgba(255,255,255,.07); }
+    [data-theme="dark"] .chat-input { --input-bg: #1e2b3a; background: #1e2b3a; color: #f1f5f9; }
+    [data-theme="dark"] .chat-header-name { color: #f1f5f9; }
+    [data-theme="dark"] .msg-date-sep span { background: rgba(255,255,255,.1); }
+    [data-theme="dark"] .sk-bubble { background: #2a3246; }
+    [data-theme="dark"] #cj-top-bar { background: #111827 !important; border-bottom-color: rgba(255,255,255,.07) !important; }
+  </style>
+</head>
+<body>
+
+<!-- Mensagens -->
+<div class="chat-messages" id="chat-messages">
+  <!-- Skeletons -->
+  <div class="msg-skeleton">
+    <div class="sk-bubble" style="width:60%;align-self:flex-start;"></div>
+    <div class="sk-bubble" style="width:45%;align-self:flex-end;background:#ffd5c0;"></div>
+    <div class="sk-bubble" style="width:70%;align-self:flex-start;"></div>
+  </div>
+</div>
+
+<!-- Typing indicator (fora do scroll) -->
+<div class="typing-indicator" id="typing-indicator">
+  <div class="typing-dot"></div>
+  <div class="typing-dot"></div>
+  <div class="typing-dot"></div>
+</div>
+
+<!-- Input bar -->
+<div class="chat-input-bar">
+  <div class="chat-input-wrap">
+    <textarea class="chat-input" id="msg-input" rows="1"
+      placeholder="Escreve uma mensagem..."
+      oninput="autoResize(this); handleTyping()"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}">
+    </textarea>
+  </div>
+  <button class="chat-send-btn" id="send-btn" onclick="sendMessage()" aria-label="Enviar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+  </button>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app-shell.js"></script>
+<script>
+var convId   = new URLSearchParams(location.search).get('id');
+var myUid    = null;
+var convData = null;
+var typingTimeout = null;
+var unsubMessages = null;
+
+// Inject chat header into top bar
+function injectChatHeader(name, initial) {
+  var tb = document.getElementById('cj-top-bar');
+  if (!tb) return;
+  // Remove existing title
+  var oldTitle = tb.querySelector('.tb-title');
+  if (oldTitle) oldTitle.remove();
+  // Insert chat header
+  var info = document.createElement('div');
+  info.className = 'chat-header-info';
+  info.innerHTML =
+    '<div class="chat-header-avatar">' + initial + '</div>' +
+    '<div><div class="chat-header-name">' + escHtml(name) + '</div>' +
+    '<div class="chat-header-sub">Online</div></div>';
+  var actions = tb.querySelector('.tb-actions');
+  if (actions) tb.insertBefore(info, actions);
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (!user) {
+    window.location.href = 'login.html';
+    return;
+  }
+  myUid = user.uid;
+  if (!convId) { window.location.href = 'mensagens.html'; return; }
+  initChat();
+});
+
+function initChat() {
+  firebaseDb.collection('conversations').doc(convId).get().then(function(doc) {
+    if (!doc.exists) { window.location.href = 'mensagens.html'; return; }
+    convData = doc.data();
+
+    var otherUid  = (convData.participants || []).find(function(p){ return p !== myUid; });
+    var otherName = (convData.participantNames || {})[otherUid] || 'Utilizador';
+    var initial   = otherName.charAt(0).toUpperCase();
+
+    injectChatHeader(otherName, initial);
+    document.title = otherName + ' — ConectaJá';
+
+    // Mark as read
+    var update = {};
+    update['unreadCount.' + myUid] = 0;
+    firebaseDb.collection('conversations').doc(convId).update(update).catch(function(){});
+
+    // Load messages
+    loadMessages();
+  });
+}
+
+function loadMessages() {
+  var container = document.getElementById('chat-messages');
+  // Remove skeleton
+  container.innerHTML = '';
+
+  unsubMessages = firebaseDb.collection('conversations').doc(convId)
+    .collection('messages')
+    .orderBy('timestamp', 'asc')
+    .onSnapshot(function(snap) {
+      container.innerHTML = '';
+      var lastDate = null;
+
+      snap.forEach(function(doc) {
+        var msg = doc.data();
+        var isMe = msg.senderId === myUid;
+
+        // Date separator
+        var msgDate = msg.timestamp ? msg.timestamp.toDate() : new Date();
+        var dateStr  = msgDate.toLocaleDateString('pt', {day:'2-digit',month:'2-digit',year:'numeric'});
+        if (dateStr !== lastDate) {
+          var sep = document.createElement('div');
+          sep.className = 'msg-date-sep';
+          sep.innerHTML = '<span>' + formatDateLabel(msgDate) + '</span>';
+          container.appendChild(sep);
+          lastDate = dateStr;
+        }
+
+        // Bubble
+        var bubble = document.createElement('div');
+        bubble.className = 'msg-bubble ' + (isMe ? 'me' : 'them');
+        var timeStr = msg.timestamp
+          ? msg.timestamp.toDate().toLocaleTimeString('pt', {hour:'2-digit',minute:'2-digit'})
+          : '';
+        bubble.innerHTML =
+          '<div class="bubble-text">' + escHtml(msg.text) + '</div>' +
+          '<div class="bubble-time">' + timeStr + (isMe ? ' ✓✓' : '') + '</div>';
+        container.appendChild(bubble);
+      });
+
+      // Show empty state if no messages
+      if (!snap.size) {
+        container.innerHTML =
+          '<div class="chat-empty">' +
+            '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+            '<p>Começa a conversa enviando uma mensagem!</p>' +
+          '</div>';
+      }
+
+      scrollToBottom();
+
+      // Mark as read
+      var upd = {};
+      upd['unreadCount.' + myUid] = 0;
+      firebaseDb.collection('conversations').doc(convId).update(upd).catch(function(){});
+    });
+}
+
+function sendMessage() {
+  var input = document.getElementById('msg-input');
+  var text  = input.value.trim();
+  if (!text || !myUid) return;
+
+  input.value = '';
+  autoResize(input);
+  document.getElementById('send-btn').disabled = true;
+
+  var now = firebase.firestore.FieldValue.serverTimestamp();
+
+  // Write message
+  firebaseDb.collection('conversations').doc(convId)
+    .collection('messages').add({
+      senderId:  myUid,
+      text:      text,
+      timestamp: now
+    }).then(function() {
+      document.getElementById('send-btn').disabled = false;
+    }).catch(function() {
+      document.getElementById('send-btn').disabled = false;
+      if (window.CJToast) CJToast('Erro ao enviar mensagem', 'error');
+    });
+
+  // Update conversation last message
+  var otherUid = convData
+    ? (convData.participants || []).find(function(p){ return p !== myUid; })
+    : null;
+
+  var convUpdate = {
+    lastMessage:   text,
+    lastMessageAt: now
+  };
+  if (otherUid) {
+    convUpdate['unreadCount.' + otherUid] = firebase.firestore.FieldValue.increment(1);
+  }
+  firebaseDb.collection('conversations').doc(convId).update(convUpdate).catch(function(){});
+
+  // Clear typing
+  if (typingTimeout) clearTimeout(typingTimeout);
+  firebaseDb.collection('conversations').doc(convId)
+    .update({ ['typing.' + myUid]: false }).catch(function(){});
+
+  // Send push notification to other user (if FCM token available)
+  if (otherUid) sendPushNotification(otherUid, text);
+}
+
+function handleTyping() {
+  if (!convId || !myUid) return;
+  firebaseDb.collection('conversations').doc(convId)
+    .update({ ['typing.' + myUid]: true }).catch(function(){});
+  if (typingTimeout) clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(function() {
+    firebaseDb.collection('conversations').doc(convId)
+      .update({ ['typing.' + myUid]: false }).catch(function(){});
+  }, 2000);
+}
+
+// ── Push notification (client-side, requires Cloud Function in production) ──
+function sendPushNotification(targetUid, messageText) {
+  // Get recipient's FCM token from Firestore
+  firebaseDb.collection('users').doc(targetUid).get().then(function(doc) {
+    if (!doc.exists) return;
+    var token = doc.data().fcmToken;
+    if (!token) return;
+    // Note: In production, call a Firebase Cloud Function here.
+    // The Cloud Function sends the FCM message server-side.
+    // For now, we save a pending notification to Firestore.
+    firebaseDb.collection('pendingNotifications').add({
+      to:        token,
+      toUid:     targetUid,
+      title:     'Nova mensagem — ConectaJá',
+      body:      messageText.length > 80 ? messageText.substring(0, 80) + '...' : messageText,
+      url:       'chat.html?id=' + convId,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(function(){});
+  });
+}
+
+// ── Typing indicator listener ──
+function watchTyping() {
+  if (!convId || !myUid) return;
+  firebaseDb.collection('conversations').doc(convId).onSnapshot(function(doc) {
+    if (!doc.exists) return;
+    var typingMap = doc.data().typing || {};
+    var otherIsTyping = Object.keys(typingMap).some(function(uid) {
+      return uid !== myUid && typingMap[uid] === true;
+    });
+    var ind = document.getElementById('typing-indicator');
+    if (ind) ind.classList.toggle('show', otherIsTyping);
+    if (otherIsTyping) scrollToBottom();
+  });
+}
+
+// ── Helpers ──
+function scrollToBottom() {
+  var container = document.getElementById('chat-messages');
+  if (container) container.scrollTop = container.scrollHeight;
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function formatDateLabel(d) {
+  var now  = new Date();
+  var diff = now - d;
+  if (diff < 86400000 && d.getDate() === now.getDate()) return 'Hoje';
+  if (diff < 172800000) return 'Ontem';
+  return d.toLocaleDateString('pt', {day:'2-digit',month:'long',year:'numeric'});
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Start watching typing after init
+setTimeout(watchTyping, 2000);
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isLoggedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return request.auth.uid == uid;
+    }
+
+    function isParticipant(convData) {
+      return request.auth.uid in convData.participants;
+    }
+
+    // ── Utilizadores ──
+    match /users/{uid} {
+      allow read:  if isLoggedIn();
+      allow write: if isOwner(uid);
+    }
+
+    // ── Prestadores ──
+    match /providers/{uid} {
+      allow read:  if true;
+      allow write: if isOwner(uid);
+    }
+
+    // ── Conversas ──
+    match /conversations/{convId} {
+
+      // Leitura: participante OU documento não existe ainda (para .get() antes de criar)
+      allow read: if isLoggedIn() && (
+        resource == null ||
+        isParticipant(resource.data)
+      );
+
+      // Criação: utilizador tem de ser participante nos dados que está a escrever
+      allow create: if isLoggedIn() &&
+        isParticipant(request.resource.data);
+
+      // Actualização: só participantes existentes
+      allow update: if isLoggedIn() &&
+        isParticipant(resource.data);
+
+      // Mensagens
+      match /messages/{msgId} {
+        allow read: if isLoggedIn() &&
+          isParticipant(get(/databases/$(database)/documents/conversations/$(convId)).data);
+
+        allow create: if isLoggedIn() &&
+          isParticipant(get(/databases/$(database)/documents/conversations/$(convId)).data) &&
+          request.resource.data.senderId == request.auth.uid;
+      }
+    }
+
+    // ── Bisno — Publicações ──
+    match /posts/{postId} {
+      // Qualquer um pode ler (feed público)
+      allow read: if true;
+
+      // Só utilizadores autenticados podem criar
+      allow create: if isLoggedIn() &&
+        request.resource.data.uid == request.auth.uid;
+
+      // Só o autor pode apagar ou editar o conteúdo
+      allow delete: if isLoggedIn() && isOwner(resource.data.uid);
+      allow update: if isLoggedIn() && (
+        // Autor pode editar tudo
+        isOwner(resource.data.uid) ||
+        // Qualquer utilizador pode dar like / marcar resolved
+        (request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['likedBy', 'likeCount', 'resolved']))
+      );
+
+      // Comentários dentro de cada post
+      match /comments/{commentId} {
+        allow read:   if true;
+        allow create: if isLoggedIn() &&
+          request.resource.data.uid == request.auth.uid;
+        allow delete: if isLoggedIn() && isOwner(resource.data.uid);
+        allow update: if isLoggedIn() && isOwner(resource.data.uid);
+      }
+    }
+
+    // ── Bisno — Denúncias ──
+    match /reports/{reportId} {
+      allow create: if isLoggedIn();
+      allow read, update, delete: if false; // só admins
+    }
+
+    // ── Notificações pendentes ──
+    match /pendingNotifications/{docId} {
+      allow create: if isLoggedIn();
+      allow read, delete: if false;
+    }
+
+    // ── Avaliações ──
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isLoggedIn();
+      allow update, delete: if isLoggedIn() && isOwner(resource.data.authorId);
+    }
+
+    // ── Pedidos de serviço ──
+    match /serviceRequests/{reqId} {
+      allow read: if isLoggedIn() &&
+        (isOwner(resource.data.clientId) || isOwner(resource.data.providerId));
+      allow create: if isLoggedIn();
+      allow update: if isLoggedIn() &&
+        (isOwner(resource.data.clientId) || isOwner(resource.data.providerId));
+    }
+
+  }
+}

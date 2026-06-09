@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Perfil do Prestador — Conecta Já</title>
+  <meta name="description" content="Perfil completo do prestador de serviços no Conecta Já.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .profile-page { background: var(--color-gray-50); padding-top: 0; min-height: 100vh; }
+
+    .profile-hero {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+      padding: 4rem 0 8rem; position: relative; overflow: hidden;
+    }
+    .profile-hero::before {
+      content: ''; position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(230,57,70,.25), transparent 70%);
+      top: -150px; right: -100px; border-radius: 50%;
+    }
+
+    .profile-hero__inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
+
+    .profile-avatar-large {
+      width: 120px; height: 120px; border-radius: 1.5rem; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; font-weight: 900; color: white;
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+      border: 4px solid rgba(255,255,255,.15);
+    }
+    .profile-avatar-large img { width: 100%; height: 100%; object-fit: cover; border-radius: calc(1.5rem - 4px); }
+
+    .profile-hero__info { flex: 1; min-width: 200px; }
+    .profile-hero__name { font-size: clamp(1.75rem,4vw,2.75rem); font-weight: 900; color: white; margin-bottom: .4rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .profile-hero__role { font-size: 1.1rem; color: rgba(255,255,255,.7); margin-bottom: .75rem; }
+    .profile-hero__meta { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .profile-hero__meta span { display: flex; align-items: center; gap: .4rem; font-size: .9rem; color: rgba(255,255,255,.8); }
+    .profile-hero__meta .stars { color: #FBBF24; }
+
+    .availability-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .35rem .9rem; border-radius: 50px; font-size: .8rem; font-weight: 700;
+    }
+    .availability-badge.available { background: rgba(42,157,143,.2); color: #4ecdc4; border: 1px solid rgba(42,157,143,.3); }
+    .availability-badge.busy { background: rgba(230,57,70,.2); color: #ff6b7a; border: 1px solid rgba(230,57,70,.3); }
+    .availability-badge i { font-size: .5rem; }
+
+    .verified-badge { background: rgba(42,157,143,.2); color: var(--color-accent); padding: .3rem .75rem; border-radius: 50px; font-size: .8rem; font-weight: 700; border: 1px solid rgba(42,157,143,.3); display: inline-flex; align-items: center; gap: .4rem; }
+
+    /* Profile body */
+    .profile-body { display: grid; gap: 2rem; padding: 2.5rem 0 5rem; margin-top: -4rem; position: relative; z-index: 2; }
+    @media (min-width: 1024px) { .profile-body { grid-template-columns: 340px 1fr; align-items: start; } }
+
+    /* Cards */
+    .profile-card {
+      background: white; border-radius: 1.5rem; padding: 2rem;
+      border: 1px solid var(--color-gray-100);
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    }
+    .profile-card__title { font-size: 1.1rem; font-weight: 800; margin-bottom: 1.25rem; padding-bottom: .75rem; border-bottom: 2px solid var(--color-gray-100); display: flex; align-items: center; gap: .5rem; }
+    .profile-card__title i { color: var(--color-primary); }
+
+    /* Action buttons */
+    .profile-actions { display: flex; flex-direction: column; gap: .75rem; }
+    .profile-actions .btn { width: 100%; justify-content: center; }
+
+    /* Stats row */
+    .profile-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .profile-stat { text-align: center; padding: 1rem; border-radius: 1rem; background: var(--color-gray-50); }
+    .profile-stat__val { font-size: 1.5rem; font-weight: 900; color: var(--color-gray-900); }
+    .profile-stat__val.gradient-text { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .profile-stat__label { font-size: .75rem; color: var(--color-gray-500); font-weight: 600; margin-top: .2rem; }
+
+    /* Bio */
+    .profile-bio-text { font-size: .975rem; line-height: 1.8; color: var(--color-gray-600); }
+
+    /* Reviews */
+    .review-item { padding: 1.25rem 0; border-bottom: 1px solid var(--color-gray-100); }
+    .review-item:last-child { border-bottom: none; }
+    .review-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-bottom: .5rem; }
+    .review-author { font-weight: 700; font-size: .95rem; }
+    .review-stars { color: #FBBF24; font-size: .85rem; }
+    .review-date { font-size: .8rem; color: var(--color-gray-400); }
+    .review-text { font-size: .9rem; line-height: 1.7; color: var(--color-gray-600); }
+
+    /* Portfolio */
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem;
+    }
+    .portfolio-item {
+      border-radius: .875rem; overflow: hidden; aspect-ratio: 4/3;
+      background: var(--color-gray-100); cursor: zoom-in;
+    }
+    .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; display: block; }
+    .portfolio-item:hover img { transform: scale(1.06); }
+
+    /* Review form */
+    .review-form { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid var(--color-gray-100); }
+    .review-form label { font-size: .875rem; font-weight: 700; display: block; margin-bottom: .4rem; }
+    .review-form textarea {
+      width: 100%; padding: .875rem; border: 2px solid var(--color-gray-200); border-radius: .875rem;
+      font-size: .9rem; font-family: inherit; resize: vertical; min-height: 100px;
+      transition: border-color .25s;
+    }
+    .review-form textarea:focus { outline: none; border-color: var(--color-primary); }
+    .star-rating { display: flex; gap: .25rem; margin-bottom: 1rem; }
+    .star-rating label { font-size: 1.75rem; color: var(--color-gray-300); cursor: pointer; transition: color .15s; }
+    .star-rating input { display: none; }
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label { color: #FBBF24; }
+    .star-rating { direction: rtl; }
+    .star-rating label:hover, .star-rating label:hover ~ label { color: #FBBF24; }
+
+    /* Dark mode overrides */
+    [data-theme="dark"] .profile-card { background: var(--color-gray-100) !important; border-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .profile-card__title { border-bottom-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .review-item { border-bottom-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .review-form { border-top-color: var(--color-gray-300) !important; }
+    [data-theme="dark"] .review-form textarea { background: var(--color-gray-200) !important; border-color: var(--color-gray-300) !important; color: var(--color-gray-900) !important; }
+    [data-theme="dark"] .review-form textarea:focus { background: var(--color-gray-200) !important; }
+  </style>
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <script>if(localStorage.getItem('cj-lang')==='en')document.documentElement.style.opacity='0';</script>
+    <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+
+</head>
+<body class="profile-page">
+
+<div class="page-transition-overlay"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar__wrapper">
+      <a href="index.html" class="navbar__logo">
+        <svg class="logo__icon" viewBox="0 0 40 40" fill="none">
+          <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="currentColor"/>
+          <circle cx="20" cy="20" r="8" fill="white"/>
+        </svg>
+        <span class="logo__text">Conecta<span class="logo__accent">Já</span></span>
+      </a>
+      <ul class="navbar__menu" id="navMenu" role="list">
+        <li class="navbar__item"><a href="index.html" class="navbar__link">Início</a></li>
+        <li class="navbar__item"><a href="prestadores.html" class="navbar__link">Prestadores</a></li>
+        <li class="navbar__item"><a href="bisno.html" class="navbar__link">Bisno</a></li>
+        <li class="navbar__item"><a href="sobre.html" class="navbar__link">Sobre</a></li>
+        <li class="navbar__item"><a href="blog.html" class="navbar__link">Blog</a></li>
+        <li class="navbar__item"><a href="faq.html" class="navbar__link">FAQ</a></li>
+        <li class="navbar__item"><a href="contacto.html" class="navbar__link">Contacto</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <a href="prestadores.html" class="btn btn--primary btn--sm">Ver Prestadores</a>
+      </div>
+      <div class="lang-toggle-wrapper" id="langWrapper">
+        <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma" aria-expanded="false" title="Mudar idioma">
+          <span class="lang-flag">🇵🇹</span>
+          <span class="lang-code">PT</span>
+          <i class="fas fa-chevron-down lang-arrow"></i>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" data-set-lang="pt">🇵🇹 Português</button>
+          <button class="lang-option" data-set-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo escuro">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- PROFILE HERO -->
+  <div class="profile-hero">
+    <div class="container">
+      <a href="prestadores.html" style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.6);font-size:.9rem;font-weight:600;text-decoration:none;margin-bottom:2rem;" class="reveal">
+        <i class="fas fa-arrow-left"></i> Voltar aos prestadores
+      </a>
+      <div class="profile-hero__inner reveal">
+        <div class="profile-avatar-large" id="profile-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="profile-hero__info">
+          <div class="profile-hero__name">
+            <span id="profile-name">Carregando…</span>
+            <span class="verified-badge" id="profile-verified" style="display:none;"><i class="fas fa-check-circle"></i> Verificado</span>
+          </div>
+          <div class="profile-hero__role" id="profile-category">—</div>
+          <div class="profile-hero__meta">
+            <span><i class="fas fa-map-marker-alt"></i> <span id="profile-location">—</span></span>
+            <span class="stars" id="profile-rating">—</span>
+            <span id="profile-reviews-count">—</span>
+            <span id="profile-availability" class="availability-badge available"><i class="fas fa-circle"></i> Disponível</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE BODY -->
+  <div class="container">
+    <div class="profile-body">
+
+      <!-- SIDEBAR -->
+      <aside>
+        <!-- Actions -->
+        <div class="profile-card reveal" style="margin-bottom:1.5rem;">
+          <div class="profile-actions" id="profile-contact-actions">
+            <button id="btn-whatsapp" class="btn btn--primary btn--lg">
+              <i class="fab fa-whatsapp"></i> Contactar no WhatsApp
+            </button>
+            <button id="btn-message" class="btn btn--outline btn--lg" onclick="openChat()">
+              <i class="fas fa-comment"></i> Enviar Mensagem
+            </button>
+            <button id="btn-call" class="btn btn--outline btn--lg">
+              <i class="fas fa-phone"></i> Ligar
+            </button>
+            <button id="btn-request" class="btn btn--ghost btn--lg">
+              <i class="fas fa-paper-plane"></i> Fazer Pedido
+            </button>
+          </div>
+          <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--color-gray-100);text-align:center;">
+            <div style="font-size:.8rem;color:var(--color-gray-400);margin-bottom:.25rem;">Preço a partir de</div>
+            <div style="font-size:1.5rem;font-weight:900;color:var(--color-gray-900);" id="profile-price">—</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="profile-card reveal delay-100">
+          <div class="profile-card__title"><i class="fas fa-chart-bar"></i> Estatísticas</div>
+          <div class="profile-stats">
+            <div class="profile-stat">
+              <div class="profile-stat__val gradient-text" id="stat-rating">—</div>
+              <div class="profile-stat__label">Avaliação</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat__val" id="stat-reviews">—</div>
+              <div class="profile-stat__label">Avaliações</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat__val" style="color:var(--color-accent);" id="stat-orders">0</div>
+              <div class="profile-stat__label">Pedidos</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div class="profile-card reveal delay-200" style="margin-top:1.5rem;" id="profile-social-card">
+          <div class="profile-card__title"><i class="fas fa-share-nodes"></i> Redes Sociais</div>
+          <div id="profile-social" style="display:none;gap:.75rem;flex-wrap:wrap;"></div>
+        </div>
+
+        <!-- Share -->
+        <div class="profile-card reveal delay-300" style="margin-top:1.5rem;">
+          <div class="profile-card__title"><i class="fas fa-share-alt"></i> Partilhar</div>
+          <div style="display:flex;gap:.75rem;">
+            <button onclick="navigator.share ? navigator.share({title:document.title,url:location.href}).catch(()=>{}) : navigator.clipboard.writeText(location.href).then(()=>Toast.success('Link copiado!')).catch(()=>Toast.error('Não foi possível copiar o link.'))" class="btn btn--outline btn--sm" style="flex:1;justify-content:center;">
+              <i class="fas fa-link"></i> Copiar link
+            </button>
+            <a href="https://wa.me/?text=Vê%20este%20prestador%20no%20Conecta%20Já" target="_blank" rel="noopener" class="btn btn--sm" style="background:#25D366;color:white;flex:1;justify-content:center;">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div>
+        <!-- Bio -->
+        <div class="profile-card reveal" style="margin-bottom:1.5rem;">
+          <div class="profile-card__title"><i class="fas fa-user"></i> Sobre o Prestador</div>
+          <p class="profile-bio-text" id="profile-bio">Carregando informação do prestador…</p>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="profile-card reveal delay-50" style="margin-bottom:1.5rem;">
+          <div class="profile-card__title"><i class="fas fa-images"></i> Portefólio de Trabalhos</div>
+          <div class="portfolio-grid" id="portfolio-grid">
+            <p style="color:var(--color-gray-400);text-align:center;grid-column:1/-1;padding:1.5rem 0;font-size:.9rem;">A carregar…</p>
+          </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="profile-card reveal delay-100">
+          <div class="profile-card__title"><i class="fas fa-star"></i> Avaliações dos Clientes</div>
+          <div id="reviews-list">
+            <p style="color:var(--color-gray-400);text-align:center;padding:2rem;">A carregar avaliações…</p>
+          </div>
+
+          <!-- Leave a review -->
+          <div class="review-form" id="reviewFormWrap">
+            <h4 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">Deixar uma avaliação</h4>
+            <form id="reviewForm">
+              <label>Classificação</label>
+              <div class="star-rating">
+                <input type="radio" name="rating" id="star5" value="5"><label for="star5"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star4" value="4"><label for="star4"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star3" value="3"><label for="star3"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star2" value="2"><label for="star2"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star1" value="1"><label for="star1"><i class="fas fa-star"></i></label>
+              </div>
+              <label for="review_text">Comentário</label>
+              <textarea id="review_text" name="review_text" placeholder="Partilha a tua experiência com este prestador…" maxlength="500" style="margin-bottom:.25rem;"></textarea>
+              <small id="review_text_counter" style="display:block;text-align:right;color:var(--color-gray-400);font-size:.75rem;margin-bottom:1rem">0/500</small>
+              <button type="submit" class="btn btn--primary">
+                <i class="fas fa-paper-plane"></i> Submeter Avaliação
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<a href="https://wa.me/244931482577?text=Olá!%20Preciso%20de%20ajuda." class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-tooltip">Fala Connosco!</span>
+</a>
+<button class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></button>
+
+<script src="i18n.js"></script>
+<script>I18n.init();</script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+<script>
+  // Stat fields and verified badge are populated via ProfilePage.render override
+  const _origRender = ProfilePage.render.bind(ProfilePage);
+  ProfilePage.render = function(p) {
+    _origRender(p);
+    const statR = document.getElementById('stat-rating');
+    const statRev = document.getElementById('stat-reviews');
+    const verified = document.getElementById('profile-verified');
+    if (statR) statR.textContent = p.rating || '—';
+    if (statRev) statRev.textContent = p.reviews || 0;
+    if (verified && p.verified) verified.style.display = '';
+  };
+
+  // Review text character counter
+  document.addEventListener('DOMContentLoaded', () => {
+    const ta = document.getElementById('review_text');
+    const counter = document.getElementById('review_text_counter');
+    if (ta && counter) {
+      ta.addEventListener('input', () => {
+        counter.textContent = ta.value.length + '/500';
+        counter.style.color = ta.value.length > 450 ? '#EF4444' : 'var(--color-gray-400)';
+      });
+    }
+  });
+</script>
+    <script src="app-shell.js"></script>
+<script>
+// ── Enviar Mensagem — abre/cria conversa no Firestore ──
+function openChat() {
+  var user = firebase.auth().currentUser;
+  if (!user) {
+    sessionStorage.setItem('cj-redirect', 'perfil-prestador.html' + location.search);
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // Get provider uid from ProfilePage data or URL
+  var providerUid = (typeof ProfilePage !== 'undefined' && ProfilePage._current && ProfilePage._current.id)
+    ? ProfilePage._current.id
+    : new URLSearchParams(location.search).get('id');
+
+  if (!providerUid) {
+    if (window.CJToast) CJToast('Não foi possível iniciar conversa.', 'error');
+    return;
+  }
+  if (providerUid === user.uid) {
+    if (window.CJToast) CJToast('Não podes enviar mensagem para ti mesmo.', 'error');
+    return;
+  }
+
+  var btn = document.getElementById('btn-message');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A abrir...'; }
+
+  // Conversation ID: sorted UIDs
+  var convId = [user.uid, providerUid].sort().join('_');
+
+  var providerNameEl = document.querySelector('.profile-hero__name');
+  var providerName = providerNameEl ? providerNameEl.textContent.trim().replace(/\s*✓\s*/g,'').trim() : 'Prestador';
+  var myName = user.displayName || user.email || 'Utilizador';
+
+  var convRef = firebase.firestore().collection('conversations').doc(convId);
+  convRef.get().then(function(doc) {
+    if (doc.exists) {
+      window.location.href = 'chat.html?id=' + convId;
+      return;
+    }
+    // Create new conversation
+    var names = {};
+    names[user.uid]    = myName;
+    names[providerUid] = providerName;
+    return convRef.set({
+      participants:     [user.uid, providerUid],
+      participantNames: names,
+      clientId:         user.uid,
+      providerId:       providerUid,
+      lastMessage:      '',
+      lastMessageAt:    firebase.firestore.FieldValue.serverTimestamp(),
+      unreadCount:      {}
+    }).then(function() {
+      window.location.href = 'chat.html?id=' + convId;
+    });
+  }).catch(function(e) {
+    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-comment"></i> Enviar Mensagem'; }
+    if (window.CJToast) CJToast('Erro ao abrir conversa.', 'error');
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Configurações — ConectaJá</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app-shell.css">
+  <link rel="stylesheet" href="mobile-ui.css">
+  <script>!function(){var t=localStorage.getItem('cj-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
+  <style>
+    .cfg-page { padding: 0 0 32px; }
+    .cfg-section { margin-bottom: 8px; }
+    .cfg-section-title {
+      font-size: 11px; font-weight: 700; color: #9ca3af; letter-spacing: .08em;
+      text-transform: uppercase; padding: 20px 20px 8px;
+    }
+    .cfg-list { background: #fff; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; }
+    .cfg-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 15px 20px; border-bottom: 1px solid #f7f7f7;
+      text-decoration: none; color: inherit;
+      transition: background .15s;
+      cursor: pointer; background: #fff;
+      border: none; width: 100%; text-align: left;
+    }
+    .cfg-item:last-child { border-bottom: none; }
+    .cfg-item:active { background: #f8f9fa; }
+    .cfg-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cfg-icon svg { width: 18px; height: 18px; }
+    .cfg-text { flex: 1; }
+    .cfg-label { font-size: 15px; font-weight: 600; color: #111; }
+    .cfg-desc { font-size: 12px; color: #9ca3af; margin-top: 1px; }
+    .cfg-arrow { color: #d1d5db; }
+    .cfg-arrow svg { width: 16px; height: 16px; }
+    .cfg-badge {
+      font-size: 11px; font-weight: 700; background: #FF6B35; color: #fff;
+      padding: 2px 7px; border-radius: 20px;
+    }
+
+    /* User card */
+    .user-card {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 20px 16px; border-bottom: 1px solid #f0f0f0;
+    }
+    .user-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, #FF6B35, #00B4D8);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins',sans-serif; font-size: 22px; font-weight: 800;
+      color: #fff; flex-shrink: 0; overflow: hidden;
+    }
+    .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .user-name { font-family: 'Poppins',sans-serif; font-size: 17px; font-weight: 700; color: #111; }
+    .user-email { font-size: 13px; color: #6b7280; }
+    .user-edit {
+      margin-left: auto; padding: 7px 14px; border: 1.5px solid #e5e7eb;
+      border-radius: 20px; font-size: 13px; font-weight: 600; color: #111;
+      background: #fff; cursor: pointer; text-decoration: none;
+      transition: background .15s;
+    }
+    .user-edit:active { background: #f3f4f6; }
+
+    .logout-btn {
+      width: calc(100% - 40px); margin: 8px 20px 0;
+      padding: 14px; background: #fff; border: 1.5px solid #fee2e2;
+      border-radius: 12px; font-size: 15px; font-weight: 700;
+      color: #ef4444; cursor: pointer; font-family: 'Poppins',sans-serif;
+      transition: background .15s;
+    }
+    .logout-btn:active { background: #fef2f2; }
+
+    .app-version { text-align: center; color: #d1d5db; font-size: 12px; padding: 20px 0 8px; }
+
+    /* ── DARK MODE ── */
+    [data-theme="dark"] body { background: #0d1117 !important; }
+    [data-theme="dark"] .cfg-list { background: #161b26 !important; border-color: rgba(255,255,255,.06) !important; }
+    [data-theme="dark"] .cfg-item { background: #161b26 !important; border-bottom-color: rgba(255,255,255,.06) !important; color: #f0f0f0; }
+    [data-theme="dark"] .cfg-item:active { background: #1e2433 !important; }
+    [data-theme="dark"] .cfg-label { color: #f0f0f0; }
+    [data-theme="dark"] .cfg-desc { color: #6b7280; }
+    [data-theme="dark"] .cfg-arrow { color: #374151; }
+    [data-theme="dark"] .user-card { border-bottom-color: rgba(255,255,255,.06); background: #0d1117; }
+    [data-theme="dark"] .user-name { color: #f0f0f0; }
+    [data-theme="dark"] .user-email { color: #6b7280; }
+    [data-theme="dark"] .user-edit { background: #161b26; border-color: rgba(255,255,255,.12); color: #f0f0f0; }
+    [data-theme="dark"] .logout-btn { background: #161b26; border-color: rgba(239,68,68,.3); }
+    [data-theme="dark"] .app-version { color: #374151; }
+    [data-theme="dark"] .cfg-icon[style*="#fff0eb"] { background: rgba(255,107,53,.12) !important; }
+    [data-theme="dark"] .cfg-icon[style*="#eff6ff"] { background: rgba(59,130,246,.12) !important; }
+    [data-theme="dark"] .cfg-icon[style*="#f0fdf4"] { background: rgba(22,163,74,.12) !important; }
+    [data-theme="dark"] .cfg-icon[style*="#fffbeb"] { background: rgba(217,119,6,.12) !important; }
+    [data-theme="dark"] .cfg-icon[style*="#f0f9ff"] { background: rgba(2,132,199,.12) !important; }
+    [data-theme="dark"] .cfg-icon[style*="#faf5ff"] { background: rgba(124,58,237,.12) !important; }
+    [data-theme="dark"] .cfg-icon[style*="#fff7ed"] { background: rgba(234,88,12,.12) !important; }
+  </style>
+</head>
+<body>
+<div class="cfg-page">
+
+  <!-- User card -->
+  <div class="user-card" id="user-card">
+    <div class="user-avatar" id="avatar-initial">?</div>
+    <div>
+      <div class="user-name" id="user-name">Utilizador</div>
+      <div class="user-email" id="user-email">—</div>
+    </div>
+    <a href="meu-perfil.html" class="user-edit">Editar</a>
+  </div>
+
+  <!-- Conta -->
+  <div class="cfg-section">
+    <div class="cfg-section-title">Conta</div>
+    <div class="cfg-list">
+      <a href="meu-perfil.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#fff0eb;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Meu Perfil</div><div class="cfg-desc">Editar dados pessoais</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+      <a href="dashboard-client.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#eff6ff;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Meus Pedidos</div><div class="cfg-desc">Histórico de serviços</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+      <a href="mensagens.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#f0fdf4;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Mensagens</div><div class="cfg-desc">Chat com prestadores</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div class="cfg-section">
+    <div class="cfg-section-title">Aplicação</div>
+    <div class="cfg-list">
+      <button class="cfg-item" onclick="toggleTheme()">
+        <div class="cfg-icon" style="background:#f0fdf4;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Tema Escuro</div><div class="cfg-desc" id="theme-desc">Claro</div></div>
+        <div id="theme-toggle" style="width:44px;height:26px;border-radius:13px;background:#e5e7eb;position:relative;transition:background .2s;cursor:pointer;">
+          <div id="theme-knob" style="position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2);"></div>
+        </div>
+      </button>
+      <a href="configuracoes.html#notifs" class="cfg-item">
+        <div class="cfg-icon" style="background:#fffbeb;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Notificações</div><div class="cfg-desc">Gerir alertas</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Informações -->
+  <div class="cfg-section">
+    <div class="cfg-section-title">Informações</div>
+    <div class="cfg-list">
+      <a href="sobre.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#f0f9ff;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Sobre nós</div><div class="cfg-desc">Quem somos e a nossa missão</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+      <a href="faq.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#faf5ff;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">FAQ</div><div class="cfg-desc">Perguntas frequentes</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+      <a href="blog.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#fff7ed;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Blog</div><div class="cfg-desc">Artigos e novidades</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Suporte -->
+  <div class="cfg-section">
+    <div class="cfg-section-title">Suporte</div>
+    <div class="cfg-list">
+      <a href="contacto.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#f0fdf4;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Contacto</div><div class="cfg-desc">Fala connosco</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Legal -->
+  <div class="cfg-section">
+    <div class="cfg-section-title">Legal</div>
+    <div class="cfg-list">
+      <a href="privacidade.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#f0f9ff;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Privacidade</div><div class="cfg-desc">Política de privacidade</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+      <a href="termos.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#faf5ff;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Termos de Serviço</div><div class="cfg-desc">Condições de uso</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+      <a href="seguranca.html" class="cfg-item">
+        <div class="cfg-icon" style="background:#fff7ed;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="cfg-text"><div class="cfg-label">Segurança</div><div class="cfg-desc">Proteção da conta</div></div>
+        <div class="cfg-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <button class="logout-btn" onclick="doLogout()">Terminar Sessão</button>
+  <div class="app-version">ConectaJá v1.0.0</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var name  = user.displayName || user.email.split('@')[0];
+      var email = user.email;
+      document.getElementById('user-name').textContent  = name;
+      document.getElementById('user-email').textContent = email;
+      var av = document.getElementById('avatar-initial');
+      if (user.photoURL) {
+        av.innerHTML = '<img src="' + user.photoURL + '" alt="avatar">';
+      } else {
+        av.textContent = name.charAt(0).toUpperCase();
+      }
+    }
+  });
+
+  function doLogout() {
+    if (!confirm('Queres mesmo terminar a sessão?')) return;
+    firebase.auth().signOut().then(function() {
+      window.location.href = 'index.html';
+    });
+  }
+
+  // Dark mode toggle
+  function toggleTheme() {
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.classList.add('theme-transitions');
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('cj-theme', next);
+    updateToggleUI(next);
+    setTimeout(function(){ document.documentElement.classList.remove('theme-transitions'); }, 400);
+  }
+  function updateToggleUI(theme) {
+    var knob = document.getElementById('theme-knob');
+    var track = document.getElementById('theme-toggle');
+    var desc = document.getElementById('theme-desc');
+    if (theme === 'dark') {
+      track.style.background = '#FF6B35';
+      knob.style.transform = 'translateX(18px)';
+      desc.textContent = 'Escuro';
+    } else {
+      track.style.background = '#e5e7eb';
+      knob.style.transform = 'translateX(0)';
+      desc.textContent = 'Claro';
+    }
+  }
+  updateToggleUI(localStorage.getItem('cj-theme') || 'light');
+</script>
+<script src="app-shell.js"></script>
+</body>
+</html>
