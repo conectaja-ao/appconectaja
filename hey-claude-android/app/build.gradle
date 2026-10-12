@@ -1,0 +1,113 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Modelo de reconhecimento de voz do Vosk (inglês, ~40 MB). É descarregado
+// na primeira compilação e embutido na APK, para a app funcionar sem internet.
+def voskModelUrl = 'https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip'
+def voskModelName = 'vosk-model-small-en-us-0.15'
+def modelAssetsDir = layout.buildDirectory.dir('generated/vosk-assets')
+
+// Assinatura: se existir keystore.properties (fora do git), a APK de release é
+// assinada com essa chave; senão usa a chave de debug.
+def keystoreFile = rootProject.file('keystore.properties')
+def keystoreProps = new Properties()
+if (keystoreFile.exists()) {
+    keystoreFile.withInputStream { keystoreProps.load(it) }
+}
+
+android {
+    namespace 'com.heyclaude.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.heyclaude.app'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+    }
+
+    signingConfigs {
+        if (keystoreFile.exists()) {
+            release {
+                storeFile file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig keystoreFile.exists() ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    packaging {
+        jniLibs {
+            // Bibliotecas comprimidas: a APK fica ~10 MB mais pequena.
+            useLegacyPackaging true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs += modelAssetsDir.get().asFile
+        }
+    }
+}
+
+def downloadVoskModel = tasks.register('downloadVoskModel') {
+    def outDir = modelAssetsDir.get().dir('model-en-us').asFile
+    outputs.dir(outDir)
+    doLast {
+        if (new File(outDir, 'am/final.mdl').exists()) {
+            return
+        }
+        def tmp = temporaryDir
+        def zip = new File(tmp, 'model.zip')
+        logger.lifecycle("A descarregar ${voskModelUrl}")
+        new URL(voskModelUrl).withInputStream { input -> zip.withOutputStream { it << input } }
+        project.delete(outDir)
+        project.copy {
+            from(project.zipTree(zip)) {
+                eachFile { it.path = it.path.replaceFirst("^${voskModelName}/", '') }
+                includeEmptyDirs = false
+            }
+            into outDir
+        }
+        // O StorageService do Vosk usa este ficheiro para saber se tem de copiar o modelo.
+        new File(outDir, 'uuid').text = voskModelName
+        zip.delete()
+    }
+}
+
+tasks.named('preBuild') {
+    dependsOn downloadVoskModel
+}
+
+dependencies {
+    implementation 'com.alphacephei:vosk-android:0.3.47@aar'
+    implementation 'net.java.dev.jna:jna:5.13.0@aar'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20231013'
+    testImplementation 'org.robolectric:robolectric:4.14.1'
+}

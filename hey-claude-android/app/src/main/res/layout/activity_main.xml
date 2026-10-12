@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <Switch
+            android:id="@+id/switch_enabled"
+            style="@style/Row"
+            android:text="Hey Claude ligado"
+            android:textSize="18sp" />
+
+        <TextView style="@style/Section" android:text="Configuração" />
+
+        <TextView android:id="@+id/step_mic" style="@style/Step" />
+        <Button android:id="@+id/btn_mic" style="@style/StepButton" android:text="Permitir o microfone" />
+
+        <TextView android:id="@+id/step_notifications" style="@style/Step" />
+        <Button android:id="@+id/btn_notifications" style="@style/StepButton" android:text="Permitir notificações" />
+
+        <TextView android:id="@+id/step_claude" style="@style/Step" />
+        <Button android:id="@+id/btn_claude" style="@style/StepButton" android:text="Instalar o Claude" />
+
+        <TextView android:id="@+id/step_accessibility" style="@style/Step" />
+        <Button android:id="@+id/btn_accessibility" style="@style/StepButton" android:text="Ligar a acessibilidade" />
+        <Button android:id="@+id/btn_app_info" style="@style/StepButton" android:text="Info da app (definições restritas)" />
+
+        <TextView android:id="@+id/step_battery" style="@style/Step" />
+        <Button android:id="@+id/btn_battery" style="@style/StepButton" android:text="Tirar restrições de bateria" />
+
+        <TextView style="@style/Section" android:text="Modo de voz" />
+
+        <Switch
+            android:id="@+id/switch_auto_voice"
+            style="@style/Row"
+            android:text="Abrir logo o modo de voz do Claude" />
+
+        <TextView
+            android:id="@+id/voice_label"
+            style="@style/Step" />
+
+        <Button
+            android:id="@+id/btn_choose_button"
+            style="@style/StepButton"
+            android:text="Escolher o botão do modo de voz" />
+
+        <Button
+            android:id="@+id/btn_test"
+            style="@style/StepButton"
+            android:text="Testar: abrir o Claude agora" />
+
+        <TextView style="@style/Section" android:text="O que ouvi" />
+
+        <TextView
+            android:id="@+id/diagnostics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:textSize="13sp"
+            android:alpha="0.7"
+            android:text="A frase é reconhecida no próprio telefone, sem internet: o som do microfone nunca sai do telefone. Diz «Hey Claude» de seguida, sem pausa entre as palavras." />
+    </LinearLayout>
+</ScrollView>

@@ -7,7 +7,8 @@
       "*.bat",
       "script-old.js",
       "node_modules/**",
-      "hey-claude/**"
+      "hey-claude/**",
+      "hey-claude-android/**"
     ],
     "headers": [
       {

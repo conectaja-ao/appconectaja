@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hey Claude</string>
+    <string name="accessibility_label">Hey Claude — abrir o modo de voz</string>
+    <string name="accessibility_description">Deixa o Hey Claude abrir a app do Claude quando dizes «Hey Claude» e carregar sozinho no botão do modo de voz. Só funciona dentro da app do Claude e não guarda nada do que está no ecrã.</string>
+    <string name="tile_label">Hey Claude</string>
+</resources>
