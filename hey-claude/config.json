@@ -1,0 +1,18 @@
+{
+  "frases_ativacao": [
+    "hey claude",
+    "hey cloud",
+    "hi claude",
+    "okay claude"
+  ],
+  "confianca_minima": 0.6,
+  "abrir": "auto",
+  "url_web": "https://claude.ai/new",
+  "caminho_app": "",
+  "atalho_apos_abrir": "win+h",
+  "atraso_atalho_segundos": 1.5,
+  "espera_maxima_janela_segundos": 15,
+  "som_confirmacao": true,
+  "pausa_apos_ativacao_segundos": 8,
+  "microfone": null
+}

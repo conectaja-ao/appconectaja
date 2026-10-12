@@ -1,0 +1,5 @@
+modelo/
+venv/
+__pycache__/
+hey_claude.log*
+parar.flag

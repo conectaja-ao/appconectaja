@@ -6,7 +6,8 @@
       "firestore.rules",
       "*.bat",
       "script-old.js",
-      "node_modules/**"
+      "node_modules/**",
+      "hey-claude/**"
     ],
     "headers": [
       {
