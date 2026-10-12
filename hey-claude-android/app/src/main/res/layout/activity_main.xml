@@ -26,6 +26,9 @@
 
         <TextView style="@style/Section" android:text="Configuração" />
 
+        <TextView android:id="@+id/step_model" style="@style/Step" />
+        <Button android:id="@+id/btn_model" style="@style/StepButton" android:text="Descarregar (~40 MB)" />
+
         <TextView android:id="@+id/step_mic" style="@style/Step" />
         <Button android:id="@+id/btn_mic" style="@style/StepButton" android:text="Permitir o microfone" />
 

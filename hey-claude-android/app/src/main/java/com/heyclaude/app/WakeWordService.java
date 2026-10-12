@@ -21,7 +21,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 
 import org.vosk.Model;
-import org.vosk.android.StorageService;
 
 import java.io.IOException;
 
@@ -132,14 +131,25 @@ public class WakeWordService extends Service {
     // ───────────────────────────── escuta ─────────────────────────────
 
     private void run() {
-        Model model;
-        try {
-            model = new Model(StorageService.sync(this, "model-en-us", "model"));
-        } catch (IOException | LinkageError e) {
-            Diagnostics.add("Erro a carregar o modelo de voz: " + e.getMessage());
-            main.post(this::stopSelf);
-            return;
+        Model model = null;
+        while (model == null && !stopRequested) {
+            try {
+                if (!ModelManager.isReady(this)) {
+                    Diagnostics.add("A descarregar o modelo de voz (~40 MB, só da primeira vez)…");
+                    ModelManager.ensure(this, () -> stopRequested);
+                }
+                model = new Model(ModelManager.modelDir(this).getAbsolutePath());
+            } catch (IOException e) {
+                Diagnostics.add("Não consegui descarregar o modelo de voz (" + e.getMessage()
+                        + "). Nova tentativa em 1 minuto.");
+                for (int i = 0; i < 120 && !stopRequested; i++) sleep(500);
+            } catch (LinkageError e) {
+                Diagnostics.add("Este telefone não é compatível: " + e.getMessage());
+                main.post(this::stopSelf);
+                return;
+            }
         }
+        if (model == null) return;
         Diagnostics.add("A ouvir. Diz «Hey Claude».");
         try {
             while (!stopRequested) {

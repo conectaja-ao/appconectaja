@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
         autoVoice.setChecked(Prefs.autoVoice(this));
         autoVoice.setOnCheckedChangeListener((b, on) -> Prefs.setAutoVoice(this, on));
 
+        findViewById(R.id.btn_model).setOnClickListener(v -> downloadModel());
         findViewById(R.id.btn_mic).setOnClickListener(v -> requestMic());
         findViewById(R.id.btn_notifications).setOnClickListener(v -> {
             if (Build.VERSION.SDK_INT >= 33) {
@@ -104,6 +106,18 @@ public class MainActivity extends Activity {
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQ_NOTIFICATIONS);
         }
         WakeWordService.start(this);
+    }
+
+    private void downloadModel() {
+        Context app = getApplicationContext();
+        new Thread(() -> {
+            try {
+                ModelManager.ensure(app, () -> false);
+            } catch (java.io.IOException ignored) {
+                // O erro aparece no ecrã (ModelManager.lastError).
+            }
+        }, "hey-claude-model").start();
+        handler.postDelayed(this::refresh, 300);
     }
 
     private void requestMic() {
@@ -178,7 +192,7 @@ public class MainActivity extends Activity {
     private void learnVoiceButton() {
         VoiceButtonService a11y = VoiceButtonService.instance();
         if (a11y == null) {
-            Toast.makeText(this, "Liga primeiro a acessibilidade (passo 4).", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Liga primeiro a acessibilidade (passo 5).", Toast.LENGTH_LONG).show();
             return;
         }
         if (!ClaudeLauncher.isClaudeInstalled(this)) {
@@ -240,6 +254,7 @@ public class MainActivity extends Activity {
 
     private void refresh() {
         boolean running = WakeWordService.isRunning();
+        boolean model = ModelManager.isReady(this);
         boolean mic = WakeWordService.hasMicPermission(this);
         boolean notifications = hasNotificationPermission();
         boolean claude = ClaudeLauncher.isClaudeInstalled(this);
@@ -254,13 +269,25 @@ public class MainActivity extends Activity {
                 ? "A ouvir — diz «Hey Claude»"
                 : "Desligado — liga o interruptor abaixo");
 
-        step(R.id.step_mic, R.id.btn_mic, mic, "1. Microfone");
-        step(R.id.step_notifications, R.id.btn_notifications, notifications, "2. Notificações");
-        step(R.id.step_claude, R.id.btn_claude, claude, "3. App do Claude instalada");
+        int progress = ModelManager.progress();
+        if (progress >= 0) {
+            ((TextView) findViewById(R.id.step_model)).setText(
+                    "⏳  1. A descarregar o modelo de voz… " + progress + "%");
+            findViewById(R.id.btn_model).setVisibility(View.GONE);
+        } else {
+            String error = ModelManager.lastError();
+            step(R.id.step_model, R.id.btn_model, model, model
+                    ? "1. Modelo de voz"
+                    : "1. Modelo de voz: descarrega uma vez, de preferência com Wi-Fi"
+                            + (error == null ? "" : "\n    Erro: " + error));
+        }
+        step(R.id.step_mic, R.id.btn_mic, mic, "2. Microfone");
+        step(R.id.step_notifications, R.id.btn_notifications, notifications, "3. Notificações");
+        step(R.id.step_claude, R.id.btn_claude, claude, "4. App do Claude instalada");
         step(R.id.step_accessibility, R.id.btn_accessibility, a11y,
-                "4. Acessibilidade (abrir o Claude e o modo de voz sozinho)");
+                "5. Acessibilidade (abrir o Claude e o modo de voz sozinho)");
         findViewById(R.id.btn_app_info).setVisibility(a11y ? View.GONE : View.VISIBLE);
-        step(R.id.step_battery, R.id.btn_battery, battery, "5. Bateria sem restrições");
+        step(R.id.step_battery, R.id.btn_battery, battery, "6. Bateria sem restrições");
 
         String label = Prefs.voiceLabel(this);
         ((TextView) findViewById(R.id.voice_label)).setText(

@@ -10,6 +10,7 @@ App para o telemóvel que fica a ouvir e, quando dizes **"Hey Claude"** (ou
 
 A frase é reconhecida **no próprio telefone, sem internet**, com o
 [Vosk](https://alphacephei.com/vosk/). O som do microfone nunca sai do telefone.
+Só é preciso internet uma vez, para descarregar o modelo de voz (~40 MB).
 (O modo de voz do Claude, esse sim, precisa de internet, como sempre.)
 
 ## Instalar
@@ -24,11 +25,12 @@ A frase é reconhecida **no próprio telefone, sem internet**, com o
 
 | Passo | Para quê |
 |-------|----------|
-| 1. Microfone | Para ouvir "Hey Claude". |
-| 2. Notificações | Para mostrar que está a ouvir e avisar se o Android a desligar. |
-| 3. App do Claude | Tem de estar instalada. |
-| 4. Acessibilidade | Para abrir o Claude sozinha e carregar no botão do modo de voz. |
-| 5. Bateria sem restrições | Para o Android não a desligar ao fim de algum tempo. |
+| 1. Modelo de voz | Descarrega ~40 MB, só uma vez (de preferência com Wi-Fi). |
+| 2. Microfone | Para ouvir "Hey Claude". |
+| 3. Notificações | Para mostrar que está a ouvir e avisar se o Android a desligar. |
+| 4. App do Claude | Tem de estar instalada. |
+| 5. Acessibilidade | Para abrir o Claude sozinha e carregar no botão do modo de voz. |
+| 6. Bateria sem restrições | Para o Android não a desligar ao fim de algum tempo. |
 
 4. Liga o interruptor **"Hey Claude ligado"** e diz **"Hey Claude"**.
 
@@ -46,7 +48,7 @@ nada de outras apps.
 
 ### Xiaomi, Tecno, Infinix, Itel, Samsung, Huawei…
 
-Estas marcas costumam fechar apps em segundo plano. Além do passo 5, procura nas
+Estas marcas costumam fechar apps em segundo plano. Além do passo 6, procura nas
 definições da app Hey Claude opções como **"Arranque automático"**,
 **"Sem restrições"** ou **"Não otimizar"** e ativa-as.
 Na lista de apps recentes, também podes **bloquear** a Hey Claude (ícone de cadeado).
@@ -95,6 +97,6 @@ Precisa do JDK 17+ e do Android SDK (plataforma 35):
 ./gradlew assembleRelease
 ```
 
-A primeira compilação descarrega o modelo de voz (~40 MB) e embute-o na APK.
-Sem `keystore.properties`, a APK é assinada com a chave de debug. Uma APK assinada
+O modelo de voz não vai dentro da APK (que fica com ~6 MB): a app descarrega-o
+de alphacephei.com na primeira utilização. Sem `keystore.properties`, a APK é assinada com a chave de debug. Uma APK assinada
 com outra chave não atualiza a que já está instalada: desinstala primeiro.

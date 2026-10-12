@@ -34,6 +34,8 @@ public class AppRobolectricTest {
     @Before
     public void setUp() {
         app = RuntimeEnvironment.getApplication();
+        // Nos testes nunca se descarrega o modelo verdadeiro.
+        ModelManager.modelUrl = "http://127.0.0.1:9/nada.zip";
         Prefs.setEnabled(app, false);
         Prefs.setVoiceLabel(app, "");
     }
@@ -171,6 +173,58 @@ public class AppRobolectricTest {
                 VoiceButtonService.labelOf(VoiceButtonService.findVoiceButton(root, "")));
         assertEquals("Send message",
                 VoiceButtonService.labelOf(VoiceButtonService.findVoiceButton(root, "Send message")));
+    }
+
+    @Test
+    public void modelStepOffersDownload() {
+        MainActivity activity = Robolectric.buildActivity(MainActivity.class).setup().get();
+        TextView step = activity.findViewById(R.id.step_model);
+        assertTrue(step.getText().toString().contains("Modelo de voz"));
+        assertEquals(View.VISIBLE, activity.findViewById(R.id.btn_model).getVisibility());
+        assertFalse(ModelManager.isReady(app));
+    }
+
+    @Test
+    public void modelDownloadFailureIsReported() {
+        try {
+            ModelManager.ensure(app, () -> false);
+            throw new AssertionError("devia falhar");
+        } catch (java.io.IOException expected) {
+            assertNotNull(ModelManager.lastError());
+            assertEquals(-1, ModelManager.progress());
+            assertFalse(ModelManager.isReady(app));
+        }
+    }
+
+    @Test
+    public void extractStripsTopFolder() throws Exception {
+        java.io.File target = new java.io.File(app.getFilesDir(), "extract-test");
+        ModelManager.extract(new java.io.ByteArrayInputStream(zip(
+                ModelManager.MODEL_NAME + "/", null,
+                ModelManager.MODEL_NAME + "/am/final.mdl", "abc",
+                ModelManager.MODEL_NAME + "/conf/model.conf", "x")), target, ModelManager.MODEL_NAME + "/");
+        assertTrue(new java.io.File(target, "am/final.mdl").isFile());
+        assertTrue(new java.io.File(target, "conf/model.conf").isFile());
+    }
+
+    @Test(expected = java.io.IOException.class)
+    public void extractRejectsPathTraversal() throws Exception {
+        java.io.File target = new java.io.File(app.getFilesDir(), "extract-evil");
+        ModelManager.extract(new java.io.ByteArrayInputStream(zip("../../evil.txt", "x")), target, "");
+    }
+
+    private static byte[] zip(String... nameAndContent) throws java.io.IOException {
+        java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
+        try (java.util.zip.ZipOutputStream z = new java.util.zip.ZipOutputStream(bytes)) {
+            for (int i = 0; i < nameAndContent.length; i += 2) {
+                z.putNextEntry(new java.util.zip.ZipEntry(nameAndContent[i]));
+                if (nameAndContent[i + 1] != null) {
+                    z.write(nameAndContent[i + 1].getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                }
+                z.closeEntry();
+            }
+        }
+        return bytes.toByteArray();
     }
 
     private static AccessibilityNodeInfo node(String description) {
