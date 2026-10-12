@@ -51,7 +51,7 @@ final class Notifications {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         return builder(c, CH_LISTENING)
                 .setContentTitle("Hey Claude está a ouvir")
-                .setContentText("Diz «Hey Claude» para abrir o Claude")
+                .setContentText("Diz «Hey Claude» para chamar o assistente")
                 .setContentIntent(open)
                 .setOngoing(true)
                 .addAction(new Notification.Action.Builder(null, "Desligar", stop).build())
@@ -75,11 +75,11 @@ final class Notifications {
     }
 
     /** Alternativa quando o Android não deixa abrir o Claude em segundo plano. */
-    static void showTapToOpen(Context c, boolean voice) {
-        Intent open = new Intent(c, WakeActivity.class).putExtra(WakeActivity.EXTRA_VOICE, voice);
+    static void showTapToOpen(Context c) {
+        Intent open = new Intent(c, AssistActivity.class);
         Notification.Builder b = builder(c, CH_ALERTS)
                 .setContentTitle("Ouvi «Hey Claude»")
-                .setContentText("Toca para abrir o Claude")
+                .setContentText("Toca para falar com o Claude")
                 .setContentIntent(activity(c, 30, open))
                 .setAutoCancel(true);
         if (Build.VERSION.SDK_INT >= 26) b.setTimeoutAfter(30_000);

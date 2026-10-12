@@ -10,10 +10,35 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!-- Abrir a bolinha por cima das outras apps quando se ouve "Hey Claude". -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Ações do assistente. -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
-    <!-- Para ver se a app do Claude está instalada e a abrir (Android 11+). -->
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+
+    <!-- O que a app precisa de "ver" no telefone (Android 11+). -->
     <queries>
-        <package android:name="com.anthropic.claude" />
+        <!-- Apps instaladas, para «abre o YouTube». -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <!-- Reconhecimento de voz e leitura em voz alta. -->
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.whatsapp.w4b" />
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="com.google.android.youtube" />
     </queries>
 
     <application
@@ -32,15 +57,25 @@
             </intent-filter>
         </activity>
 
+        <!-- A bolinha. ASSIST: pode ser escolhida como "assistente digital" do telefone. -->
         <activity
-            android:name=".WakeActivity"
+            android:name=".AssistActivity"
             android:excludeFromRecents="true"
-            android:exported="false"
-            android:noHistory="true"
+            android:exported="true"
+            android:launchMode="singleTask"
             android:showWhenLocked="true"
-            android:taskAffinity=""
-            android:theme="@style/Invisible"
-            android:turnScreenOn="true" />
+            android:taskAffinity="com.heyclaude.app.assist"
+            android:theme="@style/Assist"
+            android:turnScreenOn="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ASSIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VOICE_COMMAND" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".StartActivity"
@@ -56,7 +91,7 @@
             android:foregroundServiceType="microphone" />
 
         <service
-            android:name=".VoiceButtonService"
+            android:name=".AssistAccessibilityService"
             android:exported="true"
             android:label="@string/accessibility_label"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">

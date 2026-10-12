@@ -29,12 +29,14 @@ public class WakeWordService extends Service {
     static final String ACTION_STOP = "com.heyclaude.app.STOP";
 
     private static final int SAMPLE_RATE = 16000;
-    /** Depois de abrir o Claude, larga o microfone durante este tempo. */
-    private static final long PAUSE_AFTER_WAKE_MS = 15_000;
+    /** Depois de ouvir a frase, larga o microfone até a bolinha abrir. */
+    private static final long PAUSE_AFTER_WAKE_MS = 4_000;
     /** Áudio só com zeros durante este tempo = o Android está a bloquear o microfone. */
     private static final long SILENCED_LIMIT_MS = 8_000;
 
     private static volatile boolean running;
+    /** Pausa pedida de fora (por exemplo, a bolinha acabou de fechar). */
+    private static volatile long globalPauseUntil;
 
     private final Handler main = new Handler(Looper.getMainLooper());
     private volatile boolean stopRequested;
@@ -43,6 +45,16 @@ public class WakeWordService extends Service {
 
     static boolean isRunning() {
         return running;
+    }
+
+    static void pauseFor(long ms) {
+        globalPauseUntil = SystemClock.elapsedRealtime() + ms;
+    }
+
+    /** O microfone fica livre enquanto a bolinha está aberta ou numa pausa. */
+    private boolean paused() {
+        long now = SystemClock.elapsedRealtime();
+        return AssistActivity.isShowing() || now < pausedUntil || now < globalPauseUntil;
     }
 
     static boolean hasMicPermission(Context c) {
@@ -153,9 +165,8 @@ public class WakeWordService extends Service {
         Diagnostics.add("A ouvir. Diz «Hey Claude».");
         try {
             while (!stopRequested) {
-                long wait = pausedUntil - SystemClock.elapsedRealtime();
-                if (wait > 0) {
-                    sleep(Math.min(wait, 500));
+                if (paused()) {
+                    sleep(200);
                     continue;
                 }
                 try {
@@ -194,7 +205,7 @@ public class WakeWordService extends Service {
             short[] buffer = new short[SAMPLE_RATE / 10];
             long zerosSince = -1;
             boolean heardAudio = false;
-            while (!stopRequested && SystemClock.elapsedRealtime() >= pausedUntil) {
+            while (!stopRequested && !paused()) {
                 int n = recorder.read(buffer, 0, buffer.length);
                 if (n < 0) {
                     throw new IllegalStateException("erro ao ler o microfone (" + n + ")");
@@ -265,7 +276,7 @@ public class WakeWordService extends Service {
 
     private void onWakeWord() {
         playFeedback();
-        ClaudeLauncher.launchFromBackground(this, Prefs.autoVoice(this));
+        AssistantLauncher.launchFromBackground(this);
     }
 
     @SuppressWarnings("deprecation")

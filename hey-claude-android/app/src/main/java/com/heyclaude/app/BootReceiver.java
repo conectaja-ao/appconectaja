@@ -20,7 +20,7 @@ public class BootReceiver extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT < 30) {
             // Até ao Android 10, um serviço ligado no arranque pode usar o microfone.
             WakeWordService.startFromBackground(context, true);
-        } else if (VoiceButtonService.instance() == null) {
+        } else if (AssistAccessibilityService.instance() == null) {
             // Android 11+: só o serviço de acessibilidade (se estiver ligado) o
             // consegue fazer; senão pede ao utilizador um toque.
             Notifications.showTapToStart(context, "O telefone reiniciou.");

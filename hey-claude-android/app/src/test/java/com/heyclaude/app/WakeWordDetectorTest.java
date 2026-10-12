@@ -81,16 +81,4 @@ public class WakeWordDetectorTest {
         assertEquals("hey claude", grammar.getString(0));
         assertEquals("[unk]", grammar.getString(grammar.length() - 1));
     }
-
-    @Test
-    public void voiceButtonScoring() {
-        assertTrue(VoiceButtonService.scoreLabel("Start voice mode", "")
-                > VoiceButtonService.scoreLabel("Voice", ""));
-        assertTrue(VoiceButtonService.scoreLabel("Modo de voz", "") > 0);
-        assertEquals(0, VoiceButtonService.scoreLabel("Dictate", ""));
-        assertEquals(0, VoiceButtonService.scoreLabel("Voice dictation", ""));
-        assertEquals(0, VoiceButtonService.scoreLabel("Send message", ""));
-        assertEquals(1000, VoiceButtonService.scoreLabel("Ondas", "Ondas"));
-        assertEquals(0, VoiceButtonService.scoreLabel("Voice mode", "Ondas"));
-    }
 }

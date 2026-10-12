@@ -1,93 +1,103 @@
 # Hey Claude para Android
 
-App para o telemóvel que fica a ouvir e, quando dizes **"Hey Claude"** (ou
-"Hey Cloud"), faz como o "Hey Google":
+Um assistente de voz como o "Hey Google", mas com o Claude:
 
-1. vibra e toca um "bip";
-2. acende o ecrã e pede o desbloqueio, se o telefone estiver bloqueado;
-3. abre a app do **Claude** e carrega sozinha no botão do **modo de voz**,
-   para começares logo a falar.
+1. dizes **"Hey Claude"** (ou "Hey Cloud");
+2. aparece a **bolinha** do assistente por cima do que estiver no ecrã;
+3. pedes o que quiseres, por exemplo:
+   - «abre o YouTube», «abre o calendário»
+   - «pesquisa o tempo em Luanda»
+   - «manda uma mensagem ao João pelo WhatsApp a dizer que chego às cinco»
+   - «envia uma SMS à Maria a dizer estou a caminho», «liga para a Ana»
+   - «põe um alarme para as 6 e meia», «temporizador de 10 minutos»
+   - «marca uma reunião amanhã às 15h», «leva-me ao aeroporto»
+   - «liga a lanterna», «põe kizomba no YouTube»
+   - ou qualquer pergunta: «quantos quilómetros tem o rio Kwanza?»
+4. o Claude percebe o pedido, faz a ação no telemóvel e responde em voz alta.
 
-A frase é reconhecida **no próprio telefone, sem internet**, com o
-[Vosk](https://alphacephei.com/vosk/). O som do microfone nunca sai do telefone.
-Só é preciso internet uma vez, para descarregar o modelo de voz (~40 MB).
-(O modo de voz do Claude, esse sim, precisa de internet, como sempre.)
+Mensagens e chamadas **só avançam depois de confirmares** (dizendo «sim» ou
+tocando em Confirmar).
+
+## Como funciona
+
+- A frase "Hey Claude" é reconhecida **no próprio telemóvel, sem internet**, com o
+  [Vosk](https://alphacephei.com/vosk/). Até a dizeres, nada sai do telemóvel.
+- O teu pedido é passado a texto pelo reconhecimento de voz do Android (o da Google).
+- O texto vai para o **Claude** (API da Anthropic), que decide o que fazer: responder
+  ou usar uma das ações (abrir app, pesquisar, WhatsApp, SMS, chamada, calendário,
+  alarme, temporizador, mapa, YouTube, lanterna).
+- A app executa a ação no telemóvel e lê a resposta em voz alta.
+
+### Chave da API
+
+Para o Claude perceber os pedidos, é preciso uma **chave da API da Anthropic**:
+
+1. Cria uma conta em <https://console.anthropic.com>, adiciona crédito e cria uma chave
+   (começa por `sk-ant-`).
+2. Na app Hey Claude, cola-a no passo 4 e toca em **Guardar chave**.
+
+A API paga-se à parte da subscrição do Claude, por utilização. Na app podes escolher o
+modelo: **Opus 5.5** (o mais inteligente, padrão), **Sonnet 5.5** ou **Haiku 5.5**
+(o mais rápido e barato, bom para um assistente de voz).
+
+**Sem chave**, o assistente percebe só comandos simples («abre o …», «pesquisa …»,
+«liga para …», «manda mensagem ao … a dizer …», «alarme às …», «lanterna») e, se não
+perceber, pesquisa no Google o que disseste.
+
+A chave fica guardada só no telemóvel, na memória privada da app.
 
 ## Instalar
 
-1. Instala a app do Claude da Play Store, se ainda não a tiveres, e entra na tua conta.
-2. Descarrega o ficheiro **`HeyClaude.apk`** para o telefone e abre-o.
-   - O Android vai pedir para **permitir instalar apps desta fonte**
-     (do navegador ou da app de ficheiros): aceita.
-   - Se o Play Protect avisar que a app é desconhecida, toca em
-     **"Mais detalhes" → "Instalar mesmo assim"**. (É normal: a app não vem da Play Store.)
-3. Abre a app **Hey Claude** e segue a lista de passos no ecrã:
+1. Descarrega o ficheiro **`HeyClaude.apk`** para o telemóvel e abre-o.
+   - Aceita **permitir instalar apps desta fonte**.
+   - Se o Play Protect avisar, toca em **"Mais detalhes" → "Instalar mesmo assim"**.
+   - Se já tinhas a versão anterior, esta instala-se por cima.
+2. Abre a app **Hey Claude** e segue a lista de passos:
 
 | Passo | Para quê |
 |-------|----------|
 | 1. Modelo de voz | Descarrega ~40 MB, só uma vez (de preferência com Wi-Fi). |
-| 2. Microfone | Para ouvir "Hey Claude". |
-| 3. Notificações | Para mostrar que está a ouvir e avisar se o Android a desligar. |
-| 4. App do Claude | Tem de estar instalada. |
-| 5. Acessibilidade | Para abrir o Claude sozinha e carregar no botão do modo de voz. |
-| 6. Bateria sem restrições | Para o Android não a desligar ao fim de algum tempo. |
+| 2. Microfone | Para ouvir "Hey Claude" e os teus pedidos. |
+| 3. Notificações | Para mostrar que está a ouvir. |
+| 4. Chave da API | Para o Claude perceber os pedidos (ver acima). |
+| 5. Aparecer por cima das outras apps | Para a bolinha abrir sozinha quando dizes "Hey Claude". |
+| 6. Contactos, SMS e chamadas | Para enviar mensagens e ligar aos teus contactos. |
+| 7. Bateria sem restrições | Para o Android não a desligar. |
+| 8. (Opcional) Assistente do telemóvel | Tocar sem soltar no botão de ligar (ou de início) também abre a bolinha. |
+| 9. (Opcional) Acessibilidade | Carrega sozinho em «Enviar» no WhatsApp e volta a ligar a app depois de reiniciar. |
 
-4. Liga o interruptor **"Hey Claude ligado"** e diz **"Hey Claude"**.
+3. Liga o interruptor **"Hey Claude ligado"** e diz **"Hey Claude"**.
+   Também podes testar com **"Falar com o assistente agora"**.
 
-### Acessibilidade aparece cinzenta ("Definição restrita")
+### Acessibilidade com "Configuração restrita"
 
-Nos Android 13 e mais recentes, as apps instaladas a partir de um ficheiro têm a
-acessibilidade bloqueada até autorizares:
+1. Na app Hey Claude, toca em **"Info da app (configurações restritas)"**.
+2. Toca no menu **⋮** → **"Permitir configurações restritas"** e confirma.
+3. Volta a **"Ligar a acessibilidade"** e liga o **Hey Claude — assistente**.
 
-1. Na app Hey Claude, toca em **"Info da app (definições restritas)"**.
-2. Toca no menu **⋮** (canto superior direito) → **"Permitir definições restritas"**.
-3. Volta a **"Ligar a acessibilidade"** e liga o **Hey Claude**.
+Se o menu ⋮ não tiver essa opção, tenta primeiro ligar a acessibilidade (para aparecer o
+aviso) e depois volta à informação da app.
 
-O serviço de acessibilidade só funciona dentro da app do Claude. Não lê nem guarda
-nada de outras apps.
+### Tecno, Infinix, Itel, Xiaomi, Samsung…
 
-### Xiaomi, Tecno, Infinix, Itel, Samsung, Huawei…
-
-Estas marcas costumam fechar apps em segundo plano. Além do passo 6, procura nas
-definições da app Hey Claude opções como **"Arranque automático"**,
-**"Sem restrições"** ou **"Não otimizar"** e ativa-as.
-Na lista de apps recentes, também podes **bloquear** a Hey Claude (ícone de cadeado).
-
-## Usar
-
-- Diz **"Hey Claude"** de seguida, sem pausa entre as palavras. Também funciona
-  "Hey Cloud", "Hi Claude" e "Okay Claude".
-- Na secção **"O que ouvi"** da app vês o que o telefone percebeu. É útil se não
-  te reconhecer à primeira.
-- Mosaico rápido: nas **definições rápidas** (puxar a barra de cima), edita os
-  mosaicos e junta o **Hey Claude** para ligar e desligar com um toque.
-- Depois de reiniciar o telefone, a app volta a ligar-se sozinha se a
-  acessibilidade estiver ligada. Se o Android não deixar, aparece uma notificação:
-  **toca nela uma vez** para voltar a ligar.
-
-### Se carregar no botão errado (ou em nenhum)
-
-Não consegui confirmar o nome exato do botão do modo de voz na app do Claude, por
-isso a Hey Claude procura-o pelo nome ("Voice mode", "Modo de voz", etc.). Se não
-o encontrar:
-
-1. Na app Hey Claude, toca em **"Escolher o botão do modo de voz"**.
-2. O Claude abre e, uns segundos depois, a Hey Claude volta com a lista dos botões
-   que viu.
-3. Escolhe o do modo de voz (o ícone de ondas sonoras ao lado do microfone).
-
-Se preferires que só abra o Claude, sem carregar em botão nenhum, desliga
-**"Abrir logo o modo de voz do Claude"**.
+Estas marcas costumam fechar apps em segundo plano. Além do passo 7, procura nas
+definições da app opções como **"Arranque automático"** ou **"Sem restrições"**.
 
 ## Limitações
 
-- **Bateria:** ouvir o microfone o tempo todo gasta mais bateria do que o normal.
-  Desliga no mosaico rápido quando não precisares.
-- Frases com som quase igual, como "Hey Clown" ou "Ei, Cláudio!", também podem
-  ativá-la.
-- Enquanto está ligada, o Android mostra o indicador de microfone em uso e uma
-  notificação fixa. É obrigatório e é assim que ela te consegue ouvir.
-- Precisa de Android 7 ou mais recente, num telefone ARM (praticamente todos).
+- **Ainda não foi testado num telemóvel real**, só em simulação. Diz o que falhar.
+- **WhatsApp:** sem a acessibilidade, a conversa abre com a mensagem escrita e falta
+  tocares em Enviar. Com ela, carrega em Enviar sozinho.
+- **Calendário:** o evento abre já preenchido no calendário; falta tocares em Guardar.
+- **Bateria:** ouvir o microfone o tempo todo gasta mais bateria. Há um botão nas
+  definições rápidas para ligar e desligar.
+- Frases parecidas, como "Hey Clown" ou "Ei, Cláudio!", também podem chamar o assistente.
+- Com o telemóvel bloqueado, o assistente responde a perguntas, mas para fazer ações
+  pede primeiro o desbloqueio.
+- Depois de reiniciar o telemóvel (Android 11 ou mais recente), se a acessibilidade não
+  estiver ligada, aparece uma notificação: toca nela uma vez para voltar a ligar.
+- Privacidade: o texto dos teus pedidos (não o áudio) é enviado à Anthropic para o
+  Claude responder. A agenda de contactos nunca é enviada; só o nome que disseres.
 
 ## Compilar a partir do código
 
@@ -97,6 +107,5 @@ Precisa do JDK 17+ e do Android SDK (plataforma 35):
 ./gradlew assembleRelease
 ```
 
-O modelo de voz não vai dentro da APK (que fica com ~6 MB): a app descarrega-o
-de alphacephei.com na primeira utilização. Sem `keystore.properties`, a APK é assinada com a chave de debug. Uma APK assinada
-com outra chave não atualiza a que já está instalada: desinstala primeiro.
+Sem `keystore.properties`, a APK é assinada com a chave de debug. Uma APK assinada com
+outra chave não atualiza a que já está instalada: desinstala primeiro.

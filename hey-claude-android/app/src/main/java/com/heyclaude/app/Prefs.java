@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 final class Prefs {
     private static final String FILE = "hey_claude";
     private static final String ENABLED = "enabled";
-    private static final String AUTO_VOICE = "auto_voice";
-    private static final String VOICE_LABEL = "voice_label";
+    private static final String API_KEY = "api_key";
+    private static final String MODEL = "model";
 
     private Prefs() {}
 
@@ -25,21 +25,20 @@ final class Prefs {
         get(c).edit().putBoolean(ENABLED, value).apply();
     }
 
-    /** Carregar sozinho no botão do modo de voz depois de abrir o Claude. */
-    static boolean autoVoice(Context c) {
-        return get(c).getBoolean(AUTO_VOICE, true);
+    /** Chave da API da Anthropic (fica só neste telefone, na memória privada da app). */
+    static String apiKey(Context c) {
+        return get(c).getString(API_KEY, "");
     }
 
-    static void setAutoVoice(Context c, boolean value) {
-        get(c).edit().putBoolean(AUTO_VOICE, value).apply();
+    static void setApiKey(Context c, String value) {
+        get(c).edit().putString(API_KEY, value.trim()).apply();
     }
 
-    /** Nome do botão do modo de voz escolhido pelo utilizador ("" = deteção automática). */
-    static String voiceLabel(Context c) {
-        return get(c).getString(VOICE_LABEL, "");
+    static String model(Context c) {
+        return get(c).getString(MODEL, ClaudeBrain.DEFAULT_MODEL);
     }
 
-    static void setVoiceLabel(Context c, String value) {
-        get(c).edit().putString(VOICE_LABEL, value).apply();
+    static void setModel(Context c, String value) {
+        get(c).edit().putString(MODEL, value).apply();
     }
 }

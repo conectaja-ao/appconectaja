@@ -24,6 +24,11 @@
             android:text="Hey Claude ligado"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/btn_talk"
+            style="@style/StepButton"
+            android:text="Falar com o assistente agora" />
+
         <TextView style="@style/Section" android:text="Configuração" />
 
         <TextView android:id="@+id/step_model" style="@style/Step" />
@@ -35,36 +40,52 @@
         <TextView android:id="@+id/step_notifications" style="@style/Step" />
         <Button android:id="@+id/btn_notifications" style="@style/StepButton" android:text="Permitir notificações" />
 
-        <TextView android:id="@+id/step_claude" style="@style/Step" />
-        <Button android:id="@+id/btn_claude" style="@style/StepButton" android:text="Instalar o Claude" />
+        <TextView android:id="@+id/step_key" style="@style/Step" />
+        <EditText
+            android:id="@+id/api_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cola aqui a chave (sk-ant-…)"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_save_key" style="@style/StepButton" android:text="Guardar chave" />
+            <Button android:id="@+id/btn_get_key" style="@style/StepButton" android:text="Criar uma chave" />
+        </LinearLayout>
+        <TextView
+            style="@style/Note"
+            android:text="A chave é da conta de programadores da Anthropic (console.anthropic.com) e paga-se à parte, por utilização. Fica guardada só neste telemóvel." />
 
-        <TextView android:id="@+id/step_accessibility" style="@style/Step" />
-        <Button android:id="@+id/btn_accessibility" style="@style/StepButton" android:text="Ligar a acessibilidade" />
-        <Button android:id="@+id/btn_app_info" style="@style/StepButton" android:text="Info da app (definições restritas)" />
+        <TextView android:id="@+id/step_overlay" style="@style/Step" />
+        <Button android:id="@+id/btn_overlay" style="@style/StepButton" android:text="Permitir" />
+
+        <TextView android:id="@+id/step_phone" style="@style/Step" />
+        <Button android:id="@+id/btn_phone" style="@style/StepButton" android:text="Permitir" />
 
         <TextView android:id="@+id/step_battery" style="@style/Step" />
         <Button android:id="@+id/btn_battery" style="@style/StepButton" android:text="Tirar restrições de bateria" />
 
-        <TextView style="@style/Section" android:text="Modo de voz" />
+        <TextView android:id="@+id/step_assistant" style="@style/Step" />
+        <Button android:id="@+id/btn_assistant" style="@style/StepButton" android:text="Escolher como assistente" />
 
-        <Switch
-            android:id="@+id/switch_auto_voice"
-            style="@style/Row"
-            android:text="Abrir logo o modo de voz do Claude" />
+        <TextView android:id="@+id/step_accessibility" style="@style/Step" />
+        <Button android:id="@+id/btn_accessibility" style="@style/StepButton" android:text="Ligar a acessibilidade" />
+        <Button android:id="@+id/btn_app_info" style="@style/StepButton" android:text="Info da app (configurações restritas)" />
 
-        <TextView
-            android:id="@+id/voice_label"
-            style="@style/Step" />
+        <TextView style="@style/Section" android:text="Modelo do Claude" />
 
-        <Button
-            android:id="@+id/btn_choose_button"
-            style="@style/StepButton"
-            android:text="Escolher o botão do modo de voz" />
-
-        <Button
-            android:id="@+id/btn_test"
-            style="@style/StepButton"
-            android:text="Testar: abrir o Claude agora" />
+        <RadioGroup
+            android:id="@+id/models"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton android:id="@+id/model_opus" style="@style/Row" android:text="Claude Opus 5.5 — o mais inteligente" />
+            <RadioButton android:id="@+id/model_sonnet" style="@style/Row" android:text="Claude Sonnet 5.5 — equilibrado" />
+            <RadioButton android:id="@+id/model_haiku" style="@style/Row" android:text="Claude Haiku 5.5 — o mais rápido e barato" />
+        </RadioGroup>
 
         <TextView style="@style/Section" android:text="O que ouvi" />
 
@@ -76,11 +97,8 @@
             android:textSize="12sp" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Note"
             android:paddingTop="20dp"
-            android:textSize="13sp"
-            android:alpha="0.7"
-            android:text="A frase é reconhecida no próprio telefone, sem internet: o som do microfone nunca sai do telefone. Diz «Hey Claude» de seguida, sem pausa entre as palavras." />
+            android:text="A frase «Hey Claude» é reconhecida no próprio telemóvel, sem internet. Depois, o teu pedido vai para o Claude para ele perceber o que fazer." />
     </LinearLayout>
 </ScrollView>

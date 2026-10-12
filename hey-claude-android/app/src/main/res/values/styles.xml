@@ -10,6 +10,23 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
+    <!-- A bolinha: por cima da app que estiver aberta, com o fundo escurecido. -->
+    <style name="Assist" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.35</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.InputMethod</item>
+        <item name="android:colorAccent">#4DD0E1</item>
+    </style>
+
+    <style name="Note">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:alpha">0.7</item>
+    </style>
+
     <style name="Row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

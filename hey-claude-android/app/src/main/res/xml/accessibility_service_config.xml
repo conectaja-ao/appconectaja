@@ -6,4 +6,4 @@
     android:canRetrieveWindowContent="true"
     android:description="@string/accessibility_description"
     android:notificationTimeout="200"
-    android:packageNames="com.anthropic.claude" />
+    android:packageNames="com.whatsapp,com.whatsapp.w4b" />
